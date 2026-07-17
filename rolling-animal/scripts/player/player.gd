@@ -9,7 +9,7 @@ const BASE_RADIUS := 64.0
 
 @export_category("Size")
 @export_range(0.4, 2.0, 0.01) var default_size_scale := 1.0
-@export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.68
+@export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.2
 @export_range(1.0, 3.0, 0.01) var maximum_size_scale := 2.0
 @export_range(0.01, 0.3, 0.01) var growth_per_click := 0.075
 @export_range(1.0, 4.0, 0.1) var rapid_click_multiplier := 2.4

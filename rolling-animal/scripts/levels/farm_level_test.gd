@@ -110,8 +110,6 @@ func _on_player_reached_win() -> void:
 	player.velocity = Vector2.ZERO
 	win_popup = WIN_SCENE.instantiate()
 	hud.add_child(win_popup)
-	win_popup.left_button_pressed.connect(_restart_test)
-	win_popup.right_button_pressed.connect(_on_win_popup_closed)
 	win_popup.closed.connect(_on_win_popup_closed)
 
 
