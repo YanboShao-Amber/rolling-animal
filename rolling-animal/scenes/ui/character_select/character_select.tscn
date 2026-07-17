@@ -1,0 +1,312 @@
+[gd_scene format=3 uid="uid://85iqf6gr32jd"]
+
+[ext_resource type="Script" uid="uid://wm03v77yw16e" path="res://scripts/ui/character_select/character_select.gd" id="1_select"]
+[ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="2_font"]
+[ext_resource type="Texture2D" uid="uid://bk0a5rmrle8s7" path="res://assets/UI/panel_brown_dark.png" id="3_background"]
+[ext_resource type="Texture2D" uid="uid://ioctldvd4sec" path="res://assets/UI/banner_hanging.png" id="4_banner"]
+[ext_resource type="Texture2D" uid="uid://ctk0wkays4mp2" path="res://assets/UI/round_grey_detailed_red.png" id="5_frame"]
+[ext_resource type="Texture2D" uid="uid://crq0iilb3b5jn" path="res://assets/UI/button_brown.png" id="6_nameplate"]
+[ext_resource type="Texture2D" uid="uid://by357gm12e1vk" path="res://assets/UI/minimap_arrow_b.png" id="7_arrow"]
+[ext_resource type="Texture2D" uid="uid://bpnn7qqhudn0i" path="res://assets/UI/button_grey.png" id="8_back"]
+[ext_resource type="Texture2D" uid="uid://bxof1cyqyfgmu" path="res://assets/UI/button_red.png" id="9_select"]
+
+[sub_resource type="Shader" id="Shader_spotlight"]
+code = "shader_type canvas_item;
+void fragment() {
+ vec2 p = (UV - vec2(0.5)) / vec2(0.5, 0.42);
+ float glow = smoothstep(1.0, 0.05, length(p));
+ COLOR = vec4(1.0, 0.76, 0.44, glow * 0.12);
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_spotlight"]
+shader = SubResource("Shader_spotlight")
+
+[node name="CharacterSelect" type="Control" unique_id=195681261]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_select")
+
+[node name="Background" type="TextureRect" parent="." unique_id=286367773]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_background")
+expand_mode = 1
+
+[node name="TitleArea" type="Control" parent="." unique_id=1122930952]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 24.0
+offset_bottom = 152.0
+grow_horizontal = 2
+mouse_filter = 2
+
+[node name="TitleBanner" type="TextureRect" parent="TitleArea" unique_id=1720103264]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -305.0
+offset_top = -59.0
+offset_right = 321.0
+offset_bottom = 69.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("4_banner")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="TitleArea" unique_id=285238237]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -214.0
+offset_top = -24.0
+offset_right = 227.0
+offset_bottom = 34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.22, 0.11, 0.075, 1)
+theme_override_colors/font_shadow_color = Color(1, 0.78, 0.62, 0.48)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 27
+text = "CHOOSE YOUR CHARACTER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CarouselArea" type="Control" parent="." unique_id=256583710]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -550.0
+offset_top = -120.0
+offset_right = 550.0
+offset_bottom = 120.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Spotlight" type="ColorRect" parent="CarouselArea" unique_id=448750867]
+material = SubResource("ShaderMaterial_spotlight")
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -104.0
+offset_right = 120.0
+offset_bottom = 104.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="SelectedCharacterFrame" type="TextureRect" parent="CarouselArea" unique_id=1873134766]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.0
+offset_top = -82.0
+offset_right = 82.0
+offset_bottom = 82.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(1.2, 1.2)
+pivot_offset = Vector2(82, 82)
+mouse_filter = 2
+texture = ExtResource("5_frame")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="AvatarLayer" type="Control" parent="CarouselArea" unique_id=1284292177]
+clip_contents = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -450.0
+offset_top = -110.0
+offset_right = 450.0
+offset_bottom = 110.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="LeftArrowButton" type="TextureButton" parent="CarouselArea" unique_id=1064074656]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -32.0
+offset_right = 74.0
+offset_bottom = 32.0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(32, 32)
+texture_normal = ExtResource("7_arrow")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="RightArrowButton" type="TextureButton" parent="CarouselArea" unique_id=544725354]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -74.0
+offset_top = -32.0
+offset_right = -10.0
+offset_bottom = 32.0
+grow_horizontal = 0
+grow_vertical = 2
+rotation = 1.5708
+pivot_offset = Vector2(32, 32)
+texture_normal = ExtResource("7_arrow")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="CharacterNamePlate" type="Control" parent="." unique_id=1912074090]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -160.0
+offset_top = 190.0
+offset_right = 160.0
+offset_bottom = 286.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="NamePlateTexture" type="NinePatchRect" parent="CharacterNamePlate" unique_id=164991206]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_nameplate")
+patch_margin_left = 18
+patch_margin_top = 16
+patch_margin_right = 18
+patch_margin_bottom = 16
+
+[node name="CharacterNameLabel" type="Label" parent="CharacterNamePlate" unique_id=1536592567]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = 21.0
+offset_right = -30.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.25, 0.13, 0.065, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 23
+text = "PENGUIN"
+horizontal_alignment = 1
+vertical_alignment = 1
+text_overrun_behavior = 3
+
+[node name="BackButton" type="TextureButton" parent="." unique_id=2136497546]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 28.0
+offset_top = -101.0
+offset_right = 192.0
+offset_bottom = -28.0
+grow_vertical = 0
+pivot_offset = Vector2(96, 48)
+texture_normal = ExtResource("8_back")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="BackLabel" type="Label" parent="BackButton" unique_id=1816990302]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.2, 0.24, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SelectButton" type="TextureButton" parent="." unique_id=370789236]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -214.0
+offset_top = -117.0
+offset_right = -22.0
+offset_bottom = -35.0
+grow_horizontal = 0
+grow_vertical = 0
+pivot_offset = Vector2(96, 48)
+texture_normal = ExtResource("9_select")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SelectLabel" type="Label" parent="SelectButton" unique_id=306361474]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.34, 0.075, 0.06, 1)
+theme_override_fonts/font = ExtResource("2_font")
+theme_override_font_sizes/font_size = 24
+text = "SELECT"
+horizontal_alignment = 1
+vertical_alignment = 1

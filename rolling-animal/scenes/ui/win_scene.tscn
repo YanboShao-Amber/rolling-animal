@@ -1,0 +1,152 @@
+[gd_scene format=3 uid="uid://7qeronqpj8w2"]
+
+[ext_resource type="Script" uid="uid://dfrgt16u2qlld" path="res://scripts/ui/win_scene.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://hbbvurocdavc" path="res://assets/UI/panel_brown_arrows_detail.png" id="2_panel"]
+[ext_resource type="Texture2D" uid="uid://bl6p31hmffh6t" path="res://assets/UI/banner_classic_curtain.png" id="3_banner"]
+[ext_resource type="Texture2D" uid="uid://bor4aryxgyx08" path="res://assets/UI/panel_brown_dark_corners_a.png" id="4_button"]
+[ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="5_font"]
+
+[node name="WinScene" type="Control" unique_id=637612042]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_script")
+
+[node name="Dimmer" type="ColorRect" parent="." unique_id=1667122387]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.04, 0.025, 0.015, 0.68)
+
+[node name="PopupRoot" type="Control" parent="." unique_id=1536993394]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -310.0
+offset_top = -225.0
+offset_right = 310.0
+offset_bottom = 225.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(310, 225)
+mouse_filter = 2
+
+[node name="WindowPanel" type="NinePatchRect" parent="PopupRoot" unique_id=1010909685]
+texture_filter = 1
+layout_mode = 0
+offset_left = -111.0
+offset_top = 70.0
+offset_right = 744.0
+offset_bottom = 450.0
+texture = ExtResource("2_panel")
+patch_margin_left = 32
+patch_margin_top = 32
+patch_margin_right = 32
+patch_margin_bottom = 32
+
+[node name="TitleBanner" type="TextureRect" parent="PopupRoot" unique_id=457503135]
+texture_filter = 1
+layout_mode = 0
+offset_left = 54.0
+offset_right = 566.0
+offset_bottom = 128.0
+mouse_filter = 2
+texture = ExtResource("3_banner")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="TitleLabel" type="Label" parent="PopupRoot/TitleBanner" unique_id=1632755670]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 50.0
+offset_top = 19.0
+offset_right = -46.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.27, 0.075, 0.055, 1)
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 34
+text = "WIN!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BodyLabel" type="Label" parent="PopupRoot" unique_id=514079121]
+layout_mode = 0
+offset_left = 82.0
+offset_top = 158.0
+offset_right = 538.0
+offset_bottom = 268.0
+theme_override_colors/font_color = Color(0.3, 0.16, 0.075, 1)
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 21
+text = "You cleared the test stage successfully!
+Would you like to continue or go back?"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="PopupRoot" unique_id=449066777]
+layout_mode = 0
+offset_left = 154.0
+offset_top = 286.0
+offset_right = 466.0
+offset_bottom = 414.0
+theme_override_constants/separation = 56
+alignment = 1
+
+[node name="LeftButton" type="TextureButton" parent="PopupRoot/ButtonRow" unique_id=2022880803]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("4_button")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ButtonLabel" type="Label" parent="PopupRoot/ButtonRow/LeftButton" unique_id=132841072]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.65, 1)
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 20
+text = "RETRY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RightButton" type="TextureButton" parent="PopupRoot/ButtonRow" unique_id=174619993]
+texture_filter = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture_normal = ExtResource("4_button")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ButtonLabel" type="Label" parent="PopupRoot/ButtonRow/RightButton" unique_id=854233205]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 0.9, 0.65, 1)
+theme_override_fonts/font = ExtResource("5_font")
+theme_override_font_sizes/font_size = 20
+text = "BACK"
+horizontal_alignment = 1
+vertical_alignment = 1

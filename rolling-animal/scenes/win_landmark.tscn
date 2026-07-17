@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://b0f7l5wx2tawn"]
+
+[ext_resource type="Script" uid="uid://bgbhw0ftn27d2" path="res://scripts/levels/win_landmark.gd" id="1_script"]
+[ext_resource type="TileSet" uid="uid://b7ct8qle10t6b" path="res://resources/tilesets/farm_tileset.tres" id="2_tileset"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_win"]
+size = Vector2(52, 121)
+
+[node name="WinLandmark" type="Node2D" unique_id=1678068068]
+script = ExtResource("1_script")
+
+[node name="LandmarkLayer" type="TileMapLayer" parent="." unique_id=209057711]
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 4, 0, 2, 0, 0, 0, 0, 0, 254, 255, 0, 0, 4, 0, 1, 0, 0, 0)
+tile_set = ExtResource("2_tileset")
+
+[node name="WinTrigger" type="Area2D" parent="." unique_id=792157405]
+position = Vector2(0, -108)
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WinTrigger" unique_id=1334023018]
+position = Vector2(28, 47.5)
+shape = SubResource("RectangleShape_win")

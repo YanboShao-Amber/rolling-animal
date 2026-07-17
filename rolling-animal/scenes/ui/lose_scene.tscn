@@ -1,0 +1,240 @@
+[gd_scene load_steps=10 format=3]
+
+[ext_resource type="Script" path="res://scripts/ui/lose_scene.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://assets/UI/panel_grey_bolts_detail_a.png" id="2_window"]
+[ext_resource type="Texture2D" path="res://assets/UI/pattern_diagonal_transparent_small.png" id="3_pattern"]
+[ext_resource type="Texture2D" path="res://assets/UI/panel_grey_blue.png" id="4_message"]
+[ext_resource type="Texture2D" path="res://assets/UI/button_grey.png" id="5_button"]
+[ext_resource type="FontFile" path="res://assets/Fonts/Kenney Future.ttf" id="6_font"]
+
+[sub_resource type="StyleBoxFlat" id="Style_close_normal"]
+bg_color = Color(0.56, 0.19, 0.19, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.78, 0.42, 0.38, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_close_hover"]
+bg_color = Color(0.72, 0.24, 0.22, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.94, 0.58, 0.48, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="Style_close_pressed"]
+bg_color = Color(0.40, 0.12, 0.14, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.68, 0.32, 0.32, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[node name="LoseScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+script = ExtResource("1_script")
+
+[node name="Dimmer" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.025, 0.035, 0.055, 0.72)
+
+[node name="PopupRoot" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -300.0
+offset_top = -210.0
+offset_right = 300.0
+offset_bottom = 210.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+pivot_offset = Vector2(300, 210)
+clip_contents = true
+
+[node name="WindowPanel" type="NinePatchRect" parent="PopupRoot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("2_window")
+patch_margin_left = 28
+patch_margin_top = 28
+patch_margin_right = 28
+patch_margin_bottom = 28
+
+[node name="TitlePattern" type="TextureRect" parent="PopupRoot"]
+layout_mode = 0
+offset_left = 42.0
+offset_top = 38.0
+offset_right = 558.0
+offset_bottom = 112.0
+mouse_filter = 2
+texture_filter = 1
+modulate = Color(0.58, 0.68, 0.76, 0.52)
+texture = ExtResource("3_pattern")
+expand_mode = 1
+stretch_mode = 1
+
+[node name="TitleLabel" type="Label" parent="PopupRoot"]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 40.0
+offset_right = 508.0
+offset_bottom = 108.0
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.88, 0.94, 0.98, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.18, 0.24, 1)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 32
+text = "YOU LOSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="CloseButton" type="Button" parent="PopupRoot"]
+layout_mode = 0
+offset_left = 528.0
+offset_top = 28.0
+offset_right = 570.0
+offset_bottom = 70.0
+focus_mode = 0
+mouse_default_cursor_shape = 2
+theme_override_colors/font_color = Color(1, 0.86, 0.78, 1)
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("Style_close_normal")
+theme_override_styles/hover = SubResource("Style_close_hover")
+theme_override_styles/pressed = SubResource("Style_close_pressed")
+text = "X"
+
+[node name="MessagePanel" type="NinePatchRect" parent="PopupRoot"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 134.0
+offset_right = 532.0
+offset_bottom = 278.0
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("4_message")
+patch_margin_left = 24
+patch_margin_top = 24
+patch_margin_right = 24
+patch_margin_bottom = 24
+
+[node name="BodyLabel" type="Label" parent="PopupRoot/MessagePanel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 24.0
+offset_right = -42.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.16, 0.24, 0.31, 1)
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 19
+text = "You failed the test stage.\nTry again or return to the menu."
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="ButtonRow" type="HBoxContainer" parent="PopupRoot"]
+layout_mode = 0
+offset_left = 136.0
+offset_top = 310.0
+offset_right = 464.0
+offset_bottom = 382.0
+theme_override_constants/separation = 40
+alignment = 1
+
+[node name="RetryButton" type="TextureButton" parent="PopupRoot/ButtonRow"]
+custom_minimum_size = Vector2(144, 72)
+layout_mode = 2
+texture_filter = 1
+pivot_offset = Vector2(72, 36)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_button")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ButtonLabel" type="Label" parent="PopupRoot/ButtonRow/RetryButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.82, 0.90, 0.95, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.18, 0.23, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 19
+text = "RETRY"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MenuButton" type="TextureButton" parent="PopupRoot/ButtonRow"]
+custom_minimum_size = Vector2(144, 72)
+layout_mode = 2
+texture_filter = 1
+pivot_offset = Vector2(72, 36)
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("5_button")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="ButtonLabel" type="Label" parent="PopupRoot/ButtonRow/MenuButton"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(0.82, 0.90, 0.95, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.18, 0.23, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("6_font")
+theme_override_font_sizes/font_size = 19
+text = "MENU"
+horizontal_alignment = 1
+vertical_alignment = 1

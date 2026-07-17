@@ -1,0 +1,107 @@
+[gd_scene load_steps=8 format=3]
+
+[ext_resource type="Script" path="res://scripts/player/player_test.gd" id="1_test"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="2_player"]
+[ext_resource type="FontFile" path="res://assets/Fonts/Kenney Future.ttf" id="3_font"]
+[ext_resource type="Texture2D" path="res://assets/UI/panel_brown_dark.png" id="4_bg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_ground"]
+size = Vector2(1400, 80)
+
+[sub_resource type="StyleBoxFlat" id="Style_instructions"]
+bg_color = Color(0.17, 0.09, 0.035, 0.82)
+corner_radius_top_left = 18
+corner_radius_top_right = 18
+corner_radius_bottom_right = 18
+corner_radius_bottom_left = 18
+content_margin_left = 24.0
+content_margin_top = 16.0
+content_margin_right = 24.0
+content_margin_bottom = 16.0
+
+[sub_resource type="StyleBoxFlat" id="Style_ground"]
+bg_color = Color(0.31, 0.16, 0.07, 1)
+border_width_top = 8
+border_color = Color(0.72, 0.43, 0.17, 1)
+
+[node name="PlayerTest" type="Node2D"]
+script = ExtResource("1_test")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Background" type="TextureRect" parent="BackgroundLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture_filter = 1
+texture = ExtResource("4_bg")
+expand_mode = 1
+stretch_mode = 0
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(640, 680)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape_ground")
+
+[node name="GroundVisual" type="Panel" parent="."]
+offset_top = 640.0
+offset_right = 1280.0
+offset_bottom = 720.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_ground")
+
+[node name="Player" parent="." instance=ExtResource("2_player")]
+position = Vector2(640, 640)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="TitleLabel" type="Label" parent="UILayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 36.0
+offset_bottom = 84.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.82, 0.48, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 32
+text = "SOFT PLAYER TEST"
+horizontal_alignment = 1
+
+[node name="Instructions" type="PanelContainer" parent="UILayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 340.0
+offset_top = 96.0
+offset_right = -340.0
+offset_bottom = 184.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("Style_instructions")
+
+[node name="Label" type="Label" parent="UILayer/Instructions"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 0.94, 0.78, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 19
+text = "LEFT CLICK REPEATEDLY TO GROW\nSPACE TO JUMP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatusLabel" type="Label" parent="UILayer"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 205.0
+offset_bottom = 245.0
+grow_horizontal = 2
+mouse_filter = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("3_font")
+theme_override_font_sizes/font_size = 17
+horizontal_alignment = 1
