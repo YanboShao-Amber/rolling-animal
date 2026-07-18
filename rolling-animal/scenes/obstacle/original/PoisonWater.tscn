@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/obstacles/killzone.gd" id="1_kz"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
+size = Vector2(128, 108)
+
+[node name="PoisonWater" type="Area2D" groups=["hazards"]]
+script = ExtResource("1_kz")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64, 74)
+shape = SubResource("RectangleShape2D_water")
+
+[node name="Placeholder" type="Polygon2D" parent="."]
+color = Color(0.3, 0.75, 0.35, 0.75)
+polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)

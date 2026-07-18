@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://xqgflncscxga" path="res://scenes/player/player.tscn" id="1_player"]
 [ext_resource type="Script" path="res://scripts/levels/obstacle_test.gd" id="2_test"]
 [ext_resource type="Script" path="res://scripts/levels/respawn_manager.gd" id="3_respawn"]
-[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Spike.tscn" id="4_spike"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Killzone.tscn" id="4_killzone"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="5_checkpoint"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
@@ -41,21 +41,21 @@ default_spawn = NodePath("../DefaultSpawn")
 position = Vector2(550, 572)
 order = 0
 
-[node name="Spike1" parent="." instance=ExtResource("4_spike")]
+[node name="Killzone1" parent="." instance=ExtResource("4_killzone")]
 position = Vector2(950, 572)
 
 [node name="Checkpoint2" parent="." instance=ExtResource("5_checkpoint")]
 position = Vector2(1350, 572)
 order = 1
 
-[node name="Spike2" parent="." instance=ExtResource("4_spike")]
+[node name="Killzone2" parent="." instance=ExtResource("4_killzone")]
 position = Vector2(1750, 572)
 
 [node name="Checkpoint3" parent="." instance=ExtResource("5_checkpoint")]
 position = Vector2(2150, 572)
 order = 2
 
-[node name="Spike3" parent="." instance=ExtResource("4_spike")]
+[node name="Killzone3" parent="." instance=ExtResource("4_killzone")]
 position = Vector2(2550, 572)
 
 [node name="UILayer" type="CanvasLayer" parent="."]

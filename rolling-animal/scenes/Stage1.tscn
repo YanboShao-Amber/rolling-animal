@@ -1,0 +1,183 @@
+[gd_scene format=3 uid="uid://bbun3qkv66hy4"]
+
+[ext_resource type="PackedScene" uid="uid://xqgflncscxga" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" uid="uid://cpnigjxgxdfxo" path="res://scripts/levels/obstacle_test.gd" id="2_test"]
+[ext_resource type="Script" uid="uid://cvt2lscgpykpd" path="res://scripts/levels/respawn_manager.gd" id="3_respawn"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/PoisonWater.tscn" id="4_poison"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="5_checkpoint"]
+[ext_resource type="PackedScene" uid="uid://deedcwv6amchy" path="res://scenes/obstacle/original/breakable obstacle.tscn" id="6_breakable"]
+[ext_resource type="PackedScene" uid="uid://c71rdvofb85s2" path="res://scenes/effects/StunEffect.tscn" id="7_stun"]
+
+[sub_resource type="RectangleShape2D" id="RS_768"]
+size = Vector2(768, 200)
+
+[sub_resource type="RectangleShape2D" id="RS_512"]
+size = Vector2(512, 200)
+
+[sub_resource type="RectangleShape2D" id="RS_896"]
+size = Vector2(896, 200)
+
+[sub_resource type="RectangleShape2D" id="RS_640"]
+size = Vector2(640, 200)
+
+[sub_resource type="RectangleShape2D" id="RS_384"]
+size = Vector2(384, 200)
+
+[sub_resource type="RectangleShape2D" id="RS_CEIL"]
+size = Vector2(288, 61)
+
+[sub_resource type="RectangleShape2D" id="RS_PLAT"]
+size = Vector2(170, 48)
+
+[node name="Stage1" type="Node2D" unique_id=392444263]
+script = ExtResource("2_test")
+
+[node name="Terrain" type="StaticBody2D" parent="." unique_id=1475726757]
+
+[node name="Col_S1" type="CollisionShape2D" parent="Terrain" unique_id=1985493732]
+position = Vector2(384, 800)
+shape = SubResource("RS_768")
+
+[node name="Col_S2" type="CollisionShape2D" parent="Terrain" unique_id=501270929]
+position = Vector2(1152, 800)
+shape = SubResource("RS_512")
+
+[node name="Col_S3" type="CollisionShape2D" parent="Terrain" unique_id=1172138993]
+position = Vector2(2112, 800)
+shape = SubResource("RS_896")
+
+[node name="Col_S4" type="CollisionShape2D" parent="Terrain" unique_id=546627418]
+position = Vector2(3136, 800)
+shape = SubResource("RS_640")
+
+[node name="Col_S5" type="CollisionShape2D" parent="Terrain" unique_id=735776670]
+position = Vector2(3968, 800)
+shape = SubResource("RS_512")
+
+[node name="Col_S6" type="CollisionShape2D" parent="Terrain" unique_id=1193417726]
+position = Vector2(4928, 800)
+shape = SubResource("RS_384")
+
+[node name="Col_Ceil" type="CollisionShape2D" parent="Terrain" unique_id=1019624469]
+position = Vector2(3584, 519.5)
+shape = SubResource("RS_CEIL")
+
+[node name="Col_P1" type="CollisionShape2D" parent="Terrain" unique_id=1157047018]
+position = Vector2(4385, 596)
+shape = SubResource("RS_PLAT")
+
+[node name="Col_P2" type="CollisionShape2D" parent="Terrain" unique_id=444540362]
+position = Vector2(4615, 596)
+shape = SubResource("RS_PLAT")
+
+[node name="Vis_S1" type="Polygon2D" parent="Terrain" unique_id=1163593622]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(0, 700, 768, 700, 768, 900, 0, 900)
+
+[node name="Vis_S2" type="Polygon2D" parent="Terrain" unique_id=1040983906]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(896, 700, 1408, 700, 1408, 900, 896, 900)
+
+[node name="Vis_S3" type="Polygon2D" parent="Terrain" unique_id=1782864469]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(1664, 700, 2560, 700, 2560, 900, 1664, 900)
+
+[node name="Vis_S4" type="Polygon2D" parent="Terrain" unique_id=493208195]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(2816, 700, 3456, 700, 3456, 900, 2816, 900)
+
+[node name="Vis_S5" type="Polygon2D" parent="Terrain" unique_id=1788755582]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(3712, 700, 4224, 700, 4224, 900, 3712, 900)
+
+[node name="Vis_S6" type="Polygon2D" parent="Terrain" unique_id=2007934525]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(4736, 700, 5120, 700, 5120, 900, 4736, 900)
+
+[node name="Vis_Ceil" type="Polygon2D" parent="Terrain" unique_id=647502599]
+position = Vector2(-2, 71)
+color = Color(0.26, 0.28, 0.32, 1)
+polygon = PackedVector2Array(3440, 400, 3728, 400, 3728, 480, 3440, 480)
+
+[node name="Vis_P1" type="Polygon2D" parent="Terrain" unique_id=1561283165]
+color = Color(0.42, 0.44, 0.48, 1)
+polygon = PackedVector2Array(4300, 572, 4470, 572, 4470, 620, 4300, 620)
+
+[node name="Vis_P2" type="Polygon2D" parent="Terrain" unique_id=1725945385]
+color = Color(0.42, 0.44, 0.48, 1)
+polygon = PackedVector2Array(4530, 572, 4700, 572, 4700, 620, 4530, 620)
+
+[node name="Poison_G1" parent="." unique_id=1659861080 instance=ExtResource("4_poison")]
+position = Vector2(768, 700)
+
+[node name="Poison_G2a" parent="." unique_id=1507543783 instance=ExtResource("4_poison")]
+position = Vector2(1408, 700)
+
+[node name="Poison_G2b" parent="." unique_id=528234481 instance=ExtResource("4_poison")]
+position = Vector2(1536, 700)
+
+[node name="Poison_G3a" parent="." unique_id=1364551518 instance=ExtResource("4_poison")]
+position = Vector2(2560, 700)
+
+[node name="Poison_G3b" parent="." unique_id=2060164585 instance=ExtResource("4_poison")]
+position = Vector2(2688, 700)
+
+[node name="Poison_G4a" parent="." unique_id=848848912 instance=ExtResource("4_poison")]
+position = Vector2(3456, 700)
+
+[node name="Poison_G4b" parent="." unique_id=1117422427 instance=ExtResource("4_poison")]
+position = Vector2(3584, 700)
+
+[node name="Poison_G5a" parent="." unique_id=516579839 instance=ExtResource("4_poison")]
+position = Vector2(4224, 700)
+
+[node name="Poison_G5b" parent="." unique_id=1073375755 instance=ExtResource("4_poison")]
+position = Vector2(4352, 700)
+
+[node name="Poison_G5c" parent="." unique_id=1201683211 instance=ExtResource("4_poison")]
+position = Vector2(4480, 700)
+
+[node name="Poison_G5d" parent="." unique_id=1776888219 instance=ExtResource("4_poison")]
+position = Vector2(4608, 700)
+
+[node name="BreakableWall" parent="." unique_id=2096001859 instance=ExtResource("6_breakable")]
+position = Vector2(1950, 540)
+scale = Vector2(1, 2.5)
+stun_if_too_small = true
+grow_grace_time = 0.0
+death_effect = ExtResource("7_stun")
+restore_on_respawn = true
+
+[node name="DefaultSpawn" type="Marker2D" parent="." unique_id=1030490795]
+position = Vector2(200, 700)
+
+[node name="Player" parent="." unique_id=599316435 instance=ExtResource("1_player")]
+position = Vector2(200, 700)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2036833008]
+position = Vector2(250, -150)
+
+[node name="RespawnManager" type="Node" parent="." unique_id=1582280486]
+script = ExtResource("3_respawn")
+player = NodePath("../Player")
+default_spawn = NodePath("../DefaultSpawn")
+
+[node name="Checkpoint1" parent="." unique_id=2040896031 instance=ExtResource("5_checkpoint")]
+position = Vector2(2950, 572)
+
+[node name="Checkpoint2" parent="." unique_id=1947242909 instance=ExtResource("5_checkpoint")]
+position = Vector2(4850, 572)
+order = 1
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=353605347]
+
+[node name="Instructions" type="Label" parent="UILayer" unique_id=1418663214]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1820.0
+offset_bottom = 180.0
+theme_override_font_sizes/font_size = 28
+text = "§1 灰盒关 · 自动向右滚，[空格]跳
+绿色=毒水，掉进去=死；保持小(别点鼠标)跳得更高更远
+挡路的墙：[左键]狂点变大撞碎 → 再松手缩小才跳得过后面的沟
+死了从最近的绿旗检查点复活"

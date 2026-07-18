@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://c71rdvofb85s2"]
+
+[ext_resource type="Script" uid="uid://droememeg33g" path="res://scripts/effects/stun_effect.gd" id="1_stun"]
+[ext_resource type="Texture2D" uid="uid://4wcnnio4kh3k" path="res://assets/vfx/sheet.png" id="2_q8t20"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1fef"]
+atlas = ExtResource("2_q8t20")
+region = Rect2(778, 557, 31, 30)
+
+[node name="StunEffect" type="Node2D" unique_id=1569147368]
+script = ExtResource("1_stun")
+star_texture = SubResource("AtlasTexture_s1fef")
