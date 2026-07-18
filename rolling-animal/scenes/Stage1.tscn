@@ -7,6 +7,9 @@
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="5_checkpoint"]
 [ext_resource type="PackedScene" uid="uid://deedcwv6amchy" path="res://scenes/obstacle/original/breakable obstacle.tscn" id="6_breakable"]
 [ext_resource type="PackedScene" uid="uid://c71rdvofb85s2" path="res://scenes/effects/StunEffect.tscn" id="7_stun"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/FanZone.tscn" id="8_fan"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/WeightButton.tscn" id="9_button"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Bubble.tscn" id="10_bubble"]
 
 [sub_resource type="RectangleShape2D" id="RS_768"]
 size = Vector2(768, 200)
@@ -28,6 +31,9 @@ size = Vector2(288, 61)
 
 [sub_resource type="RectangleShape2D" id="RS_PLAT"]
 size = Vector2(170, 48)
+
+[sub_resource type="RectangleShape2D" id="RS_ELEV"]
+size = Vector2(576, 48)
 
 [node name="Stage1" type="Node2D" unique_id=392444263]
 script = ExtResource("2_test")
@@ -175,9 +181,115 @@ order = 1
 offset_left = 40.0
 offset_top = 30.0
 offset_right = 1820.0
-offset_bottom = 180.0
+offset_bottom = 230.0
 theme_override_font_sizes/font_size = 28
 text = "§1 灰盒关 · 自动向右滚，[空格]跳
 绿色=毒水，掉进去=死；保持小(别点鼠标)跳得更高更远
 挡路的墙：[左键]狂点变大撞碎 → 再松手缩小才跳得过后面的沟
+风口：保持小才被吹上去 → 跳台 → 落地狂点变大踩橙色按钮 → 出气泡过毒池
 死了从最近的绿旗检查点复活"
+
+[node name="Col_E1" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(5664, 464)
+shape = SubResource("RS_ELEV")
+
+[node name="Col_E2" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(6368, 464)
+shape = SubResource("RS_ELEV")
+
+[node name="Col_S9" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(7168, 800)
+shape = SubResource("RS_768")
+
+[node name="Col_S10" type="CollisionShape2D" parent="Terrain"]
+position = Vector2(8512, 800)
+shape = SubResource("RS_384")
+
+[node name="Vis_E1" type="Polygon2D" parent="Terrain"]
+color = Color(0.42, 0.44, 0.48, 1)
+polygon = PackedVector2Array(5376, 440, 5952, 440, 5952, 488, 5376, 488)
+
+[node name="Vis_E2" type="Polygon2D" parent="Terrain"]
+color = Color(0.42, 0.44, 0.48, 1)
+polygon = PackedVector2Array(6080, 440, 6656, 440, 6656, 488, 6080, 488)
+
+[node name="Vis_S9" type="Polygon2D" parent="Terrain"]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(6784, 700, 7552, 700, 7552, 900, 6784, 900)
+
+[node name="Vis_S10" type="Polygon2D" parent="Terrain"]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(8320, 700, 8704, 700, 8704, 900, 8320, 900)
+
+[node name="Poison_A0" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5120, 700)
+[node name="Poison_A1" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5248, 700)
+[node name="Poison_A2" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5376, 700)
+[node name="Poison_A3" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5504, 700)
+[node name="Poison_A4" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5632, 700)
+[node name="Poison_A5" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5760, 700)
+[node name="Poison_A6" parent="." instance=ExtResource("4_poison")]
+position = Vector2(5888, 700)
+[node name="Poison_A7" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6016, 700)
+[node name="Poison_A8" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6144, 700)
+[node name="Poison_A9" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6272, 700)
+[node name="Poison_A10" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6400, 700)
+[node name="Poison_A11" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6528, 700)
+[node name="Poison_A12" parent="." instance=ExtResource("4_poison")]
+position = Vector2(6656, 700)
+
+[node name="Poison_P0" parent="." instance=ExtResource("4_poison")]
+position = Vector2(7552, 700)
+[node name="Poison_P1" parent="." instance=ExtResource("4_poison")]
+position = Vector2(7680, 700)
+[node name="Poison_P2" parent="." instance=ExtResource("4_poison")]
+position = Vector2(7808, 700)
+[node name="Poison_P3" parent="." instance=ExtResource("4_poison")]
+position = Vector2(7936, 700)
+[node name="Poison_P4" parent="." instance=ExtResource("4_poison")]
+position = Vector2(8064, 700)
+[node name="Poison_P5" parent="." instance=ExtResource("4_poison")]
+position = Vector2(8192, 700)
+
+[node name="Fan_U1" parent="." instance=ExtResource("8_fan")]
+position = Vector2(5120, 572)
+neutral_size = 0.9
+max_rise_speed = 550.0
+
+[node name="Fan_U2" parent="." instance=ExtResource("8_fan")]
+position = Vector2(5248, 572)
+neutral_size = 0.9
+max_rise_speed = 550.0
+
+[node name="WeightButton" parent="." instance=ExtResource("9_button")]
+position = Vector2(7360, 700)
+target = NodePath("../Bubble")
+
+[node name="Bubble" parent="." instance=ExtResource("10_bubble")]
+position = Vector2(7488, 700)
+pool_end_x = 8320.0
+
+[node name="Checkpoint3" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(4980, 572)
+order = 2
+
+[node name="Checkpoint4" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(6900, 572)
+order = 3
+
+[node name="Checkpoint5" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(8500, 572)
+order = 4
+
+[connection signal="pressed" from="WeightButton" to="Bubble" method="set_active" binds=[true]]
+[connection signal="released" from="WeightButton" to="Bubble" method="set_active" binds=[false]]
