@@ -20,16 +20,16 @@ const BASE_RADIUS := 64.0
 
 @export_category("Jump")
 @export var gravity := 3200.0
-@export var jump_velocity := -960.0
+@export var jump_velocity := -1000.0
 @export_range(1, 10, 1) var maximum_jump_count := 1
 
 @export_category("Forward Movement")
 @export var auto_forward_enabled := false
-@export var base_forward_speed := 400.0
-@export var minimum_forward_speed := 500.0
-@export var maximum_forward_speed := 1600.0
+@export var base_forward_speed := 300.0
+@export var minimum_forward_speed := 400.0
+@export var maximum_forward_speed := 500.0
 @export var size_speed_exponent := 0.75
-@export var forward_acceleration := 1500.0
+@export var forward_acceleration := 600.0
 
 @onready var size_root: Node2D = $SizeRoot
 @onready var growth_pulse_root: Node2D = $SizeRoot/GrowthPulseRoot
