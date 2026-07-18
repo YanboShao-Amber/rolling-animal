@@ -270,6 +270,10 @@ func _update_motion_deform(delta: float, moved_distance_x: float) -> void:
 
 
 func _get_size_weight() -> float:
+	# 增加除零保护：如果最大值和最小值相等（例如被蘑菇锁定为 0.2 时），直接返回 0.0 权重
+	if is_equal_approx(minimum_size_scale, maximum_size_scale):
+		return 0.0
+		
 	return inverse_lerp(minimum_size_scale, maximum_size_scale, current_size_scale)
 
 

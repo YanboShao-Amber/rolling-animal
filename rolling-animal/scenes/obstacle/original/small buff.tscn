@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://cb0xbr80usldi"]
+
+[ext_resource type="Script" uid="uid://bm8m5y4m86qhi" path="res://scripts/obstacles/small_buff.gd" id="1_7lqos"]
+[ext_resource type="Texture2D" uid="uid://b6kwwg30nsxvq" path="res://assets/obstacle/mushroom.png" id="1_e6p1s"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_g4v7s"]
+radius = 21.0
+height = 60.0
+
+[node name="SmallBuff" type="Area2D" unique_id=409904261]
+script = ExtResource("1_7lqos")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=550011082]
+texture = ExtResource("1_e6p1s")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1460593312]
+position = Vector2(0, 34)
+shape = SubResource("CapsuleShape2D_g4v7s")
