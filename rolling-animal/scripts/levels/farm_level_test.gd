@@ -34,8 +34,10 @@ var lose_popup: LosePopup
 func _ready() -> void:
 	hud.visible = show_debug_hud
 	var selected_character: Dictionary = {"portrait_path": "res://assets/player/duck.png"}
-	if GameState.has_selected_character() and GameState.selected_character_data is Dictionary:
-		selected_character = GameState.selected_character_data.duplicate(true)
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state and game_state.has_selected_character() \
+			and game_state.selected_character_data is Dictionary:
+		selected_character = game_state.selected_character_data.duplicate(true)
 	player.setup_character(selected_character)
 	player.auto_forward_enabled = true
 	player.global_position = player_spawn.global_position

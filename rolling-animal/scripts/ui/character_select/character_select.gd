@@ -51,8 +51,8 @@ var _rotation_step_degrees := 0.0
 func _ready() -> void:
 	selected_index = wrapi(default_character_index, 0, CharacterData.CHARACTERS.size())
 	_create_avatars()
-	left_button.pressed.connect(_select_next)
-	right_button.pressed.connect(_select_previous)
+	left_button.pressed.connect(_select_previous)
+	right_button.pressed.connect(_select_next)
 	confirm_button.pressed.connect(_confirm_selection)
 	back_button.pressed.connect(_request_back)
 	avatar_layer.resized.connect(_on_carousel_resized)
@@ -71,10 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_request_back()
 		get_viewport().set_input_as_handled()
 	elif not is_animating and event.is_action_pressed("character_select_left"):
-		_select_next()
+		_select_previous()
 		get_viewport().set_input_as_handled()
 	elif not is_animating and event.is_action_pressed("character_select_right"):
-		_select_previous()
+		_select_next()
 		get_viewport().set_input_as_handled()
 
 
@@ -255,7 +255,12 @@ func _confirm_selection() -> void:
 	print("Selected character: ", data["id"])
 	print("Selected character name: ", data["display_name"])
 	print("Selected texture: ", data["portrait_path"])
-	GameState.set_selected_character(data)
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		game_state.set_selected_character(data)
+	else:
+		push_error("GameState Autoload is missing; character selection was not saved.")
+		return
 	character_confirmed.emit(data)
 	get_tree().change_scene_to_file(FARM_LEVEL_SCENE)
 
