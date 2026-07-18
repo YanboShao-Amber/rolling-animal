@@ -1,0 +1,70 @@
+[gd_scene load_steps=7 format=3]
+
+[ext_resource type="PackedScene" uid="uid://xqgflncscxga" path="res://scenes/player/player.tscn" id="1_player"]
+[ext_resource type="Script" path="res://scripts/levels/obstacle_test.gd" id="2_test"]
+[ext_resource type="Script" path="res://scripts/levels/respawn_manager.gd" id="3_respawn"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Spike.tscn" id="4_spike"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="5_checkpoint"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_floor"]
+size = Vector2(3200, 200)
+
+[node name="ObstacleTest" type="Node2D"]
+script = ExtResource("2_test")
+auto_forward = true
+
+[node name="Floor" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+position = Vector2(1500, 800)
+shape = SubResource("RectangleShape2D_floor")
+
+[node name="Ground" type="Polygon2D" parent="Floor"]
+color = Color(0.32, 0.34, 0.38, 1)
+polygon = PackedVector2Array(-100, 700, 3100, 700, 3100, 900, -100, 900)
+
+[node name="DefaultSpawn" type="Marker2D" parent="."]
+position = Vector2(200, 700)
+
+[node name="Player" parent="." instance=ExtResource("1_player")]
+position = Vector2(200, 700)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(250, -150)
+
+[node name="RespawnManager" type="Node" parent="."]
+script = ExtResource("3_respawn")
+player = NodePath("../Player")
+default_spawn = NodePath("../DefaultSpawn")
+
+[node name="Checkpoint1" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(550, 572)
+order = 0
+
+[node name="Spike1" parent="." instance=ExtResource("4_spike")]
+position = Vector2(950, 572)
+
+[node name="Checkpoint2" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(1350, 572)
+order = 1
+
+[node name="Spike2" parent="." instance=ExtResource("4_spike")]
+position = Vector2(1750, 572)
+
+[node name="Checkpoint3" parent="." instance=ExtResource("5_checkpoint")]
+position = Vector2(2150, 572)
+order = 2
+
+[node name="Spike3" parent="." instance=ExtResource("4_spike")]
+position = Vector2(2550, 572)
+
+[node name="UILayer" type="CanvasLayer" parent="."]
+
+[node name="Instructions" type="Label" parent="UILayer"]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1500.0
+offset_bottom = 130.0
+theme_override_font_sizes/font_size = 30
+text = "自动向右滚 · 按住[空格]连跳过地刺 · 不点鼠标=变小跳更高 · 左键变大会跳不过
+碰地刺=死 → 从最近的绿色检查点复活"
