@@ -8,25 +8,26 @@ signal size_changed(size_scale: float)
 const BASE_RADIUS := 64.0
 
 @export_category("Size")
-@export_range(0.4, 2.0, 0.01) var default_size_scale := 1.0
+@export_range(0.4, 2.0, 0.01) var default_size_scale := 0.8
 @export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.2
 @export_range(1.0, 3.0, 0.01) var maximum_size_scale := 2.0
 @export_range(0.01, 0.3, 0.01) var growth_per_click := 0.075
+@export_range(0.1, 3.0, 0.01) var growth_per_second_held := 0.9
 @export_range(1.0, 4.0, 0.1) var rapid_click_multiplier := 2.4
 @export_range(1.0, 20.0, 0.5) var size_follow_speed := 9.0
 @export_range(0.0, 2.0, 0.05) var shrink_delay := 0.35
-@export_range(0.01, 1.0, 0.01) var shrink_speed := 0.22
+@export_range(0.01, 1.0, 0.01) var shrink_speed := 0.20
 
 @export_category("Jump")
-@export var gravity := 1800.0
-@export var jump_velocity := -720.0
-@export_range(1, 10, 1) var maximum_jump_count := 3
+@export var gravity := 3200.0
+@export var jump_velocity := -960.0
+@export_range(1, 10, 1) var maximum_jump_count := 1
 
 @export_category("Forward Movement")
 @export var auto_forward_enabled := false
-@export var base_forward_speed := 360.0
-@export var minimum_forward_speed := 400.0
-@export var maximum_forward_speed := 2000.0
+@export var base_forward_speed := 400.0
+@export var minimum_forward_speed := 500.0
+@export var maximum_forward_speed := 1600.0
 @export var size_speed_exponent := 0.75
 @export var forward_acceleration := 1500.0
 
@@ -49,6 +50,7 @@ var _deform_tween: Tween
 var _growth_pulse_tween: Tween
 var _was_on_floor := false
 var _ground_bounce_phase := 0.0
+var _is_holding_growth := false
 
 
 func _ready() -> void:
@@ -58,8 +60,13 @@ func _ready() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		_register_growth_click()
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			# Single click still gives its instant burst; holding then grows continuously.
+			_is_holding_growth = true
+			_register_growth_click()
+		else:
+			_is_holding_growth = false
 		get_viewport().set_input_as_handled()
 
 
@@ -88,6 +95,14 @@ func _physics_process(delta: float) -> void:
 
 
 func _process(delta: float) -> void:
+	if _is_holding_growth:
+		# Holding the left button keeps feeding growth so the ball keeps expanding.
+		_time_since_click = 0.0
+		target_size_scale = clampf(
+			target_size_scale + growth_per_second_held * delta,
+			minimum_size_scale,
+			maximum_size_scale
+		)
 	# After a short grace period the desired size continuously returns to minimum.
 	if _time_since_click > shrink_delay:
 		target_size_scale = move_toward(target_size_scale, minimum_size_scale, shrink_speed * delta)
@@ -278,6 +293,7 @@ func reset_size() -> void:
 	click_frequency = 0.0
 	growth_velocity = 0.0
 	_time_since_click = 999.0
+	_is_holding_growth = false
 	_update_size_visual()
 
 
