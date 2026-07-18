@@ -22,6 +22,9 @@ func _ready() -> void:
 		_respawn_position = player.global_position
 
 	# 等一帧：确保用 Scene Paint / 瓦片实例化的物件也已进入场景树再连线。
+	if default_spawn == null:
+		push_warning("RespawnManager: 未设置 default_spawn，第一个检查点之前死亡会重生到 (0,0)。请在检查器里指定。")
+
 	await get_tree().process_frame
 
 	for hazard in get_tree().get_nodes_in_group("hazards"):
@@ -42,9 +45,8 @@ func _on_checkpoint_activated(cp: Checkpoint) -> void:
 	_respawn_position = cp.get_respawn_position()
 
 
-func _on_player_died(_who: SoftPlayer) -> void:
-	if player == null:
-		return
-	player.global_position = _respawn_position
-	player.reset_size()          # 回默认大小
-	player.reset_motion_visuals()
+func _on_player_died(who: SoftPlayer) -> void:
+	# 用信号传来的 who（实际撞刺的玩家），不依赖 export 的 player 是否解析成功。
+	who.global_position = _respawn_position
+	who.reset_size()          # 回默认大小
+	who.reset_motion_visuals()
