@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b06h8ym4006x2"]
+
+[node name="Factory" type="Control" unique_id=1157542359]
+layout_mode = 3
+anchors_preset = 0
