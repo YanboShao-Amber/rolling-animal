@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://cg76rc88yuqom" path="res://scripts/levels/minecraft.gd" id="1_aydkd"]
 [ext_resource type="Texture2D" uid="uid://c1io3skiuifk8" path="res://assets/tilemap/minecraft.png" id="1_myiik"]
 [ext_resource type="PackedScene" uid="uid://xqgflncscxga" path="res://scenes/player/player.tscn" id="2_xsfnv"]
+[ext_resource type="PackedScene" uid="uid://bo7fk75k5boib" path="res://scenes/obstacle/minecraft/glass.tscn" id="4_aydkd"]
+[ext_resource type="PackedScene" uid="uid://cb0xbr80usldi" path="res://scenes/obstacle/original/small buff.tscn" id="5_sdrot"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_myiik"]
 texture = ExtResource("1_myiik")
@@ -119,3 +121,9 @@ limit_top = 0
 limit_right = 1000000
 limit_bottom = 1080
 position_smoothing_speed = 6.0
+
+[node name="Glass" parent="." unique_id=1038747570 instance=ExtResource("4_aydkd")]
+position = Vector2(1808.0001, 586)
+
+[node name="SmallBuff" parent="." unique_id=409904261 instance=ExtResource("5_sdrot")]
+position = Vector2(1809, 475)
