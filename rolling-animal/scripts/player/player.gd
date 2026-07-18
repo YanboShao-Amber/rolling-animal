@@ -9,25 +9,25 @@ const BASE_RADIUS := 64.0
 
 @export_category("Size")
 @export_range(0.4, 2.0, 0.01) var default_size_scale := 0.8
-@export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.2
+@export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.5 
 @export_range(1.0, 3.0, 0.01) var maximum_size_scale := 2.0
 @export_range(0.01, 0.3, 0.01) var growth_per_click := 0.075
 @export_range(0.1, 3.0, 0.01) var growth_per_second_held := 0.9
 @export_range(1.0, 4.0, 0.1) var rapid_click_multiplier := 2.4
 @export_range(1.0, 20.0, 0.5) var size_follow_speed := 9.0
 @export_range(0.0, 2.0, 0.05) var shrink_delay := 0.35
-@export_range(0.01, 1.0, 0.01) var shrink_speed := 0.20
+@export_range(0.01, 1.0, 0.01) var shrink_speed := 0.7
 
 @export_category("Jump")
 @export var gravity := 3200.0
-@export var jump_velocity := -1000.0
+@export var jump_velocity := -1250.0
 @export_range(1, 10, 1) var maximum_jump_count := 1
 
 @export_category("Forward Movement")
 @export var auto_forward_enabled := false
-@export var base_forward_speed := 300.0
+@export var base_forward_speed := 350.0
 @export var minimum_forward_speed := 400.0
-@export var maximum_forward_speed := 500.0
+@export var maximum_forward_speed := 450.0
 @export var size_speed_exponent := 0.75
 @export var forward_acceleration := 600.0
 
@@ -78,7 +78,16 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-	if Input.is_action_just_pressed("player_jump"):
+# 判断玩家是否有跳跃意图：
+	# 如果在地上，只要“按住”空格（pressed）就算有跳跃意图，可以实现落地自动连跳（上楼梯也会一级一级直接跳）。
+	# 如果在空中，必须是“刚按下”空格（just_pressed），防止一瞬间把多段跳的次数全用完。
+	var wants_to_jump := false
+	if is_on_floor():
+		wants_to_jump = Input.is_action_pressed("player_jump")
+	else:
+		wants_to_jump = Input.is_action_just_pressed("player_jump")
+
+	if wants_to_jump:
 		_start_jump()
 
 	_was_on_floor = is_on_floor()
@@ -176,8 +185,21 @@ func _play_growth_pulse() -> void:
 func _start_jump() -> void:
 	if jump_count >= maximum_jump_count:
 		return
+		
+	# 获取当前体型的权重（0.0 表示最小体型，1.0 表示最大体型）
+	var size_weight := _get_size_weight()
+	
+	# 如果玩家达到了最大体型，则完全无法跳跃
+	if size_weight >= 1.0:
+		return
+		
 	jump_count += 1
-	velocity.y = jump_velocity
+	
+	# 根据起跳瞬间的体型动态计算跳跃力度
+	# size_weight 为 0.0 时，力度为 jump_velocity (最高)
+	# size_weight 接近 1.0 时，力度趋近于 0.0 (跳不起来)
+	velocity.y = lerpf(jump_velocity, 0.0, size_weight)
+	
 	_play_jump_deform()
 	jumped.emit()
 

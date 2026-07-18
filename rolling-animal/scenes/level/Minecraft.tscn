@@ -115,7 +115,7 @@ tile_set = SubResource("TileSet_g4v7s")
 position = Vector2(188, 763)
 
 [node name="Glass" parent="." unique_id=1607747491 instance=ExtResource("3_chybv")]
-position = Vector2(2720, 634)
+position = Vector2(2719, 670)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1266664725]
 limit_left = 0
@@ -123,3 +123,6 @@ limit_top = 0
 limit_right = 1000000
 limit_bottom = 1080
 position_smoothing_speed = 6.0
+
+[node name="Glass2" parent="." unique_id=1038747570 instance=ExtResource("3_chybv")]
+position = Vector2(1772, 619)
