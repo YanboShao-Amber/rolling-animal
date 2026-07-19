@@ -17,6 +17,7 @@ const LEVEL_NUMBER := 2  # Minecraft 是第 2 关（见 level_menu.gd 的 LEVEL_
 
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Camera2D
+@onready var coin_count_label: Label = $HUD/CoinCounter/CoinCountLabel
 
 func _ready() -> void:
 	# 开启玩家的自动向前移动（调用玩家代码里的逻辑）
@@ -29,6 +30,15 @@ func _ready() -> void:
 		player.global_position.x + camera_look_ahead_x,
 		player.global_position.y + camera_offset_y
 	)
+
+	# 让左上角的金币计数 HUD 跟随全局 GameState 实时刷新（HUD 在 CanvasLayer 中，不随相机滚动）。
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		game_state.coins_changed.connect(_update_coin_hud)
+		_update_coin_hud(game_state.coin_count)
+
+func _update_coin_hud(total: int) -> void:
+	coin_count_label.text = "× %d" % total
 
 func _physics_process(delta: float) -> void:
 	if not is_instance_valid(player) or not is_instance_valid(camera):

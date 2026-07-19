@@ -1,4 +1,4 @@
-[gd_scene load_steps=3 format=3 uid="uid://c3qrdguqecaxw"]
+[gd_scene format=3 uid="uid://c3qrdguqecaxw"]
 
 [ext_resource type="Script" uid="uid://lpehin41ilh" path="res://scripts/obstacles/bubble.gd" id="1_bub"]
 [ext_resource type="Texture2D" uid="uid://c82ih7dipg12a" path="res://assets/original/kenney_alien-ufo-pack/PNG/dome.png" id="2_fyx36"]

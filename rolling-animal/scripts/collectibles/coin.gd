@@ -10,6 +10,7 @@ signal collected(value: int, total: int)
 @export var display_only := false
 
 var _collected := false
+var _committed := false  # 经过检查点后锁定：死亡重生不退还、不复原
 var _resolved_level_id := ""
 var _resolved_coin_id := ""
 var _initial_position := Vector2.ZERO
@@ -35,6 +36,8 @@ func _ready() -> void:
 	# 加入 "resettable" 组：玩家死亡重生时 RespawnManager 会调 reset_state() 让金币重新出现。
 	add_to_group("resettable")
 	body_entered.connect(_on_body_entered)
+	# 监听检查点：玩家经过检查点时，把此刻已吃到的金币"锁定"，之后死亡不退还。
+	_connect_checkpoints()
 
 
 func _resolve_persistence_ids() -> void:
@@ -42,6 +45,28 @@ func _resolve_persistence_ids() -> void:
 	if _resolved_level_id.is_empty() and get_tree().current_scene:
 		_resolved_level_id = get_tree().current_scene.scene_file_path
 	_resolved_coin_id = coin_id if not coin_id.is_empty() else str(get_path())
+
+
+## 连接场景内所有检查点的 activated 信号。等一帧，确保用 Scene Paint / 瓦片
+## 实例化的检查点也已进入场景树（与 RespawnManager 的做法一致）。
+func _connect_checkpoints() -> void:
+	await get_tree().process_frame
+	if not is_inside_tree():
+		return
+	for cp in get_tree().get_nodes_in_group("checkpoints"):
+		if cp.has_signal("activated") and not cp.activated.is_connected(_on_checkpoint_activated):
+			cp.activated.connect(_on_checkpoint_activated)
+
+
+## 玩家经过检查点：把此刻已收集的这枚金币锁定，之后死亡重生不退还、不复原。
+## （检查点之后才吃到的金币不会被锁定，死亡后仍会退还并复原，供重跑重吃。）
+func _on_checkpoint_activated(_checkpoint: Node) -> void:
+	if not _collected or _committed:
+		return
+	_committed = true
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state and game_state.has_method("commit_level_coin"):
+		game_state.commit_level_coin(_resolved_level_id, _resolved_coin_id)
 
 
 func _on_body_entered(body: Node2D) -> void:
@@ -73,6 +98,9 @@ func _on_collect_finished() -> void:
 ## 通用复位接口：玩家死亡重生时由 RespawnManager 通过 call_group("resettable", "reset_state") 调用。
 func reset_state() -> void:
 	if not _collected:
+		return
+	# 经过检查点后锁定的金币：死亡重生保持"已收集"，不退还也不复原（玩家不会再跑回这段）。
+	if _committed:
 		return
 	if _collect_tween and _collect_tween.is_valid():
 		_collect_tween.kill()

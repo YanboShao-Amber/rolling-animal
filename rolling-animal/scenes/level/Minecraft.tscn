@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="12_yns3q"]
 [ext_resource type="PackedScene" uid="uid://ci363paxyxiwr" path="res://scenes/obstacle/minecraft/animal.tscn" id="13_eng76"]
 [ext_resource type="PackedScene" uid="uid://b0f7l5wx2tawn" path="res://scenes/win_landmark.tscn" id="13_yns3q"]
+[ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="14_eng76"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_myiik"]
 texture = ExtResource("1_myiik")
@@ -208,13 +209,13 @@ position = Vector2(7156, 621)
 position = Vector2(7085, 621)
 
 [node name="Glass4" parent="." unique_id=277489774 instance=ExtResource("4_aydkd")]
-position = Vector2(7736, 509)
+position = Vector2(7736, 500)
 
 [node name="Glass5" parent="." unique_id=1824940898 instance=ExtResource("4_aydkd")]
-position = Vector2(7966, 509)
+position = Vector2(7966, 500)
 
 [node name="Glass6" parent="." unique_id=867178663 instance=ExtResource("4_aydkd")]
-position = Vector2(8196, 509)
+position = Vector2(8196, 500)
 
 [node name="Coin6" parent="." unique_id=779403615 instance=ExtResource("11_8ukog")]
 position = Vector2(7837, 567)
@@ -372,3 +373,34 @@ position = Vector2(17383, 863)
 
 [node name="SmallBuff2" parent="." unique_id=1239578203 instance=ExtResource("5_sdrot")]
 position = Vector2(12387, 153)
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=1955012077]
+
+[node name="CoinCounter" type="Control" parent="HUD" unique_id=1778340647]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 133.0
+offset_top = 117.0
+offset_right = 323.0
+offset_bottom = 197.0
+mouse_filter = 2
+
+[node name="CoinIcon" parent="HUD/CoinCounter" unique_id=1045396252 instance=ExtResource("11_8ukog")]
+position = Vector2(36, 40)
+scale = Vector2(0.82, 0.82)
+display_only = true
+
+[node name="CoinCountLabel" type="Label" parent="HUD/CoinCounter" unique_id=1583743238]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 14.0
+offset_right = 190.0
+offset_bottom = 68.0
+theme_override_colors/font_color = Color(1, 0.86, 0.25, 1)
+theme_override_colors/font_shadow_color = Color(0.12, 0.06, 0.01, 0.9)
+theme_override_constants/shadow_offset_x = 3
+theme_override_constants/shadow_offset_y = 3
+theme_override_fonts/font = ExtResource("14_eng76")
+theme_override_font_sizes/font_size = 30
+text = "× 0"
+vertical_alignment = 1

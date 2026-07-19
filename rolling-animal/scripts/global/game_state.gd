@@ -9,6 +9,7 @@ var selected_character_name := ""
 var selected_portrait_path := ""
 var coin_count := 0
 var collected_level_coins: Dictionary = {}
+var committed_level_coins: Dictionary = {}  # 经过检查点后"锁定"的金币：死亡重生不退还
 var highest_unlocked_level := 1
 var completed_levels: Dictionary = {}
 var pending_level_number := 1
@@ -60,10 +61,24 @@ func is_level_coin_collected(level_id: String, coin_id: String) -> bool:
 	return collected_level_coins.has("%s::%s" % [level_id, coin_id])
 
 
+## 把某枚已收集的金币"锁定"：玩家经过检查点后调用，之后即使死亡也不退还。
+func commit_level_coin(level_id: String, coin_id: String) -> void:
+	var key := "%s::%s" % [level_id, coin_id]
+	if collected_level_coins.has(key):
+		committed_level_coins[key] = true
+
+
+func is_level_coin_committed(level_id: String, coin_id: String) -> bool:
+	return committed_level_coins.has("%s::%s" % [level_id, coin_id])
+
+
 ## 撤销一枚金币的收集（玩家死亡刷新时用）：清掉记录并把计数退回去。
+## 已锁定（检查点之前吃到）的金币不退还，保持计数。
 func uncollect_level_coin(level_id: String, coin_id: String, amount: int = 1) -> int:
 	var key := "%s::%s" % [level_id, coin_id]
 	if not collected_level_coins.has(key):
+		return coin_count
+	if committed_level_coins.has(key):
 		return coin_count
 	collected_level_coins.erase(key)
 	return add_coins(-amount)
@@ -72,6 +87,7 @@ func uncollect_level_coin(level_id: String, coin_id: String, amount: int = 1) ->
 func clear_coins() -> void:
 	coin_count = 0
 	collected_level_coins.clear()
+	committed_level_coins.clear()
 	coins_changed.emit(coin_count)
 
 
