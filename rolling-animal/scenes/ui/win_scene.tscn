@@ -92,7 +92,7 @@ offset_bottom = 268.0
 theme_override_colors/font_color = Color(0.3, 0.16, 0.075, 1)
 theme_override_fonts/font = ExtResource("5_font")
 theme_override_font_sizes/font_size = 21
-text = "You cleared the test stage successfully!
+text = "You cleared the stage in 00:00.000!
 Would you like to continue or go back?"
 horizontal_alignment = 1
 vertical_alignment = 1

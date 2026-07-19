@@ -22,6 +22,10 @@ func _ready() -> void:
 	right_button.pressed.connect(_on_right_button_pressed)
 	_setup_button_feedback(left_button)
 	_setup_button_feedback(right_button)
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		var elapsed_msec: int = game_state.finish_level_timer()
+		body_label.text = "You cleared the stage in %s!\nWould you like to continue or go back?" % game_state.format_level_time(elapsed_msec)
 	show_popup()
 
 
