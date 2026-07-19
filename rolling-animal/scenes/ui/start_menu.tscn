@@ -131,6 +131,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="CreditsButton" type="TextureButton" parent="MenuRoot/ButtonColumn" unique_id=1564513717]
+visible = false
 custom_minimum_size = Vector2(360, 82)
 layout_mode = 2
 size_flags_horizontal = 4

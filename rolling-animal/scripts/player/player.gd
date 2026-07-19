@@ -42,7 +42,6 @@ const BASE_RADIUS := 64.0
 @onready var jump_deform_root: Node2D = $SizeRoot/GrowthPulseRoot/RollVisualRoot/JumpDeformRoot
 @onready var player_sprite: Sprite2D = $SizeRoot/GrowthPulseRoot/RollVisualRoot/JumpDeformRoot/PlayerSprite
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
-@onready var debug_label: Label = $DebugLabel
 
 var current_size_scale := 1.0
 var target_size_scale := 1.0
