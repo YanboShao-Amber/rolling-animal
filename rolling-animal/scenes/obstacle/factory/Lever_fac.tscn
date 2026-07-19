@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://5gypuvhs2gai"]
+
+[ext_resource type="Script" uid="uid://c814vv0ywkunu" path="res://scripts/obstacles/lever.gd" id="1_1uhdn"]
+[ext_resource type="Texture2D" uid="uid://u6km8hhbi503" path="res://assets/original/kenney_new-platformer-pack-1.1/Sprites/Tiles/Default/lever_left.png" id="2_wfinj"]
+[ext_resource type="Texture2D" uid="uid://cjpewpbfhlgvd" path="res://assets/original/kenney_new-platformer-pack-1.1/Sprites/Tiles/Default/lever_right.png" id="3_h8vke"]
+
+[sub_resource type="RectangleShape2D" id="RS_lever"]
+size = Vector2(54, 54)
+
+[node name="Lever" type="Area2D" unique_id=475033109]
+script = ExtResource("1_1uhdn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=283468714]
+position = Vector2(27, 27)
+shape = SubResource("RS_lever")
+
+[node name="HandleLeft" type="Sprite2D" parent="." unique_id=1881254569]
+texture_filter = 1
+position = Vector2(27, 27)
+texture = ExtResource("2_wfinj")
+
+[node name="HandleRight" type="Sprite2D" parent="." unique_id=1160698571]
+visible = false
+texture_filter = 1
+position = Vector2(27, 27)
+texture = ExtResource("3_h8vke")

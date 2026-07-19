@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" path="res://scenes/obstacle/farm_falling_column.tscn" id="7_ovjd0"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/FanZone.tscn" id="8_y7vwg"]
 [ext_resource type="PackedScene" uid="uid://xiiwklto21k" path="res://scenes/collectibles/coin.tscn" id="9_ys1i4"]
-[ext_resource type="PackedScene" path="res://scenes/obstacle/jumper.tscn" id="10_tplpf"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/jumper.tscn" id="10_tplpf"]
 [ext_resource type="PackedScene" uid="uid://deedcwv6amchy" path="res://scenes/obstacle/original/breakable obstacle.tscn" id="11_ebq3g"]
 [ext_resource type="PackedScene" uid="uid://cnf7giv1qi0g2" path="res://scenes/obstacle/tilemap_checkpoint.tscn" id="12_uif0u"]
 [ext_resource type="PackedScene" path="res://scenes/backgrounds/grass_loop_background.tscn" id="14_70thq"]
