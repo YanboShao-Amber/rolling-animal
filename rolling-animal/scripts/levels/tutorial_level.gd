@@ -6,8 +6,16 @@ const START_MENU_SCENE := "res://scenes/ui/start_menu.tscn"
 @onready var player_spawn: Marker2D = $PlayerSpawn
 @onready var camera: Camera2D = $Camera2D
 @onready var completion_label: Label = $HUD/CompletionLabel
+@onready var grow_tutorial_area: Area2D = $GrowTutorialArea
+@onready var jump_tutorial_area: Area2D = $JumpTutorialArea
+@onready var grow_sign: Node2D = $TutorialSigns/GrowSign
+@onready var jump_control_sign: Node2D = $TutorialSigns/JumpControlSign
 
 var _completed := false
+
+const SIGN_FLY_IN_DURATION := 2.0
+const SIGN_HOLD_DURATION := 3.0
+const SIGN_FLY_OUT_DURATION := 1.5
 
 
 func _ready() -> void:
@@ -19,6 +27,8 @@ func _ready() -> void:
 	player.setup_character(character_data)
 	player.global_position = player_spawn.global_position
 	player.auto_forward_enabled = true
+	grow_tutorial_area.body_entered.connect(_on_grow_tutorial_entered)
+	jump_tutorial_area.body_entered.connect(_on_jump_tutorial_entered)
 
 
 func _physics_process(delta: float) -> void:
@@ -43,3 +53,39 @@ func _respawn() -> void:
 	player.reset_size()
 	player.reset_motion_visuals()
 	player.auto_forward_enabled = true
+
+
+func _on_grow_tutorial_entered(body: Node2D) -> void:
+	if body != player:
+		return
+	grow_tutorial_area.set_deferred("monitoring", false)
+	_fly_sign_in_from_right(grow_sign)
+
+
+func _on_jump_tutorial_entered(body: Node2D) -> void:
+	if body != player:
+		return
+	jump_tutorial_area.set_deferred("monitoring", false)
+	_fly_sign_in_from_right(jump_control_sign)
+
+
+# Plane and banner fly in slowly, pause at center for reading, then leave left.
+func _fly_sign_in_from_right(sign: Node2D) -> void:
+	var target_position := sign.position
+	sign.position = target_position + Vector2(900.0, 0.0)
+	sign.visible = true
+	var tween := create_tween()
+	tween.set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(sign, "position", target_position, SIGN_FLY_IN_DURATION)
+	tween.tween_interval(SIGN_HOLD_DURATION)
+	tween.set_ease(Tween.EASE_IN)
+	tween.tween_property(
+		sign,
+		"position",
+		target_position - Vector2(900.0, 0.0),
+		SIGN_FLY_OUT_DURATION
+	)
+	tween.tween_callback(func() -> void:
+		sign.visible = false
+		sign.position = target_position
+	)
