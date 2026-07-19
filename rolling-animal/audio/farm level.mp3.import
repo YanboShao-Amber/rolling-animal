@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://bx56hgjgcx5v8"
+path="res://.godot/imported/farm level.mp3-6fb9dfddbcb7209f8d511feea35b71c5.mp3str"
+
+[deps]
+
+source_file="res://audio/farm level.mp3"
+dest_files=["res://.godot/imported/farm level.mp3-6fb9dfddbcb7209f8d511feea35b71c5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

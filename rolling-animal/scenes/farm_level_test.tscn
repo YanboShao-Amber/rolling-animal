@@ -304,6 +304,7 @@ position = Vector2(9830, 343)
 position = Vector2(9971, 342)
 
 [node name="GrassLoopBackground" parent="." unique_id=913084040 instance=ExtResource("14_70thq")]
+scroll_offset = Vector2(62, -76)
 
 [node name="CreamChocoTrap10" parent="." unique_id=2007705331 instance=ExtResource("6_kh2w8")]
 position = Vector2(10238, 316)
