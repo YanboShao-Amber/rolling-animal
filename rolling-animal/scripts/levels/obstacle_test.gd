@@ -1,4 +1,4 @@
-extends Node2D
+extends Control
 
 ## 临时测试台：只把主角调到方便测试的状态。
 ## 死亡 / 检查点重生交给场景里的 RespawnManager 节点，这里不掺和。

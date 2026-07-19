@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://cwm2ekb1sg6nk"]
+
+[ext_resource type="Script" uid="uid://dgbfi4y3eteyd" path="res://scripts/obstacles/killzone.gd" id="1_kz"]
+[ext_resource type="Texture2D" uid="uid://du51pp7fhddm2" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tiles/tile_0013.png" id="2_2dd3u"]
+[ext_resource type="Texture2D" uid="uid://pq6xc3e8s1c4" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tiles/tile_0029.png" id="3_m1t5j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_water"]
+size = Vector2(100, 58)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2dd3u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_m1t5j")
+}],
+"loop": 1,
+"name": &"water",
+"speed": 5.0
+}]
+
+[node name="PoisonWater" type="Area2D" unique_id=819648958 groups=["hazards"]]
+script = ExtResource("1_kz")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1076444327]
+position = Vector2(54, 67)
+shape = SubResource("RectangleShape2D_water")
+
+[node name="Placeholder" type="Polygon2D" parent="." unique_id=289826743]
+visible = false
+color = Color(0.3, 0.75, 0.35, 0.75)
+polygon = PackedVector2Array(0, 0, 108, 0, 108, 108, 0, 108)
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=385513863]
+texture_filter = 1
+position = Vector2(54, 54)
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"water"
+autoplay = "water"
+frame_progress = 0.2790163
