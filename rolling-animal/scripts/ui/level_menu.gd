@@ -12,20 +12,22 @@ const LEVEL_SCENES := {
 }
 
 @onready var level_buttons: Array[TextureButton] = [
-	$Content/LevelRow/Level1,
-	$Content/LevelRow/Level2,
-	$Content/LevelRow/Level3,
+	find_child("Level1", true, false) as TextureButton,
+	find_child("Level2", true, false) as TextureButton,
+	find_child("Level3", true, false) as TextureButton,
 ]
-@onready var message_label: Label = $Content/MessageLabel
+@onready var message_label: Label = find_child("MessageLabel", true, false) as Label
 
 var selected_level := 1
 
 
 func _ready() -> void:
 	for index in level_buttons.size():
-		level_buttons[index].pressed.connect(_on_level_clicked.bind(index + 1))
+		if is_instance_valid(level_buttons[index]):
+			level_buttons[index].pressed.connect(_on_level_clicked.bind(index + 1))
 	_refresh_menu()
-	level_buttons[0].grab_focus()
+	if is_instance_valid(level_buttons[0]):
+		level_buttons[0].grab_focus()
 
 
 func _unhandled_input(event: InputEvent) -> void:
@@ -46,7 +48,8 @@ func _unhandled_input(event: InputEvent) -> void:
 func _select_level(level_number: int) -> void:
 	selected_level = clampi(level_number, 1, 3)
 	_refresh_menu()
-	level_buttons[selected_level - 1].grab_focus()
+	if is_instance_valid(level_buttons[selected_level - 1]):
+		level_buttons[selected_level - 1].grab_focus()
 
 
 func _on_level_clicked(level_number: int) -> void:
@@ -58,27 +61,45 @@ func _refresh_menu() -> void:
 	for index in level_buttons.size():
 		var level_number := index + 1
 		var button := level_buttons[index]
+		if not is_instance_valid(button):
+			continue
 		var unlocked := _is_level_unlocked(level_number)
 		button.texture_normal = SELECTED_PANEL if level_number == selected_level else DARK_PANEL
 		button.self_modulate = Color.WHITE if unlocked else Color(0.48, 0.52, 0.58, 1.0)
 		button.get_node("StatusLabel").text = "OPEN" if unlocked else "LOCKED"
+		var scene_path: String = LEVEL_SCENES[level_number]
+		var column := button.get_parent()
+		var coin_count := 0
+		var best_time := 0
+		var game_state := get_node_or_null("/root/GameState")
+		if game_state:
+			coin_count = game_state.get_level_coin_count(scene_path)
+			best_time = game_state.get_best_level_time(scene_path)
+		var coin_count_label := column.get_node_or_null("CoinRow/CoinCount") as Label
+		var best_time_label := column.get_node_or_null("BestTime") as Label
+		if is_instance_valid(coin_count_label):
+			coin_count_label.text = "%d/20" % mini(coin_count, 20)
+		if is_instance_valid(best_time_label):
+			best_time_label.text = (
+				game_state.format_level_time(best_time) if best_time > 0 else "--:--.---"
+			)
 
 	var unlocked := _is_level_unlocked(selected_level)
 	if not unlocked:
-		message_label.text = "CLEAR LEVEL %d TO UNLOCK" % (selected_level - 1)
+		_set_message("CLEAR LEVEL %d TO UNLOCK" % (selected_level - 1))
 	elif LEVEL_SCENES[selected_level].is_empty():
-		message_label.text = "LEVEL %d — COMING SOON" % selected_level
+		_set_message("LEVEL %d — COMING SOON" % selected_level)
 	else:
-		message_label.text = "FARM LEVEL TEST"
+		_set_message("FARM LEVEL TEST")
 
 
 func _play_selected_level() -> void:
 	if not _is_level_unlocked(selected_level):
-		message_label.text = "CLEAR LEVEL %d TO UNLOCK" % (selected_level - 1)
+		_set_message("CLEAR LEVEL %d TO UNLOCK" % (selected_level - 1))
 		return
 	var scene_path: String = LEVEL_SCENES[selected_level]
 	if scene_path.is_empty():
-		message_label.text = "LEVEL %d — COMING SOON" % selected_level
+		_set_message("LEVEL %d — COMING SOON" % selected_level)
 		return
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state:
@@ -91,6 +112,11 @@ func _is_level_unlocked(level_number: int) -> bool:
 	if game_state == null:
 		return level_number == 1
 	return bool(game_state.call("is_level_unlocked", level_number))
+
+
+func _set_message(value: String) -> void:
+	if is_instance_valid(message_label):
+		message_label.text = value
 
 
 func _go_back() -> void:

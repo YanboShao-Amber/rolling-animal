@@ -1,6 +1,17 @@
 extends CanvasLayer
 
 const FALLBACK_PORTRAIT := "res://assets/player/penguin.png"
+const ANIMAL_PORTRAITS := [
+	"res://assets/player/penguin.png",
+	"res://assets/player/sloth.png",
+	"res://assets/player/walrus.png",
+	"res://assets/player/chick.png",
+	"res://assets/player/crocodile.png",
+	"res://assets/player/duck.png",
+	"res://assets/player/gorilla.png",
+	"res://assets/player/owl.png",
+	"res://assets/player/parrot.png",
+]
 const COVER_RADIUS := 1.15
 
 var _overlay: Control
@@ -147,10 +158,7 @@ void fragment() {
 
 
 func _set_portrait_texture() -> void:
-	var portrait_path := FALLBACK_PORTRAIT
-	var game_state := get_node_or_null("/root/GameState")
-	if game_state != null and not str(game_state.selected_portrait_path).is_empty():
-		portrait_path = str(game_state.selected_portrait_path)
+	var portrait_path := str(ANIMAL_PORTRAITS.pick_random())
 	var texture := load(portrait_path) as Texture2D
 	if texture == null:
 		texture = load(FALLBACK_PORTRAIT) as Texture2D
