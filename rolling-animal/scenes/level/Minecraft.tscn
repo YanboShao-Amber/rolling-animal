@@ -403,8 +403,4 @@ text = "× 0"
 vertical_alignment = 1
 
 [node name="TilemapCheckpoint" parent="." unique_id=1173857921 instance=ExtResource("14_47i1y")]
-<<<<<<< Updated upstream
 position = Vector2(8830, 379)
-=======
-position = Vector2(8834, 381)
->>>>>>> Stashed changes
