@@ -99,7 +99,7 @@ func _on_collect_finished() -> void:
 func reset_state() -> void:
 	if not _collected:
 		return
-	# 经过检查点后锁定的金币：死亡重生保持"已收集"，不退还也不复原（玩家不会再跑回这段）。
+	# 经过检查点后锁定的金币：死亡重生保持“已收集”，不退还也不复原（玩家不会再跑回这段）。
 	if _committed:
 		return
 	if _collect_tween and _collect_tween.is_valid():

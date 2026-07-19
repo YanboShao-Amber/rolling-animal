@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b8coihhw3jflh" path="res://scripts/ui/level_menu.gd" id="1_script"]
 [ext_resource type="Texture2D" uid="uid://btaeotlkruaq5" path="res://assets/UI/panel_grey_bolts_dark.png" id="2_panel"]
 [ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="4_font"]
+[ext_resource type="Texture2D" path="res://assets/coin/gold_1.png" id="5_coin"]
 
 [node name="LevelMenu" type="Control" unique_id=1415873432]
 layout_mode = 3
@@ -76,16 +77,20 @@ layout_mode = 2
 theme_override_constants/separation = 44
 alignment = 1
 
-[node name="Level1" type="TextureButton" parent="Content/LevelRow" unique_id=1143488975]
+[node name="Level1Column" type="VBoxContainer" parent="Content/LevelRow"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Level1" type="TextureButton" parent="Content/LevelRow/Level1Column" unique_id=1143488975]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
-focus_neighbor_left = NodePath("../Level3")
-focus_neighbor_right = NodePath("../Level2")
+focus_neighbor_left = NodePath("../../Level3Column/Level3")
+focus_neighbor_right = NodePath("../../Level2Column/Level2")
 texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=1890453909]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level1Column/Level1" unique_id=1890453909]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -98,7 +103,7 @@ theme_override_font_sizes/font_size = 54
 text = "01"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=689952382]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level1Column/Level1" unique_id=689952382]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -110,7 +115,7 @@ theme_override_font_sizes/font_size = 24
 text = "FARM"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=1942859270]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level1Column/Level1" unique_id=1942859270]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -126,16 +131,54 @@ theme_override_font_sizes/font_size = 20
 text = "OPEN"
 horizontal_alignment = 1
 
-[node name="Level2" type="TextureButton" parent="Content/LevelRow" unique_id=1995556710]
+[node name="CoinRow" type="HBoxContainer" parent="Content/LevelRow/Level1Column"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="Content/LevelRow/Level1Column/CoinRow"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("5_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinCount" type="Label" parent="Content/LevelRow/Level1Column/CoinRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 20
+text = "0/20"
+vertical_alignment = 1
+
+[node name="BestTitle" type="Label" parent="Content/LevelRow/Level1Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.67, 0.76, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 15
+text = "BEST TIME"
+horizontal_alignment = 1
+
+[node name="BestTime" type="Label" parent="Content/LevelRow/Level1Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 19
+text = "--:--.---"
+horizontal_alignment = 1
+
+[node name="Level2Column" type="VBoxContainer" parent="Content/LevelRow"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Level2" type="TextureButton" parent="Content/LevelRow/Level2Column" unique_id=1995556710]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
-focus_neighbor_left = NodePath("../Level1")
-focus_neighbor_right = NodePath("../Level3")
+focus_neighbor_left = NodePath("../../Level1Column/Level1")
+focus_neighbor_right = NodePath("../../Level3Column/Level3")
 texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=699561691]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level2Column/Level2" unique_id=699561691]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -147,7 +190,7 @@ theme_override_font_sizes/font_size = 54
 text = "02"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=1085667509]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level2Column/Level2" unique_id=1085667509]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -159,7 +202,7 @@ theme_override_font_sizes/font_size = 24
 text = "LEVEL 2"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=480109612]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level2Column/Level2" unique_id=480109612]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -174,16 +217,54 @@ theme_override_font_sizes/font_size = 20
 text = "LOCKED"
 horizontal_alignment = 1
 
-[node name="Level3" type="TextureButton" parent="Content/LevelRow" unique_id=923397336]
+[node name="CoinRow" type="HBoxContainer" parent="Content/LevelRow/Level2Column"]
+layout_mode = 2
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="Content/LevelRow/Level2Column/CoinRow"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("5_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinCount" type="Label" parent="Content/LevelRow/Level2Column/CoinRow"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 20
+text = "0/20"
+vertical_alignment = 1
+
+[node name="BestTitle" type="Label" parent="Content/LevelRow/Level2Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.67, 0.76, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 15
+text = "BEST TIME"
+horizontal_alignment = 1
+
+[node name="BestTime" type="Label" parent="Content/LevelRow/Level2Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 19
+text = "--:--.---"
+horizontal_alignment = 1
+
+[node name="Level3Column" type="VBoxContainer" parent="Content/LevelRow"]
+layout_mode = 2
+theme_override_constants/separation = 5
+
+[node name="Level3" type="TextureButton" parent="Content/LevelRow/Level3Column" unique_id=923397336]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
-focus_neighbor_left = NodePath("../Level2")
-focus_neighbor_right = NodePath("../Level1")
+focus_neighbor_left = NodePath("../../Level2Column/Level2")
+focus_neighbor_right = NodePath("../../Level1Column/Level1")
 texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=1325952109]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level3Column/Level3" unique_id=1325952109]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -195,7 +276,7 @@ theme_override_font_sizes/font_size = 54
 text = "03"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=1814084991]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level3Column/Level3" unique_id=1814084991]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -207,7 +288,7 @@ theme_override_font_sizes/font_size = 24
 text = "LEVEL 3"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=719241740]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level3Column/Level3" unique_id=719241740]
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
@@ -222,13 +303,38 @@ theme_override_font_sizes/font_size = 20
 text = "LOCKED"
 horizontal_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Content" unique_id=266179774]
-custom_minimum_size = Vector2(0, 38)
+[node name="CoinRow" type="HBoxContainer" parent="Content/LevelRow/Level3Column"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.73, 0.8, 0.88, 1)
+theme_override_constants/separation = 8
+alignment = 1
+
+[node name="CoinIcon" type="TextureRect" parent="Content/LevelRow/Level3Column/CoinRow"]
+custom_minimum_size = Vector2(28, 28)
+layout_mode = 2
+texture = ExtResource("5_coin")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="CoinCount" type="Label" parent="Content/LevelRow/Level3Column/CoinRow"]
+layout_mode = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 20
-text = "FARM LEVEL TEST"
+text = "0/20"
+vertical_alignment = 1
+
+[node name="BestTitle" type="Label" parent="Content/LevelRow/Level3Column"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.56, 0.67, 0.76, 1)
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 15
+text = "BEST TIME"
+horizontal_alignment = 1
+
+[node name="BestTime" type="Label" parent="Content/LevelRow/Level3Column"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("4_font")
+theme_override_font_sizes/font_size = 19
+text = "--:--.---"
 horizontal_alignment = 1
 
 [node name="Hint" type="Label" parent="Content" unique_id=1211858535]
