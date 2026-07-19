@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://ci363paxyxiwr"]
+
+[ext_resource type="Script" uid="uid://cbdmmup318o70" path="res://scripts/obstacles/animal.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://fjb8p3s42iey" path="res://assets/obstacle/fox_body.png" id="2_body"]
+[ext_resource type="Texture2D" uid="uid://bu8f6arqoqq7s" path="res://assets/obstacle/fox_ear.png" id="3_ear"]
+[ext_resource type="Texture2D" uid="uid://bvnsvrpricgs4" path="res://assets/obstacle/fox_leg.png" id="4_leg"]
+[ext_resource type="Texture2D" uid="uid://ctdg0pd7sc6eh" path="res://assets/obstacle/fox_tail.png" id="5_tail"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_solid"]
+size = Vector2(116, 77)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_detect"]
+size = Vector2(122, 90)
+
+[node name="Animal" type="StaticBody2D" unique_id=1848859288]
+texture_filter = 1
+script = ExtResource("1_script")
+
+[node name="Tail" type="Sprite2D" parent="." unique_id=1332947201]
+position = Vector2(78, -7)
+texture = ExtResource("5_tail")
+
+[node name="LegBack" type="Sprite2D" parent="." unique_id=1830365179]
+position = Vector2(39, 38)
+texture = ExtResource("4_leg")
+
+[node name="LegFront" type="Sprite2D" parent="." unique_id=1971709324]
+position = Vector2(-19, 38)
+texture = ExtResource("4_leg")
+
+[node name="Body" type="Sprite2D" parent="." unique_id=1146502567]
+texture = ExtResource("2_body")
+
+[node name="EarBack" type="Sprite2D" parent="." unique_id=597128706]
+position = Vector2(-24, -37)
+texture = ExtResource("3_ear")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2122691281]
+visible = false
+position = Vector2(0, 11.5)
+shape = SubResource("RectangleShape2D_solid")
+
+[node name="DetectionArea" type="Area2D" parent="." unique_id=436014660]
+visible = false
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=394639711]
+position = Vector2(0, 9)
+shape = SubResource("RectangleShape2D_detect")

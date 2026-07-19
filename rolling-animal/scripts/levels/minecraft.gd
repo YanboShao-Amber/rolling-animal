@@ -6,12 +6,19 @@ extends Control
 @export var camera_speed_x := 15.0        # X轴跟随速度（数值越大，跟得越紧，保持同速）
 @export var camera_speed_y := 2.5         # Y轴跟随速度（数值越小，跳跃时相机的上下起伏越轻微、平滑）
 
+@export_category("Jump Override")
+# 仅在本关卡（Minecraft）提高跳跃高度。数值越负，跳得越高。
+# 玩家默认值为 -1300，这里覆盖为更高的跳跃力度；其他场景不受影响。
+@export var player_jump_velocity := -1800.0
+
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Camera2D
 
 func _ready() -> void:
 	# 开启玩家的自动向前移动（调用玩家代码里的逻辑）
 	player.auto_forward_enabled = true
+	# 只在本场景覆盖跳跃力度，让玩家跳得更高（不改动共享的玩家脚本/场景）。
+	player.jump_velocity = player_jump_velocity
 	
 	# 初始化时，直接将相机吸附到正确位置，防止画面一进入时有剧烈滑动
 	camera.global_position = Vector2(

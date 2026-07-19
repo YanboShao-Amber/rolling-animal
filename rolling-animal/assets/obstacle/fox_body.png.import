@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://btbxne13vrcbw"
-path="res://.godot/imported/minecraft.png-2bbca1bf5c7ca11848d7034518b3838a.ctex"
+uid="uid://fjb8p3s42iey"
+path="res://.godot/imported/fox_body.png-9022faafeeb1e704582c3e2255d9cffe.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/obstacle/minecraft.png"
-dest_files=["res://.godot/imported/minecraft.png-2bbca1bf5c7ca11848d7034518b3838a.ctex"]
+source_file="res://assets/obstacle/fox_body.png"
+dest_files=["res://.godot/imported/fox_body.png-9022faafeeb1e704582c3e2255d9cffe.ctex"]
 
 [params]
 

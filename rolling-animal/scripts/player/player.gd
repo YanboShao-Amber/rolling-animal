@@ -8,8 +8,8 @@ signal size_changed(size_scale: float)
 const BASE_RADIUS := 64.0
 
 @export_category("Size")
-@export_range(0.4, 2.0, 0.01) var default_size_scale := 0.8
-@export_range(0.3, 1.0, 0.01) var minimum_size_scale := 0.4
+@export_range(0.5, 2.0, 0.01) var default_size_scale := 0.8
+@export_range(0.3, 1.0, 0.01) var minimum_size_scale := 0.5
 @export_range(1.0, 3.0, 0.01) var maximum_size_scale := 1.45
 @export_range(0.01, 0.3, 0.01) var growth_per_click := 0.075
 @export_range(0.1, 3.0, 0.01) var growth_per_second_held := 0.9
@@ -54,6 +54,7 @@ var _last_click_time := -10.0
 var _deform_tween: Tween
 var _growth_pulse_tween: Tween
 var _damage_flash_tween: Tween
+var _respawn_blink_tween: Tween
 var _was_on_floor := false
 var _ground_bounce_phase := 0.0
 var _is_holding_growth := false
@@ -314,7 +315,16 @@ func _update_motion_deform(delta: float, moved_distance_x: float) -> void:
 
 
 func _get_size_weight() -> float:
-	return inverse_lerp(minimum_size_scale, maximum_size_scale, current_size_scale)
+	# 当体型上下限被锁成同一个值时（例如吃到变小蘑菇），inverse_lerp 会得到
+	# 0/0 = NaN，进而让跳跃 velocity.y 变成 NaN，导致 move_and_slide() 报错。
+	# 这里做保护：区间为 0 时视为最小体型（weight = 0），并把结果夹在 [0, 1] 内。
+	if maximum_size_scale - minimum_size_scale <= 0.0:
+		return 0.0
+	return clampf(
+		inverse_lerp(minimum_size_scale, maximum_size_scale, current_size_scale),
+		0.0,
+		1.0
+	)
 
 
 func _is_deform_tween_active() -> bool:
@@ -364,6 +374,19 @@ func play_damage_flash() -> void:
 	_damage_flash_tween = create_tween()
 	_damage_flash_tween.tween_property(player_sprite, "modulate", Color(1.0, 0.18, 0.18, 1.0), 0.06)
 	_damage_flash_tween.tween_property(player_sprite, "modulate", Color.WHITE, 0.10)
+
+
+# 重生瞬间的“无敌闪烁”：透明度快速闪几下再恢复。只动 alpha，RGB 保持白色。
+func play_respawn_blink() -> void:
+	if _respawn_blink_tween and _respawn_blink_tween.is_valid():
+		_respawn_blink_tween.kill()
+	if _damage_flash_tween and _damage_flash_tween.is_valid():
+		_damage_flash_tween.kill()
+	player_sprite.modulate = Color.WHITE
+	_respawn_blink_tween = create_tween()
+	for _i in 6:
+		_respawn_blink_tween.tween_property(player_sprite, "modulate:a", 0.15, 0.1)
+		_respawn_blink_tween.tween_property(player_sprite, "modulate:a", 1.0, 0.1)
 
 
 func apply_external_bounce(upward_speed: float) -> void:

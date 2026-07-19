@@ -16,6 +16,13 @@ extends Node
 ## 死亡特效相对玩家（脚底为原点）的位置——放头顶。
 @export var death_effect_offset := Vector2(0, -150)
 
+@export_category("Fall Death")
+## 坠落死亡：玩家掉出屏幕底部即死亡并重生到最近检查点。逐关开启，默认关闭，其他关卡不受影响。
+@export var fall_death_enabled := false
+## 判定线：玩家 global_position.y（脚底）超过此值即算掉出屏幕。
+## 本作视口高 1080、相机 limit_bottom≈1080，取 1300 表示已完全落到可视区下方。
+@export var fall_death_y := 1300.0
+
 var _respawn_position := Vector2.ZERO
 var _current_order := -1
 var _busy := false
@@ -42,6 +49,16 @@ func _ready() -> void:
 
 	if player and default_spawn:
 		player.global_position = _respawn_position
+
+
+func _physics_process(_delta: float) -> void:
+	# 坠落死亡：玩家掉出屏幕底部（Y 超过判定线）即重生到最近检查点。
+	if not fall_death_enabled or _busy:
+		return
+	if not is_instance_valid(player):
+		return
+	if player.global_position.y > fall_death_y:
+		_on_player_died(player)  # 不带特效 → 立即重生（与毒水一致）
 
 
 func _find_soft_player() -> SoftPlayer:
@@ -86,6 +103,7 @@ func _on_player_died(who: SoftPlayer, effect: PackedScene = null) -> void:
 	who.global_position = _respawn_position
 	who.reset_size()          # 回默认大小
 	who.reset_motion_visuals()
+	who.play_respawn_blink()  # 重生瞬间闪烁几下，给玩家“我复活了”的反馈
 	# 通用复位：让被破坏的墙等"可复位"物件恢复本段初始状态。
 	get_tree().call_group("resettable", "reset_state")
 	_busy = false

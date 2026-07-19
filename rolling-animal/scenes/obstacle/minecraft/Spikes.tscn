@@ -1,0 +1,17 @@
+[gd_scene format=3 uid="uid://d00rwopigxrf5"]
+
+[ext_resource type="Script" uid="uid://gdhm2vbef6gj" path="res://scripts/obstacles/spike.gd" id="1_spike"]
+[ext_resource type="Texture2D" uid="uid://cc51quw8088mo" path="res://assets/obstacle/spikes.png" id="2_tex"]
+
+[node name="Spikes" type="Area2D" unique_id=1483874754 groups=["hazards"]]
+script = ExtResource("1_spike")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1828354462]
+texture_filter = 1
+texture = ExtResource("2_tex")
+
+[node name="LeftSpike" type="CollisionPolygon2D" parent="." unique_id=481250025]
+polygon = PackedVector2Array(-32, 32, 0, 32, -14, -3)
+
+[node name="RightSpike" type="CollisionPolygon2D" parent="." unique_id=2041178213]
+polygon = PackedVector2Array(0, 32, 32, 32, 14, -3)

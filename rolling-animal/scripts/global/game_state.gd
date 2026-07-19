@@ -60,6 +60,15 @@ func is_level_coin_collected(level_id: String, coin_id: String) -> bool:
 	return collected_level_coins.has("%s::%s" % [level_id, coin_id])
 
 
+## 撤销一枚金币的收集（玩家死亡刷新时用）：清掉记录并把计数退回去。
+func uncollect_level_coin(level_id: String, coin_id: String, amount: int = 1) -> int:
+	var key := "%s::%s" % [level_id, coin_id]
+	if not collected_level_coins.has(key):
+		return coin_count
+	collected_level_coins.erase(key)
+	return add_coins(-amount)
+
+
 func clear_coins() -> void:
 	coin_count = 0
 	collected_level_coins.clear()

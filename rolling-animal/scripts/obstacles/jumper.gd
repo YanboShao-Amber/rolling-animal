@@ -16,17 +16,18 @@ signal player_rejected(player: SoftPlayer)
 var _contact_locked := false
 
 
-func _ready() -> void:
-	detection_area.body_entered.connect(_on_body_entered)
-	detection_area.body_exited.connect(_on_body_exited)
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if _contact_locked or not (body is SoftPlayer):
+# 每帧轮询而不是只靠一次性的 body_entered：玩家“按住跳/自动跳”冲过来时，可能在薄薄的检测区里
+# 上升中进入、或刚落到弹簧上的同一帧就被自己的自动跳弹走（Player 的 _physics_process 先于本节点执行，
+# velocity.y 已变负），一次性信号 + velocity 判定都会漏掉这次接触，导致“踩上去不弹”。
+# 现在：只要玩家与检测区重叠且本次接触还没处理过，就强制弹一次（盖过玩家自己的跳）。
+# _contact_locked 保证每次接触只弹一次，玩家离开检测区后自动解锁。
+func _physics_process(_delta: float) -> void:
+	var player := _get_overlapping_player()
+	if player == null:
+		_contact_locked = false  # 玩家离开，解锁下一次接触
 		return
-	var player := body as SoftPlayer
-	if player.velocity.y < 0.0:
-		return
+	if _contact_locked:
+		return                   # 本次接触已处理（弹过或已按“太小”拒绝）
 	_contact_locked = true
 	if player.get_current_size_scale() <= minimum_bounce_size:
 		player_rejected.emit(player)
@@ -47,9 +48,13 @@ func _on_body_entered(body: Node2D) -> void:
 	player_bounced.emit(player, upward_speed)
 
 
-func _on_body_exited(body: Node2D) -> void:
-	if body is SoftPlayer:
-		_contact_locked = false
+func _get_overlapping_player() -> SoftPlayer:
+	if not detection_area.monitoring:
+		return null
+	for body in detection_area.get_overlapping_bodies():
+		if body is SoftPlayer:
+			return body
+	return null
 
 
 func _play_compression() -> void:

@@ -3,4 +3,5 @@
 [ext_resource type="PackedScene" uid="uid://deedcwv6amchy" path="res://scenes/obstacle/original/breakable obstacle.tscn" id="1_67ec7"]
 
 [node name="Glass" unique_id=1038747570 instance=ExtResource("1_67ec7")]
-scale = Vector2(1.8, 0.6)
+scale = Vector2(1.8, 0.4)
+restore_on_respawn = true
