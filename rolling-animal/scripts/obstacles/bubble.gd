@@ -23,6 +23,10 @@ extends Node2D
 @export var surface_y := 700.0           ## 手填水面 y（仅 auto_detect_surface=false 时用）。
 @export var surface_offset := 0.0        ## 浮线微调：实际浮线 = 水面 + 这个。往上抬填负数(如 -50)。
 
+@export_category("泡泡里的跳跃增强")
+@export var jump_boost := 1.2             ## 起跳初速度倍率（>1 = 跳更高）。1.0 = 和陆地一样。
+@export var ascent_gravity_scale := 0.7   ## 上升段重力倍率（<1 = 滞空更久 → 跳更高更远）。1.0 = 正常重力。
+
 # ---------------- 内部 ----------------
 const BASE_RADIUS := 64.0                # 与 SoftPlayer 一致
 
@@ -35,6 +39,7 @@ var _grace_left := 0.0
 var _home_pos := Vector2.ZERO
 var _has_water := false
 var _water_surface := 0.0
+var _prev_vy := 0.0                       # 上一帧竖直速度，用来识别"刚起跳"的那一瞬间
 
 
 func _ready() -> void:
@@ -79,6 +84,15 @@ func _physics_process(delta: float) -> void:
 		_player.jump_count = 0
 		_player.coyote_timer = 0.2
 
+	# 泡泡里跳得更高更远（只改玩家速度，不动 player.gd）：
+	#   起跳瞬间(上一帧还在浮着/下落，这一帧猛地向上) → 初速度乘 jump_boost，只加一次。
+	if _prev_vy >= 0.0 and _player.velocity.y < -100.0:
+		_player.velocity.y *= jump_boost
+	#   上升段 → 抵消一部分重力，滞空更久（前进速度不变 → 横向距离自然变长）。
+	if _player.velocity.y < 0.0:
+		_player.velocity.y += _player.gravity * (1.0 - ascent_gravity_scale) * delta
+	_prev_vy = _player.velocity.y
+
 	# 水面
 	if auto_detect_surface:
 		var s := _detect_water_surface()
@@ -105,6 +119,7 @@ func _try_acquire() -> void:
 			_acquired = true
 			_grace_left = grace_time
 			_has_water = false
+			_prev_vy = body.velocity.y   # 防止"跳着够到泡泡"那一帧误加成
 			body.add_to_group("bubble_immune")
 			return
 
