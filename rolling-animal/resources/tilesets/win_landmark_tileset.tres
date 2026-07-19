@@ -1,9 +1,10 @@
 [gd_resource type="TileSet" format=3 uid="uid://dtnxi3oeodfsl"]
 
-[ext_resource type="Texture2D" uid="uid://dhcv4s1plevnm" path="res://assets/tilemap/tilemap_packed.png" id="1_gijgr"]
+[ext_resource type="Texture2D" uid="uid://b357enmvebxkr" path="res://assets/tilemap/flag.png" id="1_gijgr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_cldjb"]
 texture = ExtResource("1_gijgr")
+separation = Vector2i(1, 1)
 texture_region_size = Vector2i(18, 18)
 0:0/0 = 0
 1:0/0 = 0

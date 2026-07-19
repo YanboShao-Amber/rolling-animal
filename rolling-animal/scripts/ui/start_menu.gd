@@ -34,11 +34,11 @@ func _select_button(selected_button: TextureButton) -> void:
 
 
 func _on_start_pressed() -> void:
-	get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
+	get_node("/root/SceneTransition").transition_to(LEVEL_MENU_SCENE)
 
 
 func _on_tutorial_pressed() -> void:
-	get_tree().change_scene_to_file(TUTORIAL_SCENE)
+	get_node("/root/SceneTransition").transition_to(TUTORIAL_SCENE)
 
 
 func _on_credits_pressed() -> void:

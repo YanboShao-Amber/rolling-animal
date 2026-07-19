@@ -52,7 +52,7 @@ func _ready() -> void:
 			and game_state.selected_character_data is Dictionary:
 		selected_character = game_state.selected_character_data.duplicate(true)
 	player.setup_character(selected_character)
-	player.auto_forward_enabled = true
+	player.auto_forward_enabled = false
 	_current_respawn_position = player_spawn.global_position
 	player.global_position = player_spawn.global_position
 	camera.enabled = true
@@ -62,6 +62,16 @@ func _ready() -> void:
 	_connect_traps()
 	call_deferred("_connect_checkpoints")
 	_update_instruction()
+	_start_after_countdown()
+
+
+func _start_after_countdown() -> void:
+	var transition := get_node("/root/SceneTransition")
+	await transition.wait_until_transition_finished()
+	await transition.play_countdown()
+	if is_instance_valid(player) and not is_instance_valid(win_popup) \
+			and not is_instance_valid(lose_popup):
+		player.auto_forward_enabled = true
 
 
 func _update_coin_hud(total: int) -> void:
@@ -151,7 +161,7 @@ func _on_player_reached_win() -> void:
 
 
 func _on_win_menu_requested() -> void:
-	get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
+	get_node("/root/SceneTransition").transition_to(LEVEL_MENU_SCENE)
 
 
 func _on_win_popup_closed() -> void:
@@ -225,4 +235,4 @@ func _on_trap_player_hit(hit_player: SoftPlayer) -> void:
 
 
 func _on_lose_menu_pressed() -> void:
-	get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
+	get_node("/root/SceneTransition").transition_to(LEVEL_MENU_SCENE)

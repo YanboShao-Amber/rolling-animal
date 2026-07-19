@@ -83,7 +83,7 @@ func _play_selected_level() -> void:
 	var game_state := get_node_or_null("/root/GameState")
 	if game_state:
 		game_state.call("set_pending_level", selected_level, scene_path)
-	get_tree().change_scene_to_file(CHARACTER_SELECT_SCENE)
+	get_node("/root/SceneTransition").transition_to(CHARACTER_SELECT_SCENE)
 
 
 func _is_level_unlocked(level_number: int) -> bool:
@@ -94,4 +94,4 @@ func _is_level_unlocked(level_number: int) -> bool:
 
 
 func _go_back() -> void:
-	get_tree().change_scene_to_file(START_MENU_SCENE)
+	get_node("/root/SceneTransition").transition_to(START_MENU_SCENE)

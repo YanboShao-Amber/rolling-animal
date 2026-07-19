@@ -268,14 +268,14 @@ func _confirm_selection() -> void:
 	if next_scene.is_empty() or not ResourceLoader.exists(next_scene, "PackedScene"):
 		push_error("Selected level scene is missing: " + next_scene)
 		return
-	get_tree().change_scene_to_file(next_scene)
+	get_node("/root/SceneTransition").transition_to(next_scene)
 
 
 func _request_back() -> void:
 	if not is_animating:
 		print("Back requested")
 		back_requested.emit()
-		get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
+		get_node("/root/SceneTransition").transition_to(LEVEL_MENU_SCENE)
 
 
 func _on_carousel_resized() -> void:
