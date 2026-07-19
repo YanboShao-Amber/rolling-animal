@@ -3,6 +3,12 @@ extends Node
 signal coins_changed(total: int)
 signal level_progress_changed(highest_unlocked_level: int)
 
+const TIMED_LEVEL_SCENES := {
+	"res://scenes/farm_level_test.tscn": true,
+	"res://scenes/level/Minecraft.tscn": true,
+	"res://scenes/Factory.tscn": true,
+}
+
 var selected_character_data: Variant = null
 var selected_character_id := ""
 var selected_character_name := ""
@@ -14,6 +20,87 @@ var highest_unlocked_level := 1
 var completed_levels: Dictionary = {}
 var pending_level_number := 1
 var pending_level_scene_path := "res://scenes/farm_level_test.tscn"
+var _level_start_msec := 0
+var _level_elapsed_msec := 0
+var _level_timer_running := false
+var _level_timer_label: Label
+
+
+func _ready() -> void:
+	get_tree().scene_changed.connect(_on_scene_changed)
+	call_deferred("_on_scene_changed")
+
+
+func _process(_delta: float) -> void:
+	if not _level_timer_running:
+		return
+	_level_elapsed_msec = Time.get_ticks_msec() - _level_start_msec
+	_update_level_timer_label()
+
+
+func _on_scene_changed(_scene: Node = null) -> void:
+	_level_timer_label = null
+	var current_scene := get_tree().current_scene
+	if current_scene == null or not TIMED_LEVEL_SCENES.has(current_scene.scene_file_path):
+		_level_timer_running = false
+		return
+	_level_start_msec = Time.get_ticks_msec()
+	_level_elapsed_msec = 0
+	_level_timer_running = false
+	_add_level_timer(current_scene)
+
+
+func _add_level_timer(level: Node) -> void:
+	var timer_layer := CanvasLayer.new()
+	timer_layer.layer = 100
+	timer_layer.name = "LevelTimerLayer"
+	level.add_child(timer_layer)
+
+	_level_timer_label = Label.new()
+	_level_timer_label.name = "LevelTimerLabel"
+	_level_timer_label.set_anchors_preset(Control.PRESET_TOP_WIDE)
+	_level_timer_label.offset_top = 18.0
+	_level_timer_label.offset_bottom = 58.0
+	_level_timer_label.add_theme_font_override(
+		"font", load("res://assets/Fonts/Kenney Future.ttf") as Font
+	)
+	_level_timer_label.add_theme_font_size_override("font_size", 28)
+	_level_timer_label.add_theme_color_override("font_color", Color.WHITE)
+	_level_timer_label.add_theme_color_override("font_shadow_color", Color(0.0, 0.0, 0.0, 0.8))
+	_level_timer_label.add_theme_constant_override("shadow_offset_x", 2)
+	_level_timer_label.add_theme_constant_override("shadow_offset_y", 2)
+	_level_timer_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	timer_layer.add_child(_level_timer_label)
+	_update_level_timer_label()
+
+
+func finish_level_timer() -> int:
+	if _level_timer_running:
+		_level_elapsed_msec = Time.get_ticks_msec() - _level_start_msec
+		_level_timer_running = false
+	_update_level_timer_label()
+	return _level_elapsed_msec
+
+
+func start_level_timer() -> void:
+	if not is_instance_valid(_level_timer_label):
+		return
+	_level_start_msec = Time.get_ticks_msec()
+	_level_elapsed_msec = 0
+	_level_timer_running = true
+	_update_level_timer_label()
+
+
+func format_level_time(elapsed_msec: int) -> String:
+	var minutes := elapsed_msec / 60000
+	var seconds := (elapsed_msec / 1000) % 60
+	var milliseconds := elapsed_msec % 1000
+	return "%02d:%02d.%03d" % [minutes, seconds, milliseconds]
+
+
+func _update_level_timer_label() -> void:
+	if is_instance_valid(_level_timer_label):
+		_level_timer_label.text = format_level_time(_level_elapsed_msec)
 
 
 func set_pending_level(level_number: int, scene_path: String) -> void:

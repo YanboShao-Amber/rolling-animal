@@ -18,6 +18,10 @@ const LEVEL_NUMBER := 2  # Minecraft 是第 2 关（见 level_menu.gd 的 LEVEL_
 @onready var player: CharacterBody2D = $Player
 @onready var camera: Camera2D = $Camera2D
 @onready var coin_count_label: Label = $HUD/CoinCounter/CoinCountLabel
+@onready var hud: CanvasLayer = $HUD
+@onready var win_landmark: WinLandmark = $WinLandmark
+
+var win_popup: WinPopup
 
 func _ready() -> void:
 	# 开启玩家的自动向前移动（调用玩家代码里的逻辑）
@@ -36,6 +40,9 @@ func _ready() -> void:
 	if game_state:
 		game_state.coins_changed.connect(_update_coin_hud)
 		_update_coin_hud(game_state.coin_count)
+
+	# 抵达终点旗帜（WinLandmark）后弹出胜利界面（参考 farm_level_test 的 win landmark 逻辑）。
+	win_landmark.player_reached.connect(_on_player_reached_win)
 
 func _update_coin_hud(total: int) -> void:
 	coin_count_label.text = "× %d" % total
@@ -57,7 +64,34 @@ func _physics_process(delta: float) -> void:
 	# 使用较低的平滑速度，这样当玩家剧烈跳跃或下落时，相机只会慵懒、轻微地上下浮动
 	var target_y := player.global_position.y + camera_offset_y
 	camera.global_position.y = lerpf(
-		camera.global_position.y, 
-		target_y, 
+		camera.global_position.y,
+		target_y,
 		1.0 - exp(-camera_speed_y * delta)
 	)
+
+
+# 玩家抵达终点旗帜：停下玩家、记录通关进度并弹出胜利界面。
+func _on_player_reached_win() -> void:
+	if is_instance_valid(win_popup):
+		return
+	player.auto_forward_enabled = false
+	player.velocity = Vector2.ZERO
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		game_state.complete_level(LEVEL_NUMBER)
+	win_popup = WIN_SCENE.instantiate()
+	hud.add_child(win_popup)
+	win_popup.closed.connect(_on_win_popup_closed)
+	win_popup.left_button_pressed.connect(_on_win_menu_requested)
+	win_popup.right_button_pressed.connect(_on_win_menu_requested)
+
+
+func _on_win_menu_requested() -> void:
+	get_node("/root/SceneTransition").transition_to(LEVEL_MENU_SCENE)
+
+
+func _on_win_popup_closed() -> void:
+	if is_instance_valid(win_popup):
+		win_popup.queue_free()
+		win_popup = null
+	player.auto_forward_enabled = true
