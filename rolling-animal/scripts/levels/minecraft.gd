@@ -1,5 +1,9 @@
 extends Control
 
+const WIN_SCENE := preload("res://scenes/ui/win_scene.tscn")
+const LEVEL_MENU_SCENE := "res://scenes/ui/level_menu.tscn"
+const LEVEL_NUMBER := 2  # Minecraft 是第 2 关（见 level_menu.gd 的 LEVEL_SCENES）
+
 @export_category("Camera Settings")
 @export var camera_look_ahead_x := 180.0  # 让相机视口稍微超前于玩家
 @export var camera_offset_y := -80.0      # 让玩家在屏幕视野偏下方
