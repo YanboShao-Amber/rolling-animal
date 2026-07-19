@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=3]
+[gd_scene format=3 uid="uid://clkmo6107oa5m"]
 
-[ext_resource type="Script" path="res://scripts/ui/level_menu.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://assets/UI/panel_grey_bolts_dark.png" id="2_panel"]
-[ext_resource type="Texture2D" path="res://assets/UI/button_grey.png" id="3_button"]
-[ext_resource type="FontFile" path="res://assets/Fonts/Kenney Future.ttf" id="4_font"]
+[ext_resource type="Script" uid="uid://b8coihhw3jflh" path="res://scripts/ui/level_menu.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://btaeotlkruaq5" path="res://assets/UI/panel_grey_bolts_dark.png" id="2_panel"]
+[ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="4_font"]
 
-[node name="LevelMenu" type="Control"]
+[node name="LevelMenu" type="Control" unique_id=1415873432]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -14,7 +13,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_script")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=357609802]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -24,7 +23,7 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.055, 0.075, 0.105, 1)
 
-[node name="TopGlow" type="ColorRect" parent="."]
+[node name="TopGlow" type="ColorRect" parent="." unique_id=1407208402]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -33,7 +32,7 @@ grow_horizontal = 2
 mouse_filter = 2
 color = Color(0.12, 0.18, 0.24, 0.72)
 
-[node name="Content" type="VBoxContainer" parent="."]
+[node name="Content" type="VBoxContainer" parent="." unique_id=1339004942]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -49,7 +48,7 @@ grow_vertical = 2
 theme_override_constants/separation = 24
 alignment = 1
 
-[node name="Title" type="Label" parent="Content"]
+[node name="Title" type="Label" parent="Content" unique_id=529426232]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.93, 0.95, 1, 1)
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.75)
@@ -60,7 +59,7 @@ theme_override_font_sizes/font_size = 58
 text = "SELECT LEVEL"
 horizontal_alignment = 1
 
-[node name="Subtitle" type="Label" parent="Content"]
+[node name="Subtitle" type="Label" parent="Content" unique_id=1860766893]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.56, 0.67, 0.76, 1)
 theme_override_fonts/font = ExtResource("4_font")
@@ -68,16 +67,16 @@ theme_override_font_sizes/font_size = 20
 text = "CLEAR A LEVEL TO UNLOCK THE NEXT"
 horizontal_alignment = 1
 
-[node name="Spacer" type="Control" parent="Content"]
+[node name="Spacer" type="Control" parent="Content" unique_id=1709587385]
 custom_minimum_size = Vector2(0, 12)
 layout_mode = 2
 
-[node name="LevelRow" type="HBoxContainer" parent="Content"]
+[node name="LevelRow" type="HBoxContainer" parent="Content" unique_id=1153017096]
 layout_mode = 2
 theme_override_constants/separation = 44
 alignment = 1
 
-[node name="Level1" type="TextureButton" parent="Content/LevelRow"]
+[node name="Level1" type="TextureButton" parent="Content/LevelRow" unique_id=1143488975]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Level3")
@@ -86,50 +85,48 @@ texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level1"]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=1890453909]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 42.0
 offset_bottom = 120.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 54
 text = "01"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level1"]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=689952382]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 135.0
 offset_bottom = 178.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 24
 text = "FARM"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level1"]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level1" unique_id=1942859270]
 layout_mode = 1
 anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -70.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
 theme_override_colors/font_color = Color(0.72, 0.88, 0.77, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 20
 text = "OPEN"
 horizontal_alignment = 1
 
-[node name="Level2" type="TextureButton" parent="Content/LevelRow"]
+[node name="Level2" type="TextureButton" parent="Content/LevelRow" unique_id=1995556710]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Level1")
@@ -138,48 +135,46 @@ texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level2"]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=699561691]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 42.0
 offset_bottom = 120.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 54
 text = "02"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level2"]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=1085667509]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 135.0
 offset_bottom = 178.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 24
 text = "LEVEL 2"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level2"]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level2" unique_id=480109612]
 layout_mode = 1
 anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -70.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 20
 text = "LOCKED"
 horizontal_alignment = 1
 
-[node name="Level3" type="TextureButton" parent="Content/LevelRow"]
+[node name="Level3" type="TextureButton" parent="Content/LevelRow" unique_id=923397336]
 custom_minimum_size = Vector2(280, 280)
 layout_mode = 2
 focus_neighbor_left = NodePath("../Level2")
@@ -188,48 +183,46 @@ texture_normal = ExtResource("2_panel")
 ignore_texture_size = true
 stretch_mode = 0
 
-[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level3"]
+[node name="NumberLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=1325952109]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 42.0
 offset_bottom = 120.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 54
 text = "03"
 horizontal_alignment = 1
 
-[node name="NameLabel" type="Label" parent="Content/LevelRow/Level3"]
+[node name="NameLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=1814084991]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
 offset_top = 135.0
 offset_bottom = 178.0
 grow_horizontal = 2
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 24
 text = "LEVEL 3"
 horizontal_alignment = 1
 
-[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level3"]
+[node name="StatusLabel" type="Label" parent="Content/LevelRow/Level3" unique_id=719241740]
 layout_mode = 1
 anchors_preset = 12
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 offset_top = -70.0
 offset_bottom = -32.0
 grow_horizontal = 2
 grow_vertical = 0
-mouse_filter = 2
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 20
 text = "LOCKED"
 horizontal_alignment = 1
 
-[node name="MessageLabel" type="Label" parent="Content"]
+[node name="MessageLabel" type="Label" parent="Content" unique_id=266179774]
 custom_minimum_size = Vector2(0, 38)
 layout_mode = 2
 theme_override_colors/font_color = Color(0.73, 0.8, 0.88, 1)
@@ -238,7 +231,7 @@ theme_override_font_sizes/font_size = 20
 text = "FARM LEVEL TEST"
 horizontal_alignment = 1
 
-[node name="Hint" type="Label" parent="Content"]
+[node name="Hint" type="Label" parent="Content" unique_id=1211858535]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.53, 0.61, 1)
 theme_override_fonts/font = ExtResource("4_font")

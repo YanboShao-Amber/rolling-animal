@@ -7,8 +7,8 @@ const CHARACTER_SELECT_SCENE := "res://scenes/ui/character_select/character_sele
 const START_MENU_SCENE := "res://scenes/ui/start_menu.tscn"
 const LEVEL_SCENES := {
 	1: "res://scenes/farm_level_test.tscn",
-	2: "",
-	3: "",
+	2: "res://scenes/level/Minecraft.tscn",
+	3: "res://scenes/Factory.tscn",
 }
 
 @onready var level_buttons: Array[TextureButton] = [
