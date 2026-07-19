@@ -7,6 +7,7 @@ const PLAYER_HURT_SFX := preload("res://audio/lose.ogg")
 const ROLLOVER_SFX := preload("res://audio/rollover.ogg")
 const WIN_SFX := preload("res://audio/win.mp3")
 const COIN_SFX := preload("res://audio/coin.mp3")
+const JUMP_SFX := preload("res://audio/jump.mp3")
 
 const LEVEL_MUSIC := {
 	1: preload("res://audio/farm level.mp3"),
@@ -75,6 +76,10 @@ func _register_node(node: Node) -> void:
 		if not node.is_connected("player_hit", _on_player_hurt):
 			node.connect("player_hit", _on_player_hurt)
 
+	if node is SoftPlayer and node.has_signal("jumped"):
+		if not node.is_connected("jumped", _on_player_jumped):
+			node.connect("jumped", _on_player_jumped)
+
 	var scene_path := node.scene_file_path
 	if scene_path == "res://scenes/ui/lose_scene.tscn":
 		_play_sfx(LOSE_SCENE_SFX)
@@ -110,6 +115,10 @@ func _on_coin_collected(_value: int, _total: int) -> void:
 
 func _on_player_hurt(_player: Node) -> void:
 	_play_sfx(PLAYER_HURT_SFX)
+
+
+func _on_player_jumped() -> void:
+	_play_sfx(JUMP_SFX)
 
 
 func _play_sfx(stream: AudioStream) -> void:
