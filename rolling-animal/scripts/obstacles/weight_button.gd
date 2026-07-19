@@ -28,6 +28,10 @@ signal released
 @export var stay_pressed := true
 
 var _pressed := false
+## 可选换图：给子节点起名 Released（没按下的图）/ Pressed（按下的图），脚本就切换它俩显示；
+## 没有这两个节点就退回"变绿"（灰盒母本不受影响）。
+@onready var _released_sprite: CanvasItem = get_node_or_null("Released")
+@onready var _pressed_sprite: CanvasItem = get_node_or_null("Pressed")
 
 
 func _ready() -> void:
@@ -64,7 +68,14 @@ func _set_pressed(value: bool) -> void:
 
 
 func _apply(value: bool) -> void:
-	modulate = Color(0.4, 1.0, 0.5) if value else Color(1, 1, 1)  # graybox：按下变绿
+	if _released_sprite or _pressed_sprite:
+		# 工厂版：切换两张图（没按下=Released，按下=Pressed）
+		if _released_sprite:
+			_released_sprite.visible = not value
+		if _pressed_sprite:
+			_pressed_sprite.visible = value
+	else:
+		modulate = Color(0.4, 1.0, 0.5) if value else Color(1, 1, 1)  # graybox：按下变绿
 	if target:
 		if target.has_method("set_active"):
 			target.set_active(value)  # 如气泡：自己管好碰撞/视觉的启停

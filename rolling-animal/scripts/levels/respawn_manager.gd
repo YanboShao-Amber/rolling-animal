@@ -23,9 +23,19 @@ extends Node
 ## 本作视口高 1080、相机 limit_bottom≈1080，取 1300 表示已完全落到可视区下方。
 @export var fall_death_y := 1300.0
 
+@export_category("Anti-Stuck")
+## 防卡死：玩家原地不动（且体型不变）超过 stuck_duration 秒 → 回最近检查点。
+@export var stuck_death_enabled := true
+@export var stuck_duration := 2.0
+## 判定"动了"的最小位移(px)：这段时间内位移小于它就算没动。
+@export var stuck_move_threshold := 6.0
+
 var _respawn_position := Vector2.ZERO
 var _current_order := -1
 var _busy := false
+var _stuck_time := 0.0
+var _stuck_last_pos := Vector2.INF
+var _stuck_last_size := -1.0
 
 
 func _ready() -> void:
@@ -51,14 +61,36 @@ func _ready() -> void:
 		player.global_position = _respawn_position
 
 
-func _physics_process(_delta: float) -> void:
+func _physics_process(delta: float) -> void:
+	if _busy or not is_instance_valid(player):
+		return
 	# 坠落死亡：玩家掉出屏幕底部（Y 超过判定线）即重生到最近检查点。
-	if not fall_death_enabled or _busy:
-		return
-	if not is_instance_valid(player):
-		return
-	if player.global_position.y > fall_death_y:
+	if fall_death_enabled and player.global_position.y > fall_death_y:
 		_on_player_died(player)  # 不带特效 → 立即重生（与毒水一致）
+		return
+	# 防卡死：原地不动太久 → 重生。
+	if stuck_death_enabled:
+		_check_stuck(delta)
+
+
+func _check_stuck(delta: float) -> void:
+	# 只在"应该往前走"时判卡：auto_forward 关掉的段落=故意静止，不算卡。
+	if not player.auto_forward_enabled:
+		_stuck_time = 0.0
+		_stuck_last_pos = player.global_position
+		return
+	var pos := player.global_position
+	var size: float = player.current_size_scale
+	# 位置或体型有明显变化 → 算"在动/在长大"，清零计时（贴墙狂点变大砸墙不算卡）。
+	if _stuck_last_pos.distance_to(pos) > stuck_move_threshold or absf(size - _stuck_last_size) > 0.02:
+		_stuck_last_pos = pos
+		_stuck_last_size = size
+		_stuck_time = 0.0
+		return
+	_stuck_time += delta
+	if _stuck_time >= stuck_duration:
+		_stuck_time = 0.0
+		_on_player_died(player)  # 卡住 → 回最近检查点（瞬间、无特效）
 
 
 func _find_soft_player() -> SoftPlayer:

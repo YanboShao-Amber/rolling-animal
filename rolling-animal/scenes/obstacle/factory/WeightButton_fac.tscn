@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://ddo1pr5oynrri"]
+
+[ext_resource type="Script" uid="uid://rf8bthm5p73j" path="res://scripts/obstacles/weight_button.gd" id="1_wb"]
+[ext_resource type="Texture2D" uid="uid://bkg3qtruu8vmf" path="res://assets/original/kenney_simplified-platformer-pack/PNG/Tiles/platformPack_tile064.png" id="2_31fru"]
+[ext_resource type="Texture2D" uid="uid://b83whjey3e1ow" path="res://assets/original/kenney_simplified-platformer-pack/PNG/Tiles/platformPack_tile063.png" id="3_ayvni"]
+
+[sub_resource type="RectangleShape2D" id="RS_wb"]
+size = Vector2(128, 40)
+
+[node name="WeightButton" type="Area2D" unique_id=874041823]
+scale = Vector2(0.5, 0.5)
+script = ExtResource("1_wb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1674923767]
+position = Vector2(64, -20)
+shape = SubResource("RS_wb")
+
+[node name="Released" type="Sprite2D" parent="." unique_id=1368797280]
+texture_filter = 1
+position = Vector2(64, -58)
+scale = Vector2(2, 2)
+texture = ExtResource("2_31fru")
+
+[node name="Pressed" type="Sprite2D" parent="." unique_id=1368797281]
+visible = false
+texture_filter = 1
+position = Vector2(64, -58)
+scale = Vector2(2, 2)
+texture = ExtResource("3_ayvni")
