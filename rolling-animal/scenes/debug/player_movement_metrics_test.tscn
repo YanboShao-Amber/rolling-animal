@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Script" path="res://scripts/debug/player_movement_metrics_test.gd" id="1_script"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_ground"]
+size = Vector2(100000, 256)
+
+[node name="PlayerMovementMetricsTest" type="Node2D"]
+script = ExtResource("1_script")
+
+[node name="Ground" type="StaticBody2D" parent="."]
+position = Vector2(25000, 1028)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ground"]
+shape = SubResource("RectangleShape_ground")

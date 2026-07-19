@@ -1,0 +1,231 @@
+[gd_scene format=3 uid="uid://bm8qyrwo3eogt"]
+
+[ext_resource type="Script" uid="uid://4h06q0nq1nto" path="res://scripts/levels/tutorial_level.gd" id="1_script"]
+[ext_resource type="TileSet" path="res://resources/tilesets/tutorial_tileset.tres" id="2_tileset"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="3_player"]
+[ext_resource type="Texture2D" uid="uid://umi6oy816nyj" path="res://assets/Planes/planeBlue1.png" id="4_blue"]
+[ext_resource type="Texture2D" uid="uid://y2ox7pehrpkx" path="res://assets/Planes/planeGreen1.png" id="5_green"]
+[ext_resource type="Texture2D" uid="uid://ioctldvd4sec" path="res://assets/UI/banner_hanging.png" id="6_ribbon"]
+[ext_resource type="FontFile" uid="uid://sr51qv137qu8" path="res://assets/Fonts/Kenney Future.ttf" id="7_font"]
+[ext_resource type="Texture2D" uid="uid://bg6gk20hqmns1" path="res://assets/Planes/planeYellow1.png" id="8_yellow"]
+[ext_resource type="PackedScene" path="res://scenes/backgrounds/grass_loop_background.tscn" id="9_w40hx"]
+
+[node name="TutorialLevel" type="Node2D" unique_id=27149898]
+script = ExtResource("1_script")
+
+[node name="GroundLayer" type="TileMapLayer" parent="." unique_id=1892592620]
+texture_filter = 1
+scale = Vector2(3, 3)
+tile_set = ExtResource("2_tileset")
+
+[node name="PlayerSpawn" type="Marker2D" parent="." unique_id=2115539813]
+position = Vector2(150, 470)
+
+[node name="Player" parent="." unique_id=1736210429 instance=ExtResource("3_player")]
+position = Vector2(150, 470)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=212797035]
+position = Vector2(640, 360)
+position_smoothing_enabled = true
+position_smoothing_speed = 6.0
+
+[node name="TutorialSigns" type="Node2D" parent="." unique_id=294683836]
+
+[node name="GrowSign" type="Node2D" parent="TutorialSigns" unique_id=1032857030]
+position = Vector2(650, 150)
+
+[node name="Plane" type="Sprite2D" parent="TutorialSigns/GrowSign" unique_id=1266432065]
+texture_filter = 1
+position = Vector2(-230, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("4_blue")
+
+[node name="Ribbon" type="TextureRect" parent="TutorialSigns/GrowSign" unique_id=813202891]
+texture_filter = 1
+offset_left = -155.0
+offset_top = -58.0
+offset_right = 365.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("6_ribbon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="TutorialSigns/GrowSign/Ribbon" unique_id=903066044]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 22.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.06, 0.02, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 20
+text = "LEFT CLICK OR HOLD
+TO GROW BIGGER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShrinkSign" type="Node2D" parent="TutorialSigns" unique_id=515116990]
+position = Vector2(1600, 150)
+
+[node name="Plane" type="Sprite2D" parent="TutorialSigns/ShrinkSign" unique_id=1921306627]
+texture_filter = 1
+position = Vector2(-230, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("5_green")
+
+[node name="Ribbon" type="TextureRect" parent="TutorialSigns/ShrinkSign" unique_id=580662708]
+texture_filter = 1
+offset_left = -155.0
+offset_top = -58.0
+offset_right = 365.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("6_ribbon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="TutorialSigns/ShrinkSign/Ribbon" unique_id=2129149955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 22.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.06, 0.02, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 20
+text = "STOP CLICKING
+TO SHRINK"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="JumpSign" type="Node2D" parent="TutorialSigns" unique_id=681988171]
+position = Vector2(2600, 150)
+
+[node name="Plane" type="Sprite2D" parent="TutorialSigns/JumpSign" unique_id=1641991153]
+texture_filter = 1
+position = Vector2(-230, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("8_yellow")
+
+[node name="Ribbon" type="TextureRect" parent="TutorialSigns/JumpSign" unique_id=582770547]
+texture_filter = 1
+offset_left = -155.0
+offset_top = -58.0
+offset_right = 365.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("6_ribbon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="TutorialSigns/JumpSign/Ribbon" unique_id=168165906]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 22.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.06, 0.02, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 20
+text = "PRESS SPACE
+TO JUMP"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SpeedSign" type="Node2D" parent="TutorialSigns" unique_id=426500508]
+position = Vector2(3600, 150)
+
+[node name="Plane" type="Sprite2D" parent="TutorialSigns/SpeedSign" unique_id=321129065]
+texture_filter = 1
+position = Vector2(-230, 0)
+scale = Vector2(0.85, 0.85)
+texture = ExtResource("4_blue")
+
+[node name="Ribbon" type="TextureRect" parent="TutorialSigns/SpeedSign" unique_id=2131750126]
+texture_filter = 1
+offset_left = -155.0
+offset_top = -58.0
+offset_right = 365.0
+offset_bottom = 72.0
+mouse_filter = 2
+texture = ExtResource("6_ribbon")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Text" type="Label" parent="TutorialSigns/SpeedSign/Ribbon" unique_id=1174994258]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 42.0
+offset_top = 22.0
+offset_right = -34.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.12, 0.06, 0.02, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 20
+text = "SMALL = FASTER
+BIG = SLOWER"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HUD" type="CanvasLayer" parent="." unique_id=804373301]
+
+[node name="ExitHint" type="Label" parent="HUD" unique_id=873771077]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -300.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 60.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0.08, 0.05, 0.03, 1)
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 18
+text = "ESC: RETURN TO MENU"
+horizontal_alignment = 2
+
+[node name="CompletionLabel" type="Label" parent="HUD" unique_id=1570960486]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -90.0
+offset_right = 330.0
+offset_bottom = 90.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.08, 0.04, 0.01, 1)
+theme_override_colors/font_outline_color = Color(1, 0.82, 0.45, 1)
+theme_override_constants/outline_size = 8
+theme_override_fonts/font = ExtResource("7_font")
+theme_override_font_sizes/font_size = 40
+text = "TUTORIAL COMPLETE!
+PRESS ESC TO RETURN"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GrassLoopBackground" parent="." unique_id=913084040 instance=ExtResource("9_w40hx")]
+scroll_offset = Vector2(1055, -195)

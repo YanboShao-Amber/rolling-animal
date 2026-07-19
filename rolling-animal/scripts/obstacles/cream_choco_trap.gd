@@ -3,7 +3,7 @@ extends Area2D
 
 signal player_hit(player: SoftPlayer)
 
-var _triggered := false
+@export var active := true
 
 
 func _ready() -> void:
@@ -11,8 +11,6 @@ func _ready() -> void:
 
 
 func _on_body_entered(body: Node2D) -> void:
-	if _triggered or not (body is SoftPlayer):
-		return
-	_triggered = true
-	monitoring = false
-	player_hit.emit(body as SoftPlayer)
+	if active and body is SoftPlayer:
+		player_hit.emit(body as SoftPlayer)
+

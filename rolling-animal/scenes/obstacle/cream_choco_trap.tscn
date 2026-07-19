@@ -1,23 +1,34 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene load_steps=6 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/tilemap/creamChoco.png" id="1_texture"]
 [ext_resource type="Script" path="res://scripts/obstacles/cream_choco_trap.gd" id="2_script"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape_trap"]
-size = Vector2(44, 32)
+[sub_resource type="ConvexPolygonShape2D" id="ConvexPolygonShape2D_trap"]
+points = PackedVector2Array(-24, 21, -21, 3, -12, -12, 0, -21, 12, -12, 21, 3, 24, 21)
+
+[sub_resource type="Shader" id="Shader_white_outline"]
+code = "shader_type canvas_item;\n\nuniform float outline_size : hint_range(1.0, 4.0, 0.5) = 2.0;\n\nvoid fragment() {\n\tfloat center_alpha = texture(TEXTURE, UV).a;\n\tvec2 step_size = TEXTURE_PIXEL_SIZE * outline_size;\n\tfloat neighbor_alpha = 0.0;\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV + vec2(step_size.x, 0.0)).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV - vec2(step_size.x, 0.0)).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV + vec2(0.0, step_size.y)).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV - vec2(0.0, step_size.y)).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV + step_size).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV - step_size).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV + vec2(step_size.x, -step_size.y)).a);\n\tneighbor_alpha = max(neighbor_alpha, texture(TEXTURE, UV + vec2(-step_size.x, step_size.y)).a);\n\tfloat outline_alpha = max(neighbor_alpha - center_alpha, 0.0);\n\tCOLOR = vec4(1.0, 1.0, 1.0, outline_alpha);\n}\n"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_white_outline"]
+shader = SubResource("Shader_white_outline")
+shader_parameter/outline_size = 2.0
 
 [node name="CreamChocoTrap" type="Area2D" groups=["hazards"]]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 1
 monitorable = false
 script = ExtResource("2_script")
 
+[node name="WhiteOutline" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_white_outline")
+texture = ExtResource("1_texture")
+scale = Vector2(0.7714286, 0.7714286)
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(0, -27)
-scale = Vector2(0.77143, 0.77143)
 texture = ExtResource("1_texture")
+scale = Vector2(0.7714286, 0.7714286)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -18)
-shape = SubResource("RectangleShape_trap")
+shape = SubResource("ConvexPolygonShape2D_trap")

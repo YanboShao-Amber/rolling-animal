@@ -19,6 +19,7 @@ var _fall_tween: Tween
 
 func _ready() -> void:
 	add_to_group("resettable")
+	add_to_group("stun_fail_obstacles")
 	detection_area.body_entered.connect(_on_body_entered)
 
 
@@ -74,4 +75,3 @@ func reset_state() -> void:
 	visible = true
 	detection_area.set_deferred("monitoring", true)
 	solid_shape.set_deferred("disabled", false)
-

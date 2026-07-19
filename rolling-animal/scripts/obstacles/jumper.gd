@@ -5,8 +5,8 @@ signal player_bounced(player: SoftPlayer, upward_speed: float)
 signal player_rejected(player: SoftPlayer)
 
 @export_range(0.4, 1.45, 0.01) var minimum_bounce_size := 0.8
-@export_range(100.0, 2500.0, 10.0) var medium_bounce_speed := 900.0
-@export_range(100.0, 3000.0, 10.0) var maximum_bounce_speed := 1550.0
+@export_range(100.0, 3000.0, 10.0) var medium_bounce_speed := 1500.0
+@export_range(100.0, 3500.0, 10.0) var maximum_bounce_speed := 2250.0
 @export_range(0.03, 0.5, 0.01) var compression_duration := 0.08
 
 @onready var detection_area: Area2D = $DetectionArea
@@ -59,4 +59,3 @@ func _play_compression() -> void:
 	if is_inside_tree():
 		spring_in.visible = false
 		spring_out.visible = true
-

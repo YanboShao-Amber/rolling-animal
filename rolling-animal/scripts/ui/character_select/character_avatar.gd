@@ -1,7 +1,8 @@
 class_name CharacterAvatar
 extends Control
 
-@onready var portrait: TextureRect = $Portrait
+@onready var avatar_visual: Control = $AvatarVisual
+@onready var portrait: TextureRect = $AvatarVisual/Portrait
 
 var character_data: Dictionary = {}
 var carousel_slot := 0
@@ -9,6 +10,7 @@ var carousel_slot := 0
 
 func setup(data: Dictionary) -> void:
 	character_data = data
+	avatar_visual.pivot_offset = avatar_visual.size * 0.5
 	portrait.texture = load(data["portrait_path"])
 	tooltip_text = data["display_name"]
 

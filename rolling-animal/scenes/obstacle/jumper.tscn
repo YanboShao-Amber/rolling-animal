@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://hnj83phufpli"]
+[gd_scene load_steps=7 format=3]
 
 [ext_resource type="Texture2D" path="res://assets/jumper/spring.png" id="1_spring"]
 [ext_resource type="Texture2D" path="res://assets/jumper/spring_in.png" id="2_spring_in"]
@@ -10,29 +10,32 @@ size = Vector2(54, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape_detection"]
 size = Vector2(50, 20)
 
-[node name="Jumper" type="StaticBody2D" unique_id=1570180418]
+[node name="Jumper" type="StaticBody2D"]
 texture_filter = 1
+collision_layer = 1
+collision_mask = 1
 script = ExtResource("3_script")
 
-[node name="SpringOut" type="Sprite2D" parent="." unique_id=2100137696]
+[node name="SpringOut" type="Sprite2D" parent="."]
 position = Vector2(0, -14.337931)
 scale = Vector2(0.37241378, 0.37241378)
 texture = ExtResource("1_spring")
 
-[node name="SpringIn" type="Sprite2D" parent="." unique_id=1940618146]
+[node name="SpringIn" type="Sprite2D" parent="."]
 visible = false
 position = Vector2(0, -10.613793)
 scale = Vector2(0.37241378, 0.37241378)
 texture = ExtResource("2_spring_in")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1616947871]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -4)
 shape = SubResource("RectangleShape_solid")
 
-[node name="DetectionArea" type="Area2D" parent="." unique_id=1305179671]
+[node name="DetectionArea" type="Area2D" parent="."]
 collision_layer = 0
+collision_mask = 1
 monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" unique_id=1182322606]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
 position = Vector2(0, -12)
 shape = SubResource("RectangleShape_detection")

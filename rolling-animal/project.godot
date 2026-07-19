@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="rolling animal"
-run/main_scene="res://scenes/ui/character_select/character_select.tscn"
+run/main_scene="res://scenes/ui/start_menu.tscn"
 config/features=PackedStringArray("4.7", "GL Compatibility")
 config/icon="res://icon.svg"
 

@@ -12,8 +12,11 @@ script = ExtResource("1_script")
 [node name="LandmarkLayer" type="TileMapLayer" parent="." unique_id=209057711]
 texture_filter = 1
 scale = Vector2(3, 3)
-tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 11, 0, 6, 0, 0, 0, 0, 0, 254, 255, 0, 0, 11, 0, 5, 0, 0, 0)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 11, 0, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0, 11, 0, 5, 0, 0, 0)
 tile_set = ExtResource("2_tileset")
+
+[node name="FlagAnimationTimer" type="Timer" parent="." unique_id=637971068]
+wait_time = 0.16
 
 [node name="WinTrigger" type="Area2D" parent="." unique_id=792157405]
 position = Vector2(0, -300)
@@ -21,5 +24,5 @@ collision_layer = 0
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WinTrigger" unique_id=1334023018]
-position = Vector2(28, 0)
+position = Vector2(35, 61)
 shape = SubResource("RectangleShape_win")

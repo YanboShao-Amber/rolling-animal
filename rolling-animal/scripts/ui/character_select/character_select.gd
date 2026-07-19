@@ -7,6 +7,7 @@ signal back_requested
 
 const AVATAR_SCENE := preload("res://scenes/ui/character_select/character_avatar.tscn")
 const CharacterData := preload("res://resources/characters/character_select_data.gd")
+const LEVEL_MENU_SCENE := "res://scenes/ui/level_menu.tscn"
 const ANIMATION_DURATION := 0.3
 const MIN_CAROUSEL_SLOT := -4
 const MAX_CAROUSEL_SLOT := 4
@@ -50,8 +51,8 @@ var _rotation_step_degrees := 0.0
 func _ready() -> void:
 	selected_index = wrapi(default_character_index, 0, CharacterData.CHARACTERS.size())
 	_create_avatars()
-	left_button.pressed.connect(_select_next)
-	right_button.pressed.connect(_select_previous)
+	left_button.pressed.connect(_select_previous)
+	right_button.pressed.connect(_select_next)
 	confirm_button.pressed.connect(_confirm_selection)
 	back_button.pressed.connect(_request_back)
 	avatar_layer.resized.connect(_on_carousel_resized)
@@ -70,10 +71,10 @@ func _unhandled_input(event: InputEvent) -> void:
 		_request_back()
 		get_viewport().set_input_as_handled()
 	elif not is_animating and event.is_action_pressed("character_select_left"):
-		_select_next()
+		_select_previous()
 		get_viewport().set_input_as_handled()
 	elif not is_animating and event.is_action_pressed("character_select_right"):
-		_select_previous()
+		_select_next()
 		get_viewport().set_input_as_handled()
 
 
@@ -254,13 +255,27 @@ func _confirm_selection() -> void:
 	print("Selected character: ", data["id"])
 	print("Selected character name: ", data["display_name"])
 	print("Selected texture: ", data["portrait_path"])
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		game_state.set_selected_character(data)
+	else:
+		push_error("GameState Autoload is missing; character selection was not saved.")
+		return
 	character_confirmed.emit(data)
+	var next_scene := "res://scenes/farm_level_test.tscn"
+	if game_state.has_method("get_pending_level_scene_path"):
+		next_scene = str(game_state.call("get_pending_level_scene_path"))
+	if next_scene.is_empty() or not ResourceLoader.exists(next_scene, "PackedScene"):
+		push_error("Selected level scene is missing: " + next_scene)
+		return
+	get_tree().change_scene_to_file(next_scene)
 
 
 func _request_back() -> void:
 	if not is_animating:
 		print("Back requested")
 		back_requested.emit()
+		get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
 
 
 func _on_carousel_resized() -> void:

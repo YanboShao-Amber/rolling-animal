@@ -6,6 +6,7 @@ const CAMERA_Y := 468.0
 const WIN_SCENE := preload("res://scenes/ui/win_scene.tscn")
 const LOSE_SCENE := preload("res://scenes/ui/lose_scene.tscn")
 const CHARACTER_SELECT_SCENE := "res://scenes/ui/character_select/character_select.tscn"
+const LEVEL_MENU_SCENE := "res://scenes/ui/level_menu.tscn"
 
 @export var show_debug_hud := false
 @export var camera_look_ahead := 180.0
@@ -139,9 +140,18 @@ func _on_player_reached_win() -> void:
 		return
 	player.auto_forward_enabled = false
 	player.velocity = Vector2.ZERO
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state:
+		game_state.complete_level(1)
 	win_popup = WIN_SCENE.instantiate()
 	hud.add_child(win_popup)
 	win_popup.closed.connect(_on_win_popup_closed)
+	win_popup.left_button_pressed.connect(_on_win_menu_requested)
+	win_popup.right_button_pressed.connect(_on_win_menu_requested)
+
+
+func _on_win_menu_requested() -> void:
+	get_tree().change_scene_to_file(LEVEL_MENU_SCENE)
 
 
 func _on_win_popup_closed() -> void:
@@ -215,4 +225,4 @@ func _on_trap_player_hit(hit_player: SoftPlayer) -> void:
 
 
 func _on_lose_menu_pressed() -> void:
-	get_tree().change_scene_to_file(CHARACTER_SELECT_SCENE)
+	get_tree().change_scene_to_file(LEVEL_MENU_SCENE)

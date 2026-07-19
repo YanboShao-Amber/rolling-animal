@@ -36,7 +36,6 @@ animations = [{
 radius = 22.0
 
 [node name="Coin" type="Area2D" unique_id=727505925 groups=["collectibles"]]
-scale = Vector2(0.8, 0.8)
 collision_layer = 0
 monitorable = false
 script = ExtResource("5_script")

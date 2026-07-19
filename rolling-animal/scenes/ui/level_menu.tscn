@@ -238,29 +238,10 @@ theme_override_font_sizes/font_size = 20
 text = "FARM LEVEL TEST"
 horizontal_alignment = 1
 
-[node name="ButtonRow" type="HBoxContainer" parent="Content"]
-layout_mode = 2
-theme_override_constants/separation = 26
-alignment = 1
-
-[node name="BackButton" type="Button" parent="Content/ButtonRow"]
-custom_minimum_size = Vector2(190, 62)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 21
-text = "BACK"
-
-[node name="PlayButton" type="Button" parent="Content/ButtonRow"]
-custom_minimum_size = Vector2(260, 62)
-layout_mode = 2
-theme_override_fonts/font = ExtResource("4_font")
-theme_override_font_sizes/font_size = 21
-text = "PLAY"
-
 [node name="Hint" type="Label" parent="Content"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.45, 0.53, 0.61, 1)
 theme_override_fonts/font = ExtResource("4_font")
 theme_override_font_sizes/font_size = 16
-text = "ARROWS: CHOOSE    ENTER: PLAY    ESC: BACK"
+text = "CLICK A LEVEL    ARROWS: CHOOSE    ENTER: SELECT    ESC: BACK"
 horizontal_alignment = 1

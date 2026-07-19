@@ -366,6 +366,17 @@ func play_damage_flash() -> void:
 	_damage_flash_tween.tween_property(player_sprite, "modulate", Color.WHITE, 0.10)
 
 
+func apply_external_bounce(upward_speed: float) -> void:
+	if upward_speed <= 0.0:
+		return
+	velocity.y = -upward_speed
+	jump_buffer_timer = 0.0
+	coyote_timer = 0.0
+	auto_jump_cooldown_timer = auto_jump_retrigger_delay
+	_play_jump_deform()
+	jumped.emit()
+
+
 func reset_size() -> void:
 	current_size_scale = clampf(default_size_scale, minimum_size_scale, maximum_size_scale)
 	target_size_scale = current_size_scale

@@ -4,12 +4,12 @@
 
 [node name="DesertLoopBackground" type="Parallax2D" unique_id=1131711806]
 scroll_scale = Vector2(0.18, 0.1)
-repeat_size = Vector2(432, 0)
+repeat_size = Vector2(720, 0)
 repeat_times = 8
 
 [node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1118548674]
 z_index = -20
 texture_filter = 1
-scale = Vector2(9, 9)
+scale = Vector2(15, 15)
 tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAIAAAAEAAIAAAABAAAAAAAFAAAAAAABAAEAAAAFAAEAAAABAAIAAAAFAAIAAAA=")
 tile_set = ExtResource("1_2hvqr")

@@ -1,25 +1,25 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://cnf7giv1qi0g2"]
 
-[ext_resource type="Script" path="res://scripts/obstacles/checkpoint.gd" id="1_checkpoint"]
+[ext_resource type="Script" uid="uid://b2wvoth7oavnv" path="res://scripts/obstacles/checkpoint.gd" id="1_checkpoint"]
 [ext_resource type="TileSet" path="res://resources/tilesets/checkpoint_tileset.tres" id="2_tileset"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape_checkpoint"]
-size = Vector2(54, 108)
+size = Vector2(59, 733)
 
-[node name="TilemapCheckpoint" type="Area2D" groups=["checkpoints"]]
+[node name="TilemapCheckpoint" type="Area2D" unique_id=1173857921 groups=["checkpoints"]]
 collision_layer = 0
-collision_mask = 1
 monitorable = false
 script = ExtResource("1_checkpoint")
 
-[node name="LandmarkLayer" type="TileMapLayer" parent="."]
+[node name="LandmarkLayer" type="TileMapLayer" parent="." unique_id=1166531783]
 texture_filter = 1
 scale = Vector2(3, 3)
+tile_map_data = PackedByteArray(0, 0, 0, 0, 255, 255, 0, 0, 10, 0, 4, 0, 0, 0, 0, 0, 254, 255, 0, 0, 10, 0, 3, 0, 0, 0, 0, 0, 253, 255, 0, 0, 10, 0, 2, 0, 0, 0)
 tile_set = ExtResource("2_tileset")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -54)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=811419630]
+position = Vector2(28.5, -367.5)
 shape = SubResource("RectangleShape_checkpoint")
 
-[node name="RespawnPoint" type="Marker2D" parent="."]
+[node name="RespawnPoint" type="Marker2D" parent="." unique_id=357200604]
 position = Vector2(-72, 0)
