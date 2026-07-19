@@ -24,8 +24,8 @@ const LEVEL_NUMBER := 2  # Minecraft 是第 2 关（见 level_menu.gd 的 LEVEL_
 var win_popup: WinPopup
 
 func _ready() -> void:
-	# 开启玩家的自动向前移动（调用玩家代码里的逻辑）
-	player.auto_forward_enabled = true
+	# 先让玩家原地待命，等 3-2-1 倒计时结束再起步（倒计时结束时会启动关卡计时器）。
+	player.auto_forward_enabled = false
 	# 只在本场景覆盖跳跃力度，让玩家跳得更高（不改动共享的玩家脚本/场景）。
 	player.jump_velocity = player_jump_velocity
 	
@@ -49,6 +49,22 @@ func _ready() -> void:
 
 	# 抵达终点旗帜（WinLandmark）后弹出胜利界面（参考 farm_level_test 的 win landmark 逻辑）。
 	win_landmark.player_reached.connect(_on_player_reached_win)
+
+	# 播放开场倒计时并启动关卡计时器（与第 1 关一致），倒计时结束后玩家才开始自动前进。
+	_start_after_countdown()
+
+
+# 与第 1 关 farm_level_test 相同的开场流程：等场景过渡结束后播放 3-2-1 倒计时。
+# 倒计时结束时 SceneTransition 会调用 GameState.start_level_timer() 启动计时；
+# 通关时 WinPopup 调用 finish_level_timer() 便能记录本关 best time（此前从未启动计时，所以没有记录）。
+func _start_after_countdown() -> void:
+	var transition := get_node_or_null("/root/SceneTransition")
+	if transition:
+		await transition.wait_until_transition_finished()
+		await transition.play_countdown()
+	if is_instance_valid(player) and not is_instance_valid(win_popup):
+		player.auto_forward_enabled = true
+
 
 func _update_coin_hud(total: int) -> void:
 	coin_count_label.text = "× %d" % total
