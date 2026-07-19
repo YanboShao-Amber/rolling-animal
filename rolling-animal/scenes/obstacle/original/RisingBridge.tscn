@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://b83rnuptx26ux"]
+
+[ext_resource type="Script" uid="uid://dlfqkyeidgd4o" path="res://scripts/obstacles/rising_bridge.gd" id="1_rb"]
+[ext_resource type="Texture2D" uid="uid://c3pdkybc4rp7t" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="2_4nxto"]
+
+[sub_resource type="RectangleShape2D" id="RS_plank"]
+size = Vector2(162, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr8km"]
+atlas = ExtResource("2_4nxto")
+region = Rect2(126, 90, 72, 18)
+
+[node name="RisingBridge" type="StaticBody2D" unique_id=304374712]
+script = ExtResource("1_rb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1974569407]
+position = Vector2(0, 12)
+shape = SubResource("RS_plank")
+
+[node name="Plank" type="Sprite2D" parent="." unique_id=1649808922]
+texture_filter = 1
+position = Vector2(38, 12)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank" unique_id=1089439631]
+texture_filter = 1
+position = Vector2(-67, 0)
+texture = SubResource("AtlasTexture_kr8km")

@@ -31,7 +31,9 @@ var _pulled := false
 
 func _ready() -> void:
 	add_to_group("resettable")
-	_apply(false)
+	# 延后一帧再套用初始状态：确保 target（桥/气泡等）自己的 _ready 已跑完，
+	# 否则会在它 @onready 还没就绪时调用 set_active → 崩。
+	_apply.call_deferred(false)
 
 
 func _physics_process(_delta: float) -> void:

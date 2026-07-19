@@ -1,0 +1,53 @@
+[gd_scene format=3 uid="uid://bxdiclskqt7pt"]
+
+[ext_resource type="Script" uid="uid://chlq75aaaka3f" path="res://scripts/obstacles/drawbridge.gd" id="1_db"]
+[ext_resource type="Texture2D" uid="uid://c3pdkybc4rp7t" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="2_kr8km"]
+
+[sub_resource type="RectangleShape2D" id="RS_plank"]
+size = Vector2(270, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kr8km"]
+atlas = ExtResource("2_kr8km")
+region = Rect2(126, 90, 46, 18)
+
+[node name="Drawbridge" type="StaticBody2D" unique_id=1515651192]
+script = ExtResource("1_db")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=134303681]
+position = Vector2(-135, 0)
+shape = SubResource("RS_plank")
+
+[node name="Plank" type="Sprite2D" parent="." unique_id=1718726995]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank" unique_id=1656108061]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank3" type="Sprite2D" parent="Plank/Plank2" unique_id=1451740591]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank/Plank2/Plank3" unique_id=682753785]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank/Plank2/Plank3/Plank2" unique_id=170765463]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank/Plank2/Plank3/Plank2/Plank2" unique_id=601089727]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
+
+[node name="Plank2" type="Sprite2D" parent="Plank/Plank2/Plank3/Plank2/Plank2/Plank2" unique_id=1652941361]
+texture_filter = 1
+position = Vector2(-36, 0)
+texture = SubResource("AtlasTexture_kr8km")
