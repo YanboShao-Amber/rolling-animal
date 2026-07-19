@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://c5k4fpgc71hn8"]
+
+[ext_resource type="Script" uid="uid://c4rle56q4j6ex" path="res://scripts/obstacles/stun_wall.gd" id="1_fyl4d"]
+[ext_resource type="PackedScene" uid="uid://c71rdvofb85s2" path="res://scenes/effects/StunEffect.tscn" id="2_ojnk8"]
+[ext_resource type="Texture2D" uid="uid://0f87ljrc6hby" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap.png" id="3_oa2y6"]
+
+[sub_resource type="RectangleShape2D" id="RS_detect"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="RS_solid"]
+size = Vector2(54, 54)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_s1fef"]
+atlas = ExtResource("3_oa2y6")
+region = Rect2(95, 38, 18, 18)
+
+[node name="StunWall" type="StaticBody2D" unique_id=1844251890]
+script = ExtResource("1_fyl4d")
+death_effect = ExtResource("2_ojnk8")
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1039751375]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=171642568]
+position = Vector2(27, 27)
+shape = SubResource("RS_detect")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=586000672]
+position = Vector2(27, 27)
+shape = SubResource("RS_solid")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=1300189769]
+texture_filter = 1
+offset_right = 54.0
+offset_bottom = 54.0
+texture = SubResource("AtlasTexture_s1fef")

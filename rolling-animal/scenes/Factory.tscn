@@ -1,0 +1,600 @@
+[gd_scene format=4 uid="uid://cunysynfiicxu"]
+
+[ext_resource type="Script" uid="uid://cpnigjxgxdfxo" path="res://scripts/levels/obstacle_test.gd" id="1_suhr0"]
+[ext_resource type="Texture2D" uid="uid://0f87ljrc6hby" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap.png" id="2_a6mmc"]
+[ext_resource type="Texture2D" uid="uid://c3pdkybc4rp7t" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="3_6xftg"]
+[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_0wykm"]
+[ext_resource type="Script" uid="uid://cvt2lscgpykpd" path="res://scripts/levels/respawn_manager.gd" id="6_i4uyd"]
+[ext_resource type="PackedScene" uid="uid://cwg1o1hco4u4y" path="res://scenes/obstacle/factory/StunWall_fac_2.tscn" id="6_lu1w2"]
+[ext_resource type="PackedScene" uid="uid://c5k4fpgc71hn8" path="res://scenes/obstacle/factory/StunWall_fac_3.tscn" id="7_76uo4"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="7_lu1w2"]
+[ext_resource type="PackedScene" path="res://scenes/obstacle/original/jumper.tscn" id="12_6xftg"]
+[ext_resource type="PackedScene" uid="uid://cwm2ekb1sg6nk" path="res://scenes/obstacle/factory/PoisonWater_fac.tscn" id="12_a6mmc"]
+[ext_resource type="PackedScene" uid="uid://b0nt5uqj4vchw" path="res://scenes/obstacle/factory/StunWall_fac_1.tscn" id="13_0wykm"]
+[ext_resource type="PackedScene" uid="uid://xiiwklto21k" path="res://scenes/collectibles/coin.tscn" id="13_6xftg"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wykm"]
+texture = ExtResource("2_a6mmc")
+separation = Vector2i(1, 1)
+texture_region_size = Vector2i(18, 18)
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+1:0/0 = 0
+1:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+3:0/0 = 0
+3:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:0/0 = 0
+5:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:0/0 = 0
+6:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+0:1/0 = 0
+0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+1:1/0 = 0
+1:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+2:1/0 = 0
+2:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+3:1/0 = 0
+3:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+5:1/0 = 0
+5:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+6:1/0 = 0
+6:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+0:2/0 = 0
+0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+1:2/0 = 0
+1:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+2:2/0 = 0
+2:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+3:2/0 = 0
+3:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+0:3/0 = 0
+0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+1:3/0 = 0
+1:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+2:3/0 = 0
+2:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+3:3/0 = 0
+3:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, 9, -9, 9)
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+4:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+5:6/0 = 0
+5:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+6:6/0 = 0
+6:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+7:6/0 = 0
+7:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+8:6/0 = 0
+8:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+9:6/0 = 0
+9:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+10:6/0 = 0
+10:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, -9, 9, 9, -9, 9)
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+4:7/0 = 0
+5:7/0 = 0
+6:7/0 = 0
+7:7/0 = 0
+8:7/0 = 0
+9:7/0 = 0
+10:7/0 = 0
+11:7/0 = 0
+12:7/0 = 0
+13:7/0 = 0
+14:7/0 = 0
+15:7/0 = 0
+16:7/0 = 0
+17:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i4uyd"]
+texture = ExtResource("3_6xftg")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+8:0/0 = 0
+9:0/0 = 0
+10:0/0 = 0
+11:0/0 = 0
+12:0/0 = 0
+13:0/0 = 0
+14:0/0 = 0
+15:0/0 = 0
+16:0/0 = 0
+17:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+8:1/0 = 0
+9:1/0 = 0
+10:1/0 = 0
+11:1/0 = 0
+12:1/0 = 0
+13:1/0 = 0
+14:1/0 = 0
+15:1/0 = 0
+16:1/0 = 0
+17:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+8:2/0 = 0
+9:2/0 = 0
+10:2/0 = 0
+11:2/0 = 0
+12:2/0 = 0
+13:2/0 = 0
+14:2/0 = 0
+15:2/0 = 0
+16:2/0 = 0
+17:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+8:3/0 = 0
+9:3/0 = 0
+10:3/0 = 0
+11:3/0 = 0
+12:3/0 = 0
+13:3/0 = 0
+14:3/0 = 0
+15:3/0 = 0
+16:3/0 = 0
+17:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+8:4/0 = 0
+9:4/0 = 0
+10:4/0 = 0
+11:4/0 = 0
+12:4/0 = 0
+13:4/0 = 0
+14:4/0 = 0
+15:4/0 = 0
+16:4/0 = 0
+17:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+4:5/0 = 0
+5:5/0 = 0
+6:5/0 = 0
+7:5/0 = 0
+8:5/0 = 0
+9:5/0 = 0
+10:5/0 = 0
+11:5/0 = 0
+12:5/0 = 0
+13:5/0 = 0
+14:5/0 = 0
+15:5/0 = 0
+16:5/0 = 0
+17:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+4:6/0 = 0
+5:6/0 = 0
+6:6/0 = 0
+7:6/0 = 0
+8:6/0 = 0
+9:6/0 = 0
+10:6/0 = 0
+11:6/0 = 0
+12:6/0 = 0
+13:6/0 = 0
+14:6/0 = 0
+15:6/0 = 0
+16:6/0 = 0
+17:6/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_s1fef"]
+tile_size = Vector2i(18, 18)
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_0wykm")
+sources/1 = SubResource("TileSetAtlasSource_i4uyd")
+
+[node name="Stage1" type="Control" unique_id=1899916940]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_suhr0")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1375026757]
+texture_filter = 1
+position = Vector2(0, 612)
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAAAAoAAAABAAIAAAABAAoAAAACAAIAAAACAAoAAAACAAIAAAADAAoAAAACAAIAAAAEAAoAAAACAAIAAAAFAAoAAAACAAIAAAAGAAoAAAACAAIAAAAHAAoAAAADAAIAAAAAAAsAAAABAAIAAAABAAsAAAACAAIAAAACAAsAAAACAAIAAAADAAsAAAACAAIAAAAEAAsAAAACAAIAAAAFAAsAAAACAAIAAAAGAAsAAAACAAIAAAAHAAsAAAADAAIAAAAHAAkAAAADAAIAAAAGAAkAAAACAAIAAAAFAAkAAAACAAIAAAAEAAkAAAACAAIAAAAEAAgAAAACAAEAAAADAAgAAAACAAEAAAACAAgAAAACAAEAAAABAAgAAAACAAEAAAABAAkAAAACAAIAAAACAAkAAAACAAIAAAADAAkAAAACAAIAAAAFAAgAAAACAAEAAAAGAAgAAAACAAEAAAAHAAgAAAADAAEAAAAAAAgAAAABAAEAAAAAAAkAAAABAAIAAAAJAAgAAAABAAEAAAAIAAkAAAANAAIAAAAIAAoAAAANAAIAAAAIAAsAAAANAAIAAAAJAAkAAAABAAIAAAAJAAoAAAABAAIAAAAJAAsAAAABAAIAAAAOAAYAAAAFAAAAAAANAAYAAAAEAAAAAAAPAAYAAAAGAAAAAAAMAAgAAAACAAEAAAAMAAkAAAACAAIAAAAMAAoAAAACAAIAAAAMAAsAAAACAAIAAAANAAkAAAACAAIAAAANAAoAAAACAAIAAAANAAsAAAACAAIAAAAOAAkAAAADAAIAAAAOAAoAAAADAAIAAAAOAAsAAAADAAIAAAAPAAkAAAANAAIAAAAPAAoAAAANAAIAAAAPAAsAAAANAAIAAAAQAAkAAAANAAIAAAAQAAoAAAANAAIAAAAQAAsAAAANAAIAAAARAAkAAAANAAIAAAARAAoAAAANAAIAAAARAAsAAAANAAIAAAASAAgAAAABAAEAAAASAAkAAAABAAIAAAASAAoAAAABAAIAAAASAAsAAAABAAIAAAATAAgAAAACAAEAAAATAAkAAAACAAIAAAATAAoAAAACAAIAAAAUAAkAAAACAAIAAAAUAAoAAAACAAIAAAAVAAoAAAACAAIAAAAWAAoAAAACAAEAAAANAAgAAAACAAEAAAAOAAgAAAADAAEAAAATAAsAAAACAAIAAAAUAAgAAAACAAEAAAAUAAsAAAACAAIAAAAVAAgAAAABAAYAAAAVAAkAAAACAAEAAAAXAAoAAAACAAEAAAAYAAoAAAACAAEAAAAKAAgAAAACAAEAAAAKAAkAAAACAAIAAAAKAAoAAAACAAIAAAAKAAsAAAACAAIAAAALAAgAAAACAAEAAAALAAkAAAACAAIAAAALAAoAAAACAAIAAAALAAsAAAACAAIAAAAWAAkAAAABAAYAAAAAAAwAAAACAAIAAAABAAwAAAACAAIAAAACAAwAAAACAAIAAAADAAwAAAACAAIAAAAEAAwAAAACAAIAAAAFAAwAAAACAAIAAAAGAAwAAAACAAIAAAAHAAwAAAACAAIAAAAIAAwAAAACAAIAAAAJAAwAAAACAAIAAAAKAAwAAAACAAIAAAALAAwAAAACAAIAAAAMAAwAAAACAAIAAAANAAwAAAACAAIAAAAOAAwAAAACAAIAAAAPAAwAAAACAAIAAAAQAAwAAAACAAIAAAARAAwAAAACAAIAAAASAAwAAAACAAIAAAATAAwAAAACAAIAAAAUAAwAAAACAAIAAAAVAAwAAAACAAIAAAAWAAwAAAACAAIAAAAXAAwAAAACAAIAAAAYAAwAAAACAAIAAAAZAAwAAAACAAIAAAAaAAwAAAACAAIAAAAbAAwAAAACAAIAAAAVAAsAAAACAAIAAAAWAAsAAAACAAIAAAAXAAsAAAACAAIAAAAYAAsAAAACAAIAAAAZAAsAAAACAAIAAAAaAAsAAAACAAIAAAAbAAsAAAACAAIAAAAcAAsAAAACAAIAAAAZAAoAAAACAAEAAAAaAAoAAAACAAEAAAAbAAoAAAACAAEAAAAcAAoAAAACAAEAAAAdAAoAAAACAAEAAAAdAAsAAAACAAIAAAAdAAwAAAACAAIAAAAeAAoAAAACAAEAAAAeAAsAAAACAAIAAAAeAAwAAAACAAIAAAAfAAoAAAACAAEAAAAfAAsAAAACAAIAAAAfAAwAAAACAAIAAAAgAAoAAAACAAEAAAAgAAsAAAACAAIAAAAgAAwAAAACAAIAAAAcAAwAAAACAAIAAAAhAAoAAAACAAEAAAAhAAsAAAACAAIAAAAhAAwAAAACAAIAAAAiAAoAAAACAAEAAAAiAAsAAAACAAIAAAAiAAwAAAACAAIAAAAjAAoAAAACAAEAAAAjAAsAAAACAAIAAAAjAAwAAAACAAIAAAAkAAoAAAACAAEAAAAkAAsAAAACAAIAAAAkAAwAAAACAAIAAAAlAAoAAAANAAAAAAAlAAsAAAANAAIAAAAlAAwAAAANAAIAAAAnAAgAAAAEAAAAAAAoAAgAAAAGAAAAAAAqAAcAAAAEAAAAAAArAAcAAAAGAAAAAAAkAAkAAAAEAAAAAAAlAAkAAAAGAAAAAAAmAAwAAAANAAIAAAAnAAwAAAANAAIAAAAnAAsAAAANAAIAAAAmAAsAAAANAAIAAAAoAAsAAAANAAIAAAApAAsAAAANAAIAAAAqAAsAAAANAAIAAAArAAsAAAANAAIAAAAsAAsAAAANAAIAAAApAAwAAAANAAIAAAAoAAwAAAANAAIAAAAqAAwAAAANAAIAAAArAAwAAAANAAIAAAAsAAwAAAANAAIAAAAtAAYAAAAEAAAAAAAuAAYAAAAGAAAAAAAtAAsAAAANAAIAAAAuAAsAAAANAAIAAAAuAAwAAAANAAIAAAAtAAwAAAANAAIAAAAvAAwAAAABAAIAAAAvAAsAAAABAAIAAAAvAAoAAAAAAAEAAAAwAAoAAAACAAEAAAAxAAoAAAACAAEAAAAwAAsAAAACAAIAAAAxAAsAAAACAAIAAAAyAAsAAAACAAIAAAAwAAwAAAACAAIAAAAxAAwAAAACAAIAAAAyAAwAAAACAAIAAAAyAAgAAAAEAAAAAAAzAAgAAAAGAAAAAAA6AAoAAAACAAEAAAA6AAsAAAACAAIAAAA6AAwAAAACAAIAAAA7AAoAAAACAAEAAAA7AAsAAAACAAIAAAA7AAwAAAACAAIAAAA8AAoAAAACAAEAAAA8AAsAAAACAAIAAAA8AAwAAAACAAIAAAA9AAoAAAADAAEAAAA9AAsAAAADAAIAAAA9AAwAAAADAAIAAAAzAAsAAAACAAIAAAAzAAwAAAACAAIAAAA0AAsAAAACAAIAAAA0AAwAAAACAAIAAAA1AAsAAAACAAIAAAA1AAwAAAACAAIAAAA2AAsAAAACAAIAAAA2AAwAAAACAAIAAAA3AAsAAAACAAIAAAA3AAwAAAACAAIAAAA4AAsAAAACAAIAAAA4AAwAAAACAAIAAAA5AAsAAAACAAIAAAA5AAwAAAACAAIAAAA1AAgAAAAEAAAAAAA2AAgAAAAGAAAAAAA4AAgAAAAEAAAAAAA5AAgAAAAGAAAAAABUAAgAAAAEAAAAAABVAAgAAAAFAAAAAABWAAgAAAAFAAAAAABMAAoAAAACAAEAAABMAAsAAAACAAIAAABMAAwAAAACAAIAAABNAAoAAAACAAEAAABNAAsAAAACAAIAAABNAAwAAAACAAIAAABOAAoAAAACAAEAAABOAAsAAAACAAIAAABOAAwAAAACAAIAAABPAAoAAAACAAEAAABPAAsAAAACAAIAAABPAAwAAAACAAIAAABQAAoAAAACAAEAAABQAAsAAAACAAIAAABQAAwAAAACAAIAAABXAAgAAAAFAAAAAABYAAgAAAAFAAAAAABZAAgAAAAFAAAAAABaAAgAAAAFAAAAAABbAAgAAAAFAAAAAABcAAgAAAAFAAAAAABdAAgAAAAGAAAAAABfAAgAAAAEAAAAAABgAAgAAAAFAAAAAABhAAgAAAAFAAAAAABiAAgAAAAFAAAAAABjAAgAAAAFAAAAAABkAAgAAAAGAAAAAAA+AAoAAAAEAAYAAAA/AAoAAAAFAAYAAABAAAoAAAAFAAYAAABBAAoAAAAFAAYAAABCAAoAAAAFAAYAAABDAAoAAAAFAAYAAABEAAoAAAAFAAYAAABFAAoAAAAFAAYAAABGAAoAAAAGAAYAAABHAAoAAAABAAEAAABHAAsAAAABAAIAAABHAAwAAAABAAIAAABIAAoAAAACAAEAAABIAAsAAAACAAIAAABIAAwAAAACAAIAAABJAAoAAAACAAEAAABJAAsAAAACAAIAAABJAAwAAAACAAIAAABKAAoAAAACAAEAAABKAAsAAAACAAIAAABKAAwAAAACAAIAAABLAAoAAAACAAEAAABLAAsAAAACAAIAAABLAAwAAAACAAIAAAA=")
+tile_set = SubResource("TileSet_s1fef")
+
+[node name="PoisonWaters" type="Control" parent="." unique_id=251059163]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PoisonWater" parent="PoisonWaters" unique_id=819648958 instance=ExtResource("12_a6mmc")]
+position = Vector2(432, 1044)
+
+[node name="Control" type="Control" parent="PoisonWaters" unique_id=1648704784]
+anchors_preset = 0
+offset_left = 108.0
+offset_right = 148.0
+offset_bottom = 40.0
+
+[node name="PoisonWater2" parent="PoisonWaters/Control" unique_id=111896932 instance=ExtResource("12_a6mmc")]
+position = Vector2(702, 1044)
+
+[node name="PoisonWater3" parent="PoisonWaters/Control" unique_id=257796773 instance=ExtResource("12_a6mmc")]
+position = Vector2(756, 1044)
+
+[node name="PoisonWater4" parent="PoisonWaters/Control" unique_id=1985021271 instance=ExtResource("12_a6mmc")]
+position = Vector2(810, 1044)
+
+[node name="Control2" type="Control" parent="PoisonWaters" unique_id=1047754892]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="PoisonWater" parent="PoisonWaters/Control2" unique_id=1584553583 instance=ExtResource("12_a6mmc")]
+position = Vector2(2052, 1152)
+
+[node name="PoisonWater2" parent="PoisonWaters/Control2" unique_id=915542895 instance=ExtResource("12_a6mmc")]
+position = Vector2(2106, 1152)
+
+[node name="PoisonWater3" parent="PoisonWaters/Control2" unique_id=1567239233 instance=ExtResource("12_a6mmc")]
+position = Vector2(2160, 1152)
+
+[node name="PoisonWater4" parent="PoisonWaters/Control2" unique_id=1389022795 instance=ExtResource("12_a6mmc")]
+position = Vector2(2214, 1152)
+
+[node name="PoisonWater5" parent="PoisonWaters/Control2" unique_id=2030496538 instance=ExtResource("12_a6mmc")]
+position = Vector2(2268, 1152)
+
+[node name="PoisonWater6" parent="PoisonWaters/Control2" unique_id=1322397159 instance=ExtResource("12_a6mmc")]
+position = Vector2(2322, 1152)
+
+[node name="PoisonWater7" parent="PoisonWaters/Control2" unique_id=1130355607 instance=ExtResource("12_a6mmc")]
+position = Vector2(2376, 1152)
+
+[node name="PoisonWater8" parent="PoisonWaters/Control2" unique_id=1337785612 instance=ExtResource("12_a6mmc")]
+position = Vector2(1998, 1152)
+
+[node name="PoisonWater9" parent="PoisonWaters/Control2" unique_id=1741617599 instance=ExtResource("12_a6mmc")]
+position = Vector2(2430, 1152)
+
+[node name="PoisonWater10" parent="PoisonWaters/Control2" unique_id=1137744929 instance=ExtResource("12_a6mmc")]
+position = Vector2(2484, 1152)
+
+[node name="Control3" type="Control" parent="PoisonWaters" unique_id=313417771]
+anchors_preset = 0
+offset_left = 1890.0
+offset_top = 108.0
+offset_right = 1930.0
+offset_bottom = 148.0
+
+[node name="PoisonWater2" parent="PoisonWaters/Control3" unique_id=1802285626 instance=ExtResource("12_a6mmc")]
+position = Vector2(702, 1044)
+
+[node name="PoisonWater3" parent="PoisonWaters/Control3" unique_id=1373270024 instance=ExtResource("12_a6mmc")]
+position = Vector2(756, 1044)
+
+[node name="PoisonWater4" parent="PoisonWaters/Control3" unique_id=2060240294 instance=ExtResource("12_a6mmc")]
+position = Vector2(810, 1044)
+
+[node name="PoisonWater" parent="PoisonWaters/Control3" unique_id=1661527026 instance=ExtResource("12_a6mmc")]
+position = Vector2(864, 1044)
+
+[node name="PoisonWater5" parent="PoisonWaters/Control3" unique_id=1362158772 instance=ExtResource("12_a6mmc")]
+position = Vector2(918, 1044)
+
+[node name="PoisonWater6" parent="PoisonWaters/Control3" unique_id=1737569737 instance=ExtResource("12_a6mmc")]
+position = Vector2(972, 1044)
+
+[node name="PoisonWater7" parent="PoisonWaters/Control3" unique_id=1441380537 instance=ExtResource("12_a6mmc")]
+position = Vector2(1026, 1044)
+
+[node name="PoisonWater8" parent="PoisonWaters/Control3" unique_id=187572892 instance=ExtResource("12_a6mmc")]
+position = Vector2(1080, 1044)
+
+[node name="PoisonWater9" parent="PoisonWaters/Control3" unique_id=890270176 instance=ExtResource("12_a6mmc")]
+position = Vector2(1134, 1044)
+
+[node name="PoisonWater10" parent="PoisonWaters/Control3" unique_id=559047940 instance=ExtResource("12_a6mmc")]
+position = Vector2(1188, 1044)
+
+[node name="Control4" type="Control" parent="PoisonWaters" unique_id=1911715344]
+anchors_preset = 0
+offset_left = 3672.0
+offset_top = 108.0
+offset_right = 3712.0
+offset_bottom = 148.0
+
+[node name="PoisonWater2" parent="PoisonWaters/Control4" unique_id=551065658 instance=ExtResource("12_a6mmc")]
+position = Vector2(702, 1044)
+
+[node name="PoisonWater3" parent="PoisonWaters/Control4" unique_id=696420138 instance=ExtResource("12_a6mmc")]
+position = Vector2(756, 1044)
+
+[node name="PoisonWater4" parent="PoisonWaters/Control4" unique_id=181075893 instance=ExtResource("12_a6mmc")]
+position = Vector2(810, 1044)
+
+[node name="PoisonWater" parent="PoisonWaters/Control4" unique_id=241013683 instance=ExtResource("12_a6mmc")]
+position = Vector2(864, 1044)
+
+[node name="PoisonWater5" parent="PoisonWaters/Control4" unique_id=629779093 instance=ExtResource("12_a6mmc")]
+position = Vector2(918, 1044)
+
+[node name="PoisonWater6" parent="PoisonWaters/Control4" unique_id=503260161 instance=ExtResource("12_a6mmc")]
+position = Vector2(972, 1044)
+
+[node name="PoisonWater7" parent="PoisonWaters/Control4" unique_id=877588324 instance=ExtResource("12_a6mmc")]
+position = Vector2(1026, 1044)
+
+[node name="PoisonWater8" parent="PoisonWaters/Control4" unique_id=2584700 instance=ExtResource("12_a6mmc")]
+position = Vector2(1080, 1044)
+
+[node name="PoisonWater9" parent="PoisonWaters/Control4" unique_id=815113223 instance=ExtResource("12_a6mmc")]
+position = Vector2(1134, 1044)
+
+[node name="PoisonWater10" parent="PoisonWaters/Control4" unique_id=307514978 instance=ExtResource("12_a6mmc")]
+position = Vector2(1188, 1044)
+
+[node name="PoisonWater11" parent="PoisonWaters/Control4" unique_id=1193176302 instance=ExtResource("12_a6mmc")]
+position = Vector2(1242, 1044)
+
+[node name="PoisonWater12" parent="PoisonWaters/Control4" unique_id=945096097 instance=ExtResource("12_a6mmc")]
+position = Vector2(1296, 1044)
+
+[node name="PoisonWater13" parent="PoisonWaters/Control4" unique_id=1022304318 instance=ExtResource("12_a6mmc")]
+position = Vector2(1350, 1044)
+
+[node name="PoisonWater14" parent="PoisonWaters/Control4" unique_id=1616490575 instance=ExtResource("12_a6mmc")]
+position = Vector2(1404, 1044)
+
+[node name="PoisonWater15" parent="PoisonWaters/Control4" unique_id=207099952 instance=ExtResource("12_a6mmc")]
+position = Vector2(1458, 1044)
+
+[node name="PoisonWater16" parent="PoisonWaters/Control4" unique_id=944590560 instance=ExtResource("12_a6mmc")]
+position = Vector2(1512, 1044)
+
+[node name="PoisonWater17" parent="PoisonWaters/Control4" unique_id=1036354713 instance=ExtResource("12_a6mmc")]
+position = Vector2(1566, 1044)
+
+[node name="PoisonWater18" parent="PoisonWaters/Control4" unique_id=1208371380 instance=ExtResource("12_a6mmc")]
+position = Vector2(1620, 1044)
+
+[node name="PoisonWater19" parent="PoisonWaters/Control4" unique_id=208929096 instance=ExtResource("12_a6mmc")]
+position = Vector2(1674, 1044)
+
+[node name="PoisonWater20" parent="PoisonWaters/Control4" unique_id=1838754019 instance=ExtResource("12_a6mmc")]
+position = Vector2(1728, 1044)
+
+[node name="Walls" type="Control" parent="." unique_id=1198835820]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Control" type="Control" parent="Walls" unique_id=2085758008]
+anchors_preset = 0
+offset_left = 324.0
+offset_right = 364.0
+offset_bottom = 40.0
+
+[node name="StunWall" parent="Walls/Control" unique_id=1983975982 instance=ExtResource("13_0wykm")]
+position = Vector2(1350, 1098)
+
+[node name="StunWall2" parent="Walls/Control" unique_id=1844251890 instance=ExtResource("6_lu1w2")]
+position = Vector2(1350, 1044)
+
+[node name="StunWall3" parent="Walls/Control" unique_id=558695860 instance=ExtResource("7_76uo4")]
+position = Vector2(1350, 936)
+
+[node name="StunWall4" parent="Walls/Control" unique_id=329051932 instance=ExtResource("6_lu1w2")]
+position = Vector2(1350, 990)
+
+[node name="CheckPoint" type="Node2D" parent="." unique_id=127506614]
+
+[node name="DefaultSpawn" type="Marker2D" parent="CheckPoint" unique_id=1030490795]
+position = Vector2(200, 700)
+
+[node name="Checkpoint1" parent="CheckPoint" unique_id=2040896031 instance=ExtResource("7_lu1w2")]
+position = Vector2(2950, 572)
+
+[node name="Checkpoint2" parent="CheckPoint" unique_id=1947242909 instance=ExtResource("7_lu1w2")]
+position = Vector2(4850, 572)
+order = 1
+
+[node name="Checkpoint3" parent="CheckPoint" unique_id=612536947 instance=ExtResource("7_lu1w2")]
+position = Vector2(4980, 572)
+order = 2
+
+[node name="Checkpoint4" parent="CheckPoint" unique_id=1642562286 instance=ExtResource("7_lu1w2")]
+position = Vector2(6900, 572)
+order = 3
+
+[node name="Checkpoint5" parent="CheckPoint" unique_id=1055533333 instance=ExtResource("7_lu1w2")]
+position = Vector2(8500, 572)
+order = 4
+
+[node name="Player" parent="." unique_id=599316435 instance=ExtResource("5_0wykm")]
+position = Vector2(200, 882)
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=2036833008]
+position = Vector2(250, -150)
+
+[node name="RespawnManager" type="Node" parent="." unique_id=1582280486]
+script = ExtResource("6_i4uyd")
+player = NodePath("../Player")
+default_spawn = NodePath("../CheckPoint/DefaultSpawn")
+
+[node name="Mechanics" type="Control" parent="." unique_id=806435517]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Lever" type="Control" parent="Mechanics" unique_id=1804368111]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Jumpers" type="Control" parent="Mechanics" unique_id=862270025]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Jumper" parent="Mechanics/Jumpers" unique_id=168785947 instance=ExtResource("12_6xftg")]
+position = Vector2(4158, 1152)
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=353605347]
+
+[node name="Instructions" type="Label" parent="UILayer" unique_id=1418663214]
+offset_left = 40.0
+offset_top = 30.0
+offset_right = 1820.0
+offset_bottom = 230.0
+theme_override_font_sizes/font_size = 28
+text = "§1 灰盒关 · 自动向右滚，[空格]跳
+绿色=毒水，掉进去=死；保持小(别点鼠标)跳得更高更远
+挡路的墙：[左键]狂点变大撞碎 → 再松手缩小才跳得过后面的沟
+风口：保持小才被吹上去 → 跳台 → 落地狂点变大踩橙色按钮 → 出气泡过毒池
+死了从最近的绿旗检查点复活"
+
+[node name="Coins" type="Control" parent="." unique_id=1693724316]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="Coin" parent="Coins" unique_id=727505925 instance=ExtResource("13_6xftg")]
+position = Vector2(810, 882)
