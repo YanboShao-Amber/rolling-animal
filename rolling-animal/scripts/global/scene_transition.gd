@@ -84,6 +84,9 @@ func play_countdown() -> void:
 		await fade.finished
 	_countdown_label.visible = false
 	_countdown_active = false
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state and game_state.has_method("start_level_timer"):
+		game_state.start_level_timer()
 
 
 func _build_overlay() -> void:
