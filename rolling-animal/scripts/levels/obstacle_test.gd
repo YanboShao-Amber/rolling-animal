@@ -11,7 +11,6 @@ extends Control
 
 
 func _ready() -> void:
-	player.debug_label.visible = true          # 屏幕上看实时 SIZE
 	player.auto_forward_enabled = auto_forward
 	# 应用在角色选择界面选中的角色（与第 1 关 farm_level_test 一致）。
 	# 正常流程会先经过角色选择，这里据此替换主角贴图；直接运行本场景时保留场景自带的默认外观。

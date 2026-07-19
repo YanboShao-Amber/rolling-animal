@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://0f87ljrc6hby" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap.png" id="2_a6mmc"]
 [ext_resource type="PackedScene" path="res://scenes/backgrounds/snow_loop_background.tscn" id="2_c0shp"]
 [ext_resource type="Texture2D" uid="uid://c3pdkybc4rp7t" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="3_6xftg"]
-[ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_0wykm"]
+[ext_resource type="PackedScene" uid="uid://xqgflncscxga" path="res://scenes/player/player.tscn" id="5_0wykm"]
 [ext_resource type="PackedScene" uid="uid://ifvavgcqrwft" path="res://scenes/obstacle/factory/Notreachable.tscn" id="5_i4uyd"]
 [ext_resource type="Script" uid="uid://cvt2lscgpykpd" path="res://scripts/levels/respawn_manager.gd" id="6_i4uyd"]
 [ext_resource type="PackedScene" uid="uid://cwg1o1hco4u4y" path="res://scenes/obstacle/factory/StunWall_fac_2.tscn" id="6_lu1w2"]
@@ -51,8 +51,6 @@ texture_region_size = Vector2i(18, 18)
 13:0/0 = 0
 14:0/0 = 0
 15:0/0 = 0
-16:0/0 = 0
-17:0/0 = 0
 0:1/0 = 0
 0:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
 1:1/0 = 0
@@ -76,8 +74,6 @@ texture_region_size = Vector2i(18, 18)
 13:1/0 = 0
 14:1/0 = 0
 15:1/0 = 0
-16:1/0 = 0
-17:1/0 = 0
 0:2/0 = 0
 0:2/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
 1:2/0 = 0
@@ -98,8 +94,6 @@ texture_region_size = Vector2i(18, 18)
 13:2/0 = 0
 14:2/0 = 0
 15:2/0 = 0
-16:2/0 = 0
-17:2/0 = 0
 0:3/0 = 0
 0:3/0/physics_layer_0/polygon_0/points = PackedVector2Array(-6.7029743, -8, 8, -8, 8, 8, -8, 8)
 1:3/0 = 0
@@ -120,8 +114,6 @@ texture_region_size = Vector2i(18, 18)
 13:3/0 = 0
 14:3/0 = 0
 15:3/0 = 0
-16:3/0 = 0
-17:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
 2:4/0 = 0
@@ -138,8 +130,6 @@ texture_region_size = Vector2i(18, 18)
 13:4/0 = 0
 14:4/0 = 0
 15:4/0 = 0
-16:4/0 = 0
-17:4/0 = 0
 0:5/0 = 0
 1:5/0 = 0
 2:5/0 = 0
@@ -160,8 +150,6 @@ texture_region_size = Vector2i(18, 18)
 13:5/0 = 0
 14:5/0 = 0
 15:5/0 = 0
-16:5/0 = 0
-17:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
 1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, 9, -9, 9)
@@ -186,26 +174,6 @@ texture_region_size = Vector2i(18, 18)
 13:6/0 = 0
 14:6/0 = 0
 15:6/0 = 0
-16:6/0 = 0
-17:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-7:7/0 = 0
-8:7/0 = 0
-9:7/0 = 0
-10:7/0 = 0
-11:7/0 = 0
-12:7/0 = 0
-13:7/0 = 0
-14:7/0 = 0
-15:7/0 = 0
-16:7/0 = 0
-17:7/0 = 0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_i4uyd"]
 texture = ExtResource("3_6xftg")
@@ -362,8 +330,6 @@ texture_region_size = Vector2i(18, 18)
 13:0/0 = 0
 14:0/0 = 0
 15:0/0 = 0
-16:0/0 = 0
-17:0/0 = 0
 0:1/0 = 0
 1:1/0 = 0
 2:1/0 = 0
@@ -380,8 +346,6 @@ texture_region_size = Vector2i(18, 18)
 13:1/0 = 0
 14:1/0 = 0
 15:1/0 = 0
-16:1/0 = 0
-17:1/0 = 0
 0:2/0 = 0
 1:2/0 = 0
 2:2/0 = 0
@@ -398,8 +362,6 @@ texture_region_size = Vector2i(18, 18)
 13:2/0 = 0
 14:2/0 = 0
 15:2/0 = 0
-16:2/0 = 0
-17:2/0 = 0
 0:3/0 = 0
 1:3/0 = 0
 2:3/0 = 0
@@ -416,8 +378,6 @@ texture_region_size = Vector2i(18, 18)
 13:3/0 = 0
 14:3/0 = 0
 15:3/0 = 0
-16:3/0 = 0
-17:3/0 = 0
 0:4/0 = 0
 1:4/0 = 0
 2:4/0 = 0
@@ -434,8 +394,6 @@ texture_region_size = Vector2i(18, 18)
 13:4/0 = 0
 14:4/0 = 0
 15:4/0 = 0
-16:4/0 = 0
-17:4/0 = 0
 0:5/0 = 0
 1:5/0 = 0
 2:5/0 = 0
@@ -452,8 +410,6 @@ texture_region_size = Vector2i(18, 18)
 13:5/0 = 0
 14:5/0 = 0
 15:5/0 = 0
-16:5/0 = 0
-17:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
 2:6/0 = 0
@@ -470,26 +426,6 @@ texture_region_size = Vector2i(18, 18)
 13:6/0 = 0
 14:6/0 = 0
 15:6/0 = 0
-16:6/0 = 0
-17:6/0 = 0
-0:7/0 = 0
-1:7/0 = 0
-2:7/0 = 0
-3:7/0 = 0
-4:7/0 = 0
-5:7/0 = 0
-6:7/0 = 0
-7:7/0 = 0
-8:7/0 = 0
-9:7/0 = 0
-10:7/0 = 0
-11:7/0 = 0
-12:7/0 = 0
-13:7/0 = 0
-14:7/0 = 0
-15:7/0 = 0
-16:7/0 = 0
-17:7/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_khhxn"]
 tile_size = Vector2i(18, 18)
@@ -869,7 +805,7 @@ position = Vector2(1350, 936)
 position = Vector2(1350, 990)
 
 [node name="Player" parent="." unique_id=599316435 instance=ExtResource("5_0wykm")]
-position = Vector2(6156, 810)
+position = Vector2(-90, 1044)
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=2036833008]
 position = Vector2(250, -150)
@@ -940,7 +876,8 @@ target = NodePath("../Bubble")
 [node name="Bubble" parent="Mechanics/Button" unique_id=1157410344 instance=ExtResource("17_76uo4")]
 position = Vector2(7534, 1026)
 auto_detect_surface = true
-jump_boost = 1.5
+jump_boost = 1.6
+ascent_gravity_scale = 1.0
 
 [node name="Buff" type="Control" parent="Mechanics" unique_id=1320135140]
 anchors_preset = 0
@@ -967,20 +904,6 @@ offset_bottom = 40.0
 [node name="FanZone" parent="Mechanics/Fan" unique_id=1783351087 instance=ExtResource("18_b63pd")]
 position = Vector2(9720, 1210)
 scale = Vector2(0.83, 0.83)
-
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=353605347]
-
-[node name="Instructions" type="Label" parent="UILayer" unique_id=1418663214]
-offset_left = 40.0
-offset_top = 30.0
-offset_right = 1820.0
-offset_bottom = 230.0
-theme_override_font_sizes/font_size = 28
-text = "§1 灰盒关 · 自动向右滚，[空格]跳
-绿色=毒水，掉进去=死；保持小(别点鼠标)跳得更高更远
-挡路的墙：[左键]狂点变大撞碎 → 再松手缩小才跳得过后面的沟
-风口：保持小才被吹上去 → 跳台 → 落地狂点变大踩橙色按钮 → 出气泡过毒池
-死了从最近的绿旗检查点复活"
 
 [node name="Coins" type="Control" parent="." unique_id=1693724316]
 anchors_preset = 0
