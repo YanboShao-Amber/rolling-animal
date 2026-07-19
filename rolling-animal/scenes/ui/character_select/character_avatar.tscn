@@ -13,27 +13,7 @@ mouse_filter = 2
 pivot_offset = Vector2(66, 66)
 script = ExtResource("1_avatar")
 
-[node name="AvatarVisual" type="Control" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-pivot_offset = Vector2(66, 66)
-
-[node name="PortraitArea" type="Control" parent="AvatarVisual"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-pivot_offset = Vector2(66, 66)
-
-[node name="Portrait" type="TextureRect" parent="AvatarVisual/PortraitArea"]
+[node name="Portrait" type="TextureRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

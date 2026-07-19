@@ -1,0 +1,15 @@
+[gd_scene format=4]
+
+[ext_resource type="TileSet" path="res://resources/tilesets/loop_backgrounds_tileset.tres" id="1_2hvqr"]
+
+[node name="DesertLoopBackground" type="Parallax2D" unique_id=1131711806]
+scroll_scale = Vector2(0.18, 0.1)
+repeat_size = Vector2(432, 0)
+repeat_times = 8
+
+[node name="BackgroundLayer" type="TileMapLayer" parent="." unique_id=1118548674]
+z_index = -20
+texture_filter = 1
+scale = Vector2(9, 9)
+tile_map_data = PackedByteArray("AAAAAAAAAAAEAAAAAAAAAAEAAAAEAAEAAAAAAAIAAAAEAAIAAAABAAAAAAAFAAAAAAABAAEAAAAFAAEAAAABAAIAAAAFAAIAAAA=")
+tile_set = ExtResource("1_2hvqr")

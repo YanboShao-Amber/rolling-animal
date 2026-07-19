@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilemap/tilemap-backgrounds.png" id="1_texture"]
+
+[sub_resource type="AtlasTexture" id="Atlas_blue"]
+atlas = ExtResource("1_texture")
+region = Rect2(0, 0, 100, 74)
+
+[node name="FarmBackgroundBlue" type="Parallax2D"]
+scroll_scale = Vector2(0.15, 0.15)
+repeat_size = Vector2(600, 0)
+repeat_times = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(300, 222)
+scale = Vector2(6, 6)
+texture = SubResource("Atlas_blue")

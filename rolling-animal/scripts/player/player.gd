@@ -9,8 +9,8 @@ const BASE_RADIUS := 64.0
 
 @export_category("Size")
 @export_range(0.4, 2.0, 0.01) var default_size_scale := 0.8
-@export_range(0.4, 1.0, 0.01) var minimum_size_scale := 0.5 
-@export_range(1.0, 3.0, 0.01) var maximum_size_scale := 2.0
+@export_range(0.3, 1.0, 0.01) var minimum_size_scale := 0.4
+@export_range(1.0, 3.0, 0.01) var maximum_size_scale := 1.45
 @export_range(0.01, 0.3, 0.01) var growth_per_click := 0.075
 @export_range(0.1, 3.0, 0.01) var growth_per_second_held := 0.9
 @export_range(1.0, 4.0, 0.1) var rapid_click_multiplier := 2.4
@@ -19,17 +19,22 @@ const BASE_RADIUS := 64.0
 @export_range(0.01, 1.0, 0.01) var shrink_speed := 0.7
 
 @export_category("Jump")
-@export var gravity := 3200.0
-@export var jump_velocity := -1250.0
+@export var gravity := 5000.0
+@export var jump_velocity := -1300.0
 @export_range(1, 10, 1) var maximum_jump_count := 1
+
+@export_group("Jump Forgiveness")
+@export_range(0.0, 0.5, 0.01) var jump_buffer_duration := 0.15
+@export_range(0.0, 0.5, 0.01) var coyote_duration := 0.10
+@export_range(0.0, 0.2, 0.01) var auto_jump_retrigger_delay := 0.03
 
 @export_category("Forward Movement")
 @export var auto_forward_enabled := false
-@export var base_forward_speed := 350.0
-@export var minimum_forward_speed := 400.0
-@export var maximum_forward_speed := 450.0
+@export var base_forward_speed := 330.0
+@export var minimum_forward_speed := 350.0
+@export var maximum_forward_speed := 430.0
 @export var size_speed_exponent := 0.75
-@export var forward_acceleration := 600.0
+@export var forward_acceleration := 1200.0
 
 @onready var size_root: Node2D = $SizeRoot
 @onready var growth_pulse_root: Node2D = $SizeRoot/GrowthPulseRoot
@@ -48,9 +53,14 @@ var _time_since_click := 999.0
 var _last_click_time := -10.0
 var _deform_tween: Tween
 var _growth_pulse_tween: Tween
+var _damage_flash_tween: Tween
 var _was_on_floor := false
 var _ground_bounce_phase := 0.0
 var _is_holding_growth := false
+var jump_buffer_timer := 0.0
+var coyote_timer := 0.0
+var auto_jump_cooldown_timer := 0.0
+var jump_started_this_frame := false
 
 
 func _ready() -> void:
@@ -78,17 +88,7 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 
-# 判断玩家是否有跳跃意图：
-	# 如果在地上，只要“按住”空格（pressed）就算有跳跃意图，可以实现落地自动连跳（上楼梯也会一级一级直接跳）。
-	# 如果在空中，必须是“刚按下”空格（just_pressed），防止一瞬间把多段跳的次数全用完。
-	var wants_to_jump := false
-	if is_on_floor():
-		wants_to_jump = Input.is_action_pressed("player_jump")
-	else:
-		wants_to_jump = Input.is_action_just_pressed("player_jump")
-
-	if wants_to_jump:
-		_start_jump()
+	_update_jump_forgiveness(delta)
 
 	_was_on_floor = is_on_floor()
 	var previous_x := global_position.x
@@ -101,6 +101,54 @@ func _physics_process(delta: float) -> void:
 		landed.emit()
 	elif not _is_deform_tween_active():
 		_update_motion_deform(delta, moved_distance_x)
+
+
+func _update_jump_forgiveness(delta: float) -> void:
+	jump_started_this_frame = false
+	jump_buffer_timer = maxf(jump_buffer_timer - delta, 0.0)
+	auto_jump_cooldown_timer = maxf(auto_jump_cooldown_timer - delta, 0.0)
+
+	if is_on_floor():
+		coyote_timer = coyote_duration
+
+	# Only a new press fills the buffer; holding does not refresh it forever.
+	if Input.is_action_just_pressed("player_jump"):
+		jump_buffer_timer = jump_buffer_duration
+
+	if jump_buffer_timer > 0.0 and (is_on_floor() or coyote_timer > 0.0):
+		if _try_start_jump():
+			return
+
+	# Preserve automatic repeated jumping while Space remains held.
+	if Input.is_action_pressed("player_jump") and is_on_floor() \
+			and auto_jump_cooldown_timer <= 0.0:
+		_try_start_jump()
+
+	# Consume the current air frame after checking input, so the configured
+	# 0.10 seconds is not shortened by one physics tick.
+	if not is_on_floor():
+		coyote_timer = maxf(coyote_timer - delta, 0.0)
+
+
+func _try_start_jump() -> bool:
+	if jump_started_this_frame:
+		return false
+	if _get_size_weight() >= 1.0:
+		_clear_jump_requests()
+		auto_jump_cooldown_timer = auto_jump_retrigger_delay
+		return false
+	if not _start_jump():
+		return false
+
+	jump_started_this_frame = true
+	jump_buffer_timer = 0.0
+	coyote_timer = 0.0
+	auto_jump_cooldown_timer = auto_jump_retrigger_delay
+	return true
+
+
+func _clear_jump_requests() -> void:
+	jump_buffer_timer = 0.0
 
 
 func _process(delta: float) -> void:
@@ -182,26 +230,22 @@ func _play_growth_pulse() -> void:
 	_growth_pulse_tween.tween_property(growth_pulse_root, "scale", Vector2.ONE, 0.12)
 
 
-func _start_jump() -> void:
+func _start_jump() -> bool:
 	if jump_count >= maximum_jump_count:
-		return
-		
-	# 获取当前体型的权重（0.0 表示最小体型，1.0 表示最大体型）
+		return false
+
+	# Farm 的连续平台以 54px 为一格。限制体积带来的力度差距，
+	# 避免高速小体积一次越过太多平台。
 	var size_weight := _get_size_weight()
-	
-	# 如果玩家达到了最大体型，则完全无法跳跃
 	if size_weight >= 1.0:
-		return
-		
+		return false
+	var jump_strength := lerpf(0.75, 0.35, size_weight)
+	velocity.y = jump_velocity * jump_strength
 	jump_count += 1
-	
-	# 根据起跳瞬间的体型动态计算跳跃力度
-	# size_weight 为 0.0 时，力度为 jump_velocity (最高)
-	# size_weight 接近 1.0 时，力度趋近于 0.0 (跳不起来)
-	velocity.y = lerpf(jump_velocity, 0.0, size_weight)
-	
+
 	_play_jump_deform()
 	jumped.emit()
+	return true
 
 
 func _play_jump_deform() -> void:
@@ -270,10 +314,6 @@ func _update_motion_deform(delta: float, moved_distance_x: float) -> void:
 
 
 func _get_size_weight() -> float:
-	# 增加除零保护：如果最大值和最小值相等（例如被蘑菇锁定为 0.2 时），直接返回 0.0 权重
-	if is_equal_approx(minimum_size_scale, maximum_size_scale):
-		return 0.0
-		
 	return inverse_lerp(minimum_size_scale, maximum_size_scale, current_size_scale)
 
 
@@ -299,11 +339,15 @@ func _update_size_visual() -> void:
 
 func _update_debug_label() -> void:
 	if debug_label.visible:
-		debug_label.text = "SIZE %.2f\nCLICK %.1f / s\nJUMPS %d / %d" % [
+		debug_label.text = "SIZE %.2f\nCLICK %.1f / s\nJUMPS %d / %d\nON FLOOR %s\nCOYOTE %.3f\nBUFFER %.3f\nJUMPED NOW %s" % [
 			current_size_scale,
 			click_frequency,
 			jump_count,
 			maximum_jump_count,
+			str(is_on_floor()).to_upper(),
+			coyote_timer,
+			jump_buffer_timer,
+			str(jump_started_this_frame).to_upper(),
 		]
 
 
@@ -311,6 +355,15 @@ func setup_character(character_data: Dictionary) -> void:
 	var portrait_path: String = character_data.get("portrait_path", "")
 	if not portrait_path.is_empty():
 		player_sprite.texture = load(portrait_path)
+
+
+func play_damage_flash() -> void:
+	if _damage_flash_tween and _damage_flash_tween.is_valid():
+		_damage_flash_tween.kill()
+	player_sprite.modulate = Color.WHITE
+	_damage_flash_tween = create_tween()
+	_damage_flash_tween.tween_property(player_sprite, "modulate", Color(1.0, 0.18, 0.18, 1.0), 0.06)
+	_damage_flash_tween.tween_property(player_sprite, "modulate", Color.WHITE, 0.10)
 
 
 func reset_size() -> void:
@@ -327,10 +380,15 @@ func reset_motion_visuals() -> void:
 	_kill_deform_tween()
 	velocity = Vector2.ZERO
 	jump_count = 0
+	jump_buffer_timer = 0.0
+	coyote_timer = 0.0
+	auto_jump_cooldown_timer = 0.0
+	jump_started_this_frame = false
 	_ground_bounce_phase = 0.0
 	roll_visual_root.rotation = 0.0
 	growth_pulse_root.scale = Vector2.ONE
 	jump_deform_root.scale = Vector2.ONE
+	player_sprite.modulate = Color.WHITE
 
 
 func get_current_size_scale() -> float:

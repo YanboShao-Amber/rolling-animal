@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Texture2D" path="res://assets/tilemap/farm.png" id="1_farm"]
+[ext_resource type="Script" path="res://scripts/obstacles/farm_falling_column.gd" id="2_script"]
+
+[sub_resource type="AtlasTexture" id="Atlas_column"]
+atlas = ExtResource("1_farm")
+region = Rect2(108, 90, 18, 18)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape_column"]
+size = Vector2(50, 270)
+
+[node name="FarmFallingColumn" type="StaticBody2D" groups=["stun_fail_obstacles"]]
+script = ExtResource("2_script")
+
+[node name="Tiles" type="Node2D" parent="."]
+
+[node name="Tile1" type="Sprite2D" parent="Tiles"]
+texture_filter = 1
+position = Vector2(0, -27)
+scale = Vector2(3, 3)
+texture = SubResource("Atlas_column")
+[node name="Tile2" type="Sprite2D" parent="Tiles"]
+texture_filter = 1
+position = Vector2(0, -81)
+scale = Vector2(3, 3)
+texture = SubResource("Atlas_column")
+[node name="Tile3" type="Sprite2D" parent="Tiles"]
+texture_filter = 1
+position = Vector2(0, -135)
+scale = Vector2(3, 3)
+texture = SubResource("Atlas_column")
+[node name="Tile4" type="Sprite2D" parent="Tiles"]
+texture_filter = 1
+position = Vector2(0, -189)
+scale = Vector2(3, 3)
+texture = SubResource("Atlas_column")
+[node name="Tile5" type="Sprite2D" parent="Tiles"]
+texture_filter = 1
+position = Vector2(0, -243)
+scale = Vector2(3, 3)
+texture = SubResource("Atlas_column")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -135)
+shape = SubResource("RectangleShape_column")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+collision_layer = 0
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea"]
+position = Vector2(-32, -135)
+shape = SubResource("RectangleShape_column")

@@ -1,9 +1,7 @@
 class_name CharacterAvatar
 extends Control
 
-@onready var avatar_visual: Control = $AvatarVisual
-@onready var portrait_area: Control = $AvatarVisual/PortraitArea
-@onready var portrait: TextureRect = $AvatarVisual/PortraitArea/Portrait
+@onready var portrait: TextureRect = $Portrait
 
 var character_data: Dictionary = {}
 var carousel_slot := 0
@@ -12,8 +10,6 @@ var carousel_slot := 0
 func setup(data: Dictionary) -> void:
 	character_data = data
 	portrait.texture = load(data["portrait_path"])
-	var portrait_zoom: float = data.get("portrait_zoom", 1.0)
-	portrait_area.scale = Vector2.ONE * portrait_zoom
 	tooltip_text = data["display_name"]
 
 
