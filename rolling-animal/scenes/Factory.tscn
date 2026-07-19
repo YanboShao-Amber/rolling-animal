@@ -2,16 +2,18 @@
 
 [ext_resource type="Script" uid="uid://cpnigjxgxdfxo" path="res://scripts/levels/obstacle_test.gd" id="1_suhr0"]
 [ext_resource type="Texture2D" uid="uid://0f87ljrc6hby" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap.png" id="2_a6mmc"]
-[ext_resource type="PackedScene" path="res://scenes/obstacle/original/PoisonWater.tscn" id="2_ecbh7"]
 [ext_resource type="Texture2D" uid="uid://c3pdkybc4rp7t" path="res://assets/original/kenney_pixel-platformer-industrial-expansion/Tilemap/tilemap_packed.png" id="3_6xftg"]
-[ext_resource type="PackedScene" uid="uid://deedcwv6amchy" path="res://scenes/obstacle/original/breakable obstacle.tscn" id="3_a6mmc"]
 [ext_resource type="PackedScene" path="res://scenes/player/player.tscn" id="5_0wykm"]
 [ext_resource type="Script" uid="uid://cvt2lscgpykpd" path="res://scripts/levels/respawn_manager.gd" id="6_i4uyd"]
+[ext_resource type="PackedScene" uid="uid://cwg1o1hco4u4y" path="res://scenes/obstacle/factory/StunWall_fac_2.tscn" id="6_lu1w2"]
+[ext_resource type="PackedScene" uid="uid://c5k4fpgc71hn8" path="res://scenes/obstacle/factory/StunWall_fac_3.tscn" id="7_76uo4"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/Checkpoint.tscn" id="7_lu1w2"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/FanZone.tscn" id="8_76uo4"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/WeightButton.tscn" id="9_tjdhg"]
 [ext_resource type="PackedScene" path="res://scenes/obstacle/original/Bubble.tscn" id="10_b63pd"]
 [ext_resource type="PackedScene" uid="uid://cwm2ekb1sg6nk" path="res://scenes/obstacle/factory/PoisonWater_fac.tscn" id="12_a6mmc"]
+[ext_resource type="PackedScene" uid="uid://b0nt5uqj4vchw" path="res://scenes/obstacle/factory/StunWall_fac_1.tscn" id="13_0wykm"]
+[ext_resource type="PackedScene" uid="uid://xiiwklto21k" path="res://scenes/collectibles/coin.tscn" id="13_6xftg"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0wykm"]
 texture = ExtResource("2_a6mmc")
@@ -149,6 +151,7 @@ texture_region_size = Vector2i(18, 18)
 17:5/0 = 0
 0:6/0 = 0
 1:6/0 = 0
+1:6/0/physics_layer_0/polygon_0/points = PackedVector2Array(-9, -9, 9, 9, -9, 9)
 2:6/0 = 0
 3:6/0 = 0
 4:6/0 = 0
@@ -319,30 +322,6 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_0wykm")
 sources/1 = SubResource("TileSetAtlasSource_i4uyd")
 
-[sub_resource type="RectangleShape2D" id="RS_768"]
-size = Vector2(768, 200)
-
-[sub_resource type="RectangleShape2D" id="RS_512"]
-size = Vector2(512, 200)
-
-[sub_resource type="RectangleShape2D" id="RS_896"]
-size = Vector2(896, 200)
-
-[sub_resource type="RectangleShape2D" id="RS_640"]
-size = Vector2(640, 200)
-
-[sub_resource type="RectangleShape2D" id="RS_384"]
-size = Vector2(384, 200)
-
-[sub_resource type="RectangleShape2D" id="RS_CEIL"]
-size = Vector2(288, 61)
-
-[sub_resource type="RectangleShape2D" id="RS_PLAT"]
-size = Vector2(170, 48)
-
-[sub_resource type="RectangleShape2D" id="RS_ELEV"]
-size = Vector2(576, 48)
-
 [node name="Stage1" type="Control" unique_id=1899916940]
 layout_mode = 3
 anchors_preset = 0
@@ -350,9 +329,9 @@ script = ExtResource("1_suhr0")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1375026757]
 texture_filter = 1
-position = Vector2(0, 18)
-scale = Vector2(6, 6)
-tile_map_data = PackedByteArray("AAAAAAoAAAABAAIAAAABAAoAAAACAAIAAAACAAoAAAACAAIAAAADAAoAAAACAAIAAAAEAAoAAAACAAIAAAAFAAoAAAACAAIAAAAGAAoAAAACAAIAAAAHAAoAAAADAAIAAAAAAAsAAAABAAIAAAABAAsAAAACAAIAAAACAAsAAAACAAIAAAADAAsAAAACAAIAAAAEAAsAAAACAAIAAAAFAAsAAAACAAIAAAAGAAsAAAACAAIAAAAHAAsAAAADAAIAAAAHAAkAAAADAAIAAAAGAAkAAAACAAIAAAAFAAkAAAACAAIAAAAEAAkAAAACAAIAAAAEAAgAAAACAAEAAAADAAgAAAACAAEAAAACAAgAAAACAAEAAAABAAgAAAACAAEAAAABAAkAAAACAAIAAAACAAkAAAACAAIAAAADAAkAAAACAAIAAAAFAAgAAAACAAEAAAAGAAgAAAACAAEAAAAHAAgAAAADAAEAAAAAAAgAAAABAAEAAAAAAAkAAAABAAIAAAAKAAgAAAACAAEAAAALAAgAAAACAAEAAAAMAAgAAAADAAEAAAAJAAgAAAABAAEAAAAIAAkAAAANAAIAAAAIAAoAAAANAAIAAAAIAAsAAAANAAIAAAAJAAkAAAABAAIAAAAJAAoAAAABAAIAAAAJAAsAAAABAAIAAAAKAAkAAAACAAIAAAALAAkAAAACAAIAAAALAAoAAAACAAIAAAALAAsAAAACAAIAAAAKAAsAAAACAAIAAAAKAAoAAAACAAIAAAAMAAkAAAADAAIAAAAMAAoAAAADAAIAAAAMAAsAAAADAAIAAAAOAAYAAAAFAAAAAAANAAYAAAAEAAAAAAAPAAYAAAAGAAAAAAANAAkAAAANAAIAAAANAAoAAAANAAIAAAANAAsAAAANAAIAAAAOAAkAAAANAAIAAAAOAAoAAAANAAIAAAAOAAsAAAANAAIAAAAPAAkAAAANAAIAAAAPAAoAAAANAAIAAAAPAAsAAAANAAIAAAA=")
+position = Vector2(0, 612)
+scale = Vector2(3, 3)
+tile_map_data = PackedByteArray("AAAAAAoAAAABAAIAAAABAAoAAAACAAIAAAACAAoAAAACAAIAAAADAAoAAAACAAIAAAAEAAoAAAACAAIAAAAFAAoAAAACAAIAAAAGAAoAAAACAAIAAAAHAAoAAAADAAIAAAAAAAsAAAABAAIAAAABAAsAAAACAAIAAAACAAsAAAACAAIAAAADAAsAAAACAAIAAAAEAAsAAAACAAIAAAAFAAsAAAACAAIAAAAGAAsAAAACAAIAAAAHAAsAAAADAAIAAAAHAAkAAAADAAIAAAAGAAkAAAACAAIAAAAFAAkAAAACAAIAAAAEAAkAAAACAAIAAAAEAAgAAAACAAEAAAADAAgAAAACAAEAAAACAAgAAAACAAEAAAABAAgAAAACAAEAAAABAAkAAAACAAIAAAACAAkAAAACAAIAAAADAAkAAAACAAIAAAAFAAgAAAACAAEAAAAGAAgAAAACAAEAAAAHAAgAAAADAAEAAAAAAAgAAAABAAEAAAAAAAkAAAABAAIAAAAJAAgAAAABAAEAAAAIAAkAAAANAAIAAAAIAAoAAAANAAIAAAAIAAsAAAANAAIAAAAJAAkAAAABAAIAAAAJAAoAAAABAAIAAAAJAAsAAAABAAIAAAAOAAYAAAAFAAAAAAANAAYAAAAEAAAAAAAPAAYAAAAGAAAAAAAMAAgAAAACAAEAAAAMAAkAAAACAAIAAAAMAAoAAAACAAIAAAAMAAsAAAACAAIAAAANAAkAAAACAAIAAAANAAoAAAACAAIAAAANAAsAAAACAAIAAAAOAAkAAAADAAIAAAAOAAoAAAADAAIAAAAOAAsAAAADAAIAAAAPAAkAAAANAAIAAAAPAAoAAAANAAIAAAAPAAsAAAANAAIAAAAQAAkAAAANAAIAAAAQAAoAAAANAAIAAAAQAAsAAAANAAIAAAARAAkAAAANAAIAAAARAAoAAAANAAIAAAARAAsAAAANAAIAAAASAAgAAAABAAEAAAASAAkAAAABAAIAAAASAAoAAAABAAIAAAASAAsAAAABAAIAAAATAAgAAAACAAEAAAATAAkAAAACAAIAAAATAAoAAAACAAIAAAAUAAkAAAACAAIAAAAUAAoAAAACAAIAAAAVAAoAAAACAAIAAAAWAAoAAAACAAEAAAANAAgAAAACAAEAAAAOAAgAAAADAAEAAAATAAsAAAACAAIAAAAUAAgAAAACAAEAAAAUAAsAAAACAAIAAAAVAAgAAAABAAYAAAAVAAkAAAACAAEAAAAXAAoAAAACAAEAAAAYAAoAAAACAAEAAAAKAAgAAAACAAEAAAAKAAkAAAACAAIAAAAKAAoAAAACAAIAAAAKAAsAAAACAAIAAAALAAgAAAACAAEAAAALAAkAAAACAAIAAAALAAoAAAACAAIAAAALAAsAAAACAAIAAAAWAAkAAAABAAYAAAAAAAwAAAACAAIAAAABAAwAAAACAAIAAAACAAwAAAACAAIAAAADAAwAAAACAAIAAAAEAAwAAAACAAIAAAAFAAwAAAACAAIAAAAGAAwAAAACAAIAAAAHAAwAAAACAAIAAAAIAAwAAAACAAIAAAAJAAwAAAACAAIAAAAKAAwAAAACAAIAAAALAAwAAAACAAIAAAAMAAwAAAACAAIAAAANAAwAAAACAAIAAAAOAAwAAAACAAIAAAAPAAwAAAACAAIAAAAQAAwAAAACAAIAAAARAAwAAAACAAIAAAASAAwAAAACAAIAAAATAAwAAAACAAIAAAAUAAwAAAACAAIAAAAVAAwAAAACAAIAAAAWAAwAAAACAAIAAAAXAAwAAAACAAIAAAAYAAwAAAACAAIAAAAZAAwAAAACAAIAAAAaAAwAAAACAAIAAAAbAAwAAAACAAIAAAAVAAsAAAACAAIAAAAWAAsAAAACAAIAAAAXAAsAAAACAAIAAAAYAAsAAAACAAIAAAAZAAsAAAACAAIAAAAaAAsAAAACAAIAAAAbAAsAAAACAAIAAAAcAAsAAAACAAIAAAAZAAoAAAACAAEAAAAaAAoAAAACAAEAAAAbAAoAAAACAAEAAAAcAAoAAAACAAEAAAAdAAoAAAACAAEAAAAdAAsAAAACAAIAAAAdAAwAAAACAAIAAAAeAAoAAAACAAEAAAAeAAsAAAACAAIAAAAeAAwAAAACAAIAAAAfAAoAAAACAAEAAAAfAAsAAAACAAIAAAAfAAwAAAACAAIAAAAgAAoAAAACAAEAAAAgAAsAAAACAAIAAAAgAAwAAAACAAIAAAAcAAwAAAACAAIAAAAhAAoAAAACAAEAAAAhAAsAAAACAAIAAAAhAAwAAAACAAIAAAAiAAoAAAACAAEAAAAiAAsAAAACAAIAAAAiAAwAAAACAAIAAAAjAAoAAAACAAEAAAAjAAsAAAACAAIAAAAjAAwAAAACAAIAAAAkAAoAAAACAAEAAAAkAAsAAAACAAIAAAAkAAwAAAACAAIAAAAlAAoAAAANAAAAAAAlAAsAAAANAAIAAAAlAAwAAAANAAIAAAAnAAgAAAAEAAAAAAAoAAgAAAAGAAAAAAAqAAcAAAAEAAAAAAArAAcAAAAGAAAAAAAkAAkAAAAEAAAAAAAlAAkAAAAGAAAAAAAmAAwAAAANAAIAAAAnAAwAAAANAAIAAAAnAAsAAAANAAIAAAAmAAsAAAANAAIAAAAoAAsAAAANAAIAAAApAAsAAAANAAIAAAAqAAsAAAANAAIAAAArAAsAAAANAAIAAAAsAAsAAAANAAIAAAApAAwAAAANAAIAAAAoAAwAAAANAAIAAAAqAAwAAAANAAIAAAArAAwAAAANAAIAAAAsAAwAAAANAAIAAAAtAAYAAAAEAAAAAAAuAAYAAAAGAAAAAAAtAAsAAAANAAIAAAAuAAsAAAANAAIAAAAuAAwAAAANAAIAAAAtAAwAAAANAAIAAAAvAAwAAAABAAIAAAAvAAsAAAABAAIAAAAvAAoAAAABAAIAAAAvAAkAAAABAAIAAAAvAAgAAAABAAIAAAAvAAcAAAABAAIAAAAvAAYAAAABAAIAAAAvAAUAAAABAAEAAAAwAAUAAAACAAEAAAAxAAUAAAACAAEAAAAyAAUAAAACAAEAAAAzAAUAAAACAAEAAAA=")
 tile_set = SubResource("TileSet_s1fef")
 
 [node name="PoisonWaters" type="Control" parent="." unique_id=251059163]
@@ -361,219 +340,80 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="PoisonWater" parent="PoisonWaters" unique_id=819648958 instance=ExtResource("12_a6mmc")]
-position = Vector2(864, 882)
+position = Vector2(432, 1044)
 
-[node name="PoisonWater2" parent="PoisonWaters" unique_id=111896932 instance=ExtResource("12_a6mmc")]
-position = Vector2(1404, 882)
+[node name="Control" type="Control" parent="PoisonWaters" unique_id=1648704784]
+anchors_preset = 0
+offset_left = 108.0
+offset_right = 148.0
+offset_bottom = 40.0
 
-[node name="PoisonWater3" parent="PoisonWaters" unique_id=257796773 instance=ExtResource("12_a6mmc")]
-position = Vector2(1512, 882)
+[node name="PoisonWater2" parent="PoisonWaters/Control" unique_id=111896932 instance=ExtResource("12_a6mmc")]
+position = Vector2(702, 1044)
 
-[node name="PoisonWater4" parent="PoisonWaters" unique_id=1985021271 instance=ExtResource("12_a6mmc")]
-position = Vector2(1620, 882)
+[node name="PoisonWater3" parent="PoisonWaters/Control" unique_id=257796773 instance=ExtResource("12_a6mmc")]
+position = Vector2(756, 1044)
 
-[node name="Terrain" type="StaticBody2D" parent="." unique_id=1475726757]
-visible = false
-position = Vector2(5, 196)
+[node name="PoisonWater4" parent="PoisonWaters/Control" unique_id=1985021271 instance=ExtResource("12_a6mmc")]
+position = Vector2(810, 1044)
 
-[node name="Col_S1" type="CollisionShape2D" parent="Terrain" unique_id=1985493732]
-position = Vector2(384, 800)
-shape = SubResource("RS_768")
+[node name="Control2" type="Control" parent="PoisonWaters" unique_id=1047754892]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Col_S2" type="CollisionShape2D" parent="Terrain" unique_id=501270929]
-position = Vector2(1152, 800)
-shape = SubResource("RS_512")
+[node name="PoisonWater" parent="PoisonWaters/Control2" unique_id=1584553583 instance=ExtResource("12_a6mmc")]
+position = Vector2(2052, 1152)
 
-[node name="Col_S3" type="CollisionShape2D" parent="Terrain" unique_id=1172138993]
-position = Vector2(2112, 800)
-shape = SubResource("RS_896")
+[node name="PoisonWater2" parent="PoisonWaters/Control2" unique_id=915542895 instance=ExtResource("12_a6mmc")]
+position = Vector2(2106, 1152)
 
-[node name="Col_S4" type="CollisionShape2D" parent="Terrain" unique_id=546627418]
-position = Vector2(3136, 800)
-shape = SubResource("RS_640")
+[node name="PoisonWater3" parent="PoisonWaters/Control2" unique_id=1567239233 instance=ExtResource("12_a6mmc")]
+position = Vector2(2160, 1152)
 
-[node name="Col_S5" type="CollisionShape2D" parent="Terrain" unique_id=735776670]
-position = Vector2(3968, 800)
-shape = SubResource("RS_512")
+[node name="PoisonWater4" parent="PoisonWaters/Control2" unique_id=1389022795 instance=ExtResource("12_a6mmc")]
+position = Vector2(2214, 1152)
 
-[node name="Col_S6" type="CollisionShape2D" parent="Terrain" unique_id=1193417726]
-position = Vector2(4928, 800)
-shape = SubResource("RS_384")
+[node name="PoisonWater5" parent="PoisonWaters/Control2" unique_id=2030496538 instance=ExtResource("12_a6mmc")]
+position = Vector2(2268, 1152)
 
-[node name="Col_Ceil" type="CollisionShape2D" parent="Terrain" unique_id=1019624469]
-position = Vector2(3584, 519.5)
-shape = SubResource("RS_CEIL")
+[node name="PoisonWater6" parent="PoisonWaters/Control2" unique_id=1322397159 instance=ExtResource("12_a6mmc")]
+position = Vector2(2322, 1152)
 
-[node name="Col_P1" type="CollisionShape2D" parent="Terrain" unique_id=1157047018]
-position = Vector2(4385, 596)
-shape = SubResource("RS_PLAT")
+[node name="PoisonWater7" parent="PoisonWaters/Control2" unique_id=1130355607 instance=ExtResource("12_a6mmc")]
+position = Vector2(2376, 1152)
 
-[node name="Col_P2" type="CollisionShape2D" parent="Terrain" unique_id=444540362]
-position = Vector2(4615, 596)
-shape = SubResource("RS_PLAT")
+[node name="PoisonWater8" parent="PoisonWaters/Control2" unique_id=1337785612 instance=ExtResource("12_a6mmc")]
+position = Vector2(1998, 1152)
 
-[node name="Vis_S1" type="Polygon2D" parent="Terrain" unique_id=1163593622]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(0, 700, 768, 700, 768, 900, 0, 900)
+[node name="PoisonWater9" parent="PoisonWaters/Control2" unique_id=1741617599 instance=ExtResource("12_a6mmc")]
+position = Vector2(2430, 1152)
 
-[node name="Vis_S2" type="Polygon2D" parent="Terrain" unique_id=1040983906]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(896, 700, 1408, 700, 1408, 900, 896, 900)
+[node name="PoisonWater10" parent="PoisonWaters/Control2" unique_id=1137744929 instance=ExtResource("12_a6mmc")]
+position = Vector2(2484, 1152)
 
-[node name="Vis_S3" type="Polygon2D" parent="Terrain" unique_id=1782864469]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(1664, 700, 2560, 700, 2560, 900, 1664, 900)
+[node name="Walls" type="Control" parent="." unique_id=1198835820]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Vis_S4" type="Polygon2D" parent="Terrain" unique_id=493208195]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(2816, 700, 3456, 700, 3456, 900, 2816, 900)
+[node name="Control" type="Control" parent="Walls" unique_id=2085758008]
+anchors_preset = 0
+offset_left = 324.0
+offset_right = 364.0
+offset_bottom = 40.0
 
-[node name="Vis_S5" type="Polygon2D" parent="Terrain" unique_id=1788755582]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(3712, 700, 4224, 700, 4224, 900, 3712, 900)
+[node name="StunWall" parent="Walls/Control" unique_id=1983975982 instance=ExtResource("13_0wykm")]
+position = Vector2(1350, 1098)
 
-[node name="Vis_S6" type="Polygon2D" parent="Terrain" unique_id=2007934525]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(4736, 700, 5120, 700, 5120, 900, 4736, 900)
+[node name="StunWall2" parent="Walls/Control" unique_id=1844251890 instance=ExtResource("6_lu1w2")]
+position = Vector2(1350, 1044)
 
-[node name="Vis_Ceil" type="Polygon2D" parent="Terrain" unique_id=647502599]
-position = Vector2(-2, 71)
-color = Color(0.26, 0.28, 0.32, 1)
-polygon = PackedVector2Array(3440, 400, 3728, 400, 3728, 480, 3440, 480)
+[node name="StunWall3" parent="Walls/Control" unique_id=558695860 instance=ExtResource("7_76uo4")]
+position = Vector2(1350, 936)
 
-[node name="Vis_P1" type="Polygon2D" parent="Terrain" unique_id=1561283165]
-color = Color(0.42, 0.44, 0.48, 1)
-polygon = PackedVector2Array(4300, 572, 4470, 572, 4470, 620, 4300, 620)
-
-[node name="Vis_P2" type="Polygon2D" parent="Terrain" unique_id=1725945385]
-color = Color(0.42, 0.44, 0.48, 1)
-polygon = PackedVector2Array(4530, 572, 4700, 572, 4700, 620, 4530, 620)
-
-[node name="Col_E1" type="CollisionShape2D" parent="Terrain" unique_id=98281323]
-position = Vector2(5664, 464)
-shape = SubResource("RS_ELEV")
-
-[node name="Col_E2" type="CollisionShape2D" parent="Terrain" unique_id=1235556009]
-position = Vector2(6368, 464)
-shape = SubResource("RS_ELEV")
-
-[node name="Col_S9" type="CollisionShape2D" parent="Terrain" unique_id=204843408]
-position = Vector2(7168, 800)
-shape = SubResource("RS_768")
-
-[node name="Col_S10" type="CollisionShape2D" parent="Terrain" unique_id=1155195876]
-position = Vector2(8512, 800)
-shape = SubResource("RS_384")
-
-[node name="Vis_E1" type="Polygon2D" parent="Terrain" unique_id=942350564]
-color = Color(0.42, 0.44, 0.48, 1)
-polygon = PackedVector2Array(5376, 440, 5952, 440, 5952, 488, 5376, 488)
-
-[node name="Vis_E2" type="Polygon2D" parent="Terrain" unique_id=1140204327]
-color = Color(0.42, 0.44, 0.48, 1)
-polygon = PackedVector2Array(6080, 440, 6656, 440, 6656, 488, 6080, 488)
-
-[node name="Vis_S9" type="Polygon2D" parent="Terrain" unique_id=532700076]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(6784, 700, 7552, 700, 7552, 900, 6784, 900)
-
-[node name="Vis_S10" type="Polygon2D" parent="Terrain" unique_id=926209103]
-color = Color(0.32, 0.34, 0.38, 1)
-polygon = PackedVector2Array(8320, 700, 8704, 700, 8704, 900, 8320, 900)
-
-[node name="Pond" type="Node2D" parent="." unique_id=1360528387]
-visible = false
-position = Vector2(0, 196)
-
-[node name="Poison_G1" parent="Pond" unique_id=1659861080 instance=ExtResource("2_ecbh7")]
-position = Vector2(768, 700)
-
-[node name="Poison_G2a" parent="Pond" unique_id=1507543783 instance=ExtResource("2_ecbh7")]
-position = Vector2(1408, 700)
-
-[node name="Poison_G2b" parent="Pond" unique_id=528234481 instance=ExtResource("2_ecbh7")]
-position = Vector2(1536, 700)
-
-[node name="Poison_G3a" parent="Pond" unique_id=1364551518 instance=ExtResource("2_ecbh7")]
-position = Vector2(2560, 700)
-
-[node name="Poison_G3b" parent="Pond" unique_id=2060164585 instance=ExtResource("2_ecbh7")]
-position = Vector2(2688, 700)
-
-[node name="Poison_G4a" parent="Pond" unique_id=848848912 instance=ExtResource("2_ecbh7")]
-position = Vector2(3456, 700)
-
-[node name="Poison_G4b" parent="Pond" unique_id=1117422427 instance=ExtResource("2_ecbh7")]
-position = Vector2(3584, 700)
-
-[node name="Poison_G5a" parent="Pond" unique_id=516579839 instance=ExtResource("2_ecbh7")]
-position = Vector2(4224, 700)
-
-[node name="Poison_G5b" parent="Pond" unique_id=1073375755 instance=ExtResource("2_ecbh7")]
-position = Vector2(4352, 700)
-
-[node name="Poison_G5c" parent="Pond" unique_id=1201683211 instance=ExtResource("2_ecbh7")]
-position = Vector2(4480, 700)
-
-[node name="Poison_G5d" parent="Pond" unique_id=1776888219 instance=ExtResource("2_ecbh7")]
-position = Vector2(4608, 700)
-
-[node name="Poison_A0" parent="Pond" unique_id=2065378969 instance=ExtResource("2_ecbh7")]
-position = Vector2(5120, 700)
-
-[node name="Poison_A1" parent="Pond" unique_id=1618211871 instance=ExtResource("2_ecbh7")]
-position = Vector2(5248, 700)
-
-[node name="Poison_A2" parent="Pond" unique_id=1276250106 instance=ExtResource("2_ecbh7")]
-position = Vector2(5376, 700)
-
-[node name="Poison_A3" parent="Pond" unique_id=1788804371 instance=ExtResource("2_ecbh7")]
-position = Vector2(5504, 700)
-
-[node name="Poison_A4" parent="Pond" unique_id=678335556 instance=ExtResource("2_ecbh7")]
-position = Vector2(5632, 700)
-
-[node name="Poison_A5" parent="Pond" unique_id=78141843 instance=ExtResource("2_ecbh7")]
-position = Vector2(5760, 700)
-
-[node name="Poison_A6" parent="Pond" unique_id=271241218 instance=ExtResource("2_ecbh7")]
-position = Vector2(5888, 700)
-
-[node name="Poison_A7" parent="Pond" unique_id=1213970550 instance=ExtResource("2_ecbh7")]
-position = Vector2(6016, 700)
-
-[node name="Poison_A8" parent="Pond" unique_id=2030075484 instance=ExtResource("2_ecbh7")]
-position = Vector2(6144, 700)
-
-[node name="Poison_A9" parent="Pond" unique_id=715232675 instance=ExtResource("2_ecbh7")]
-position = Vector2(6272, 700)
-
-[node name="Poison_A10" parent="Pond" unique_id=475993521 instance=ExtResource("2_ecbh7")]
-position = Vector2(6400, 700)
-
-[node name="Poison_A11" parent="Pond" unique_id=506839778 instance=ExtResource("2_ecbh7")]
-position = Vector2(6528, 700)
-
-[node name="Poison_A12" parent="Pond" unique_id=346307281 instance=ExtResource("2_ecbh7")]
-position = Vector2(6656, 700)
-
-[node name="Poison_P0" parent="Pond" unique_id=1844638793 instance=ExtResource("2_ecbh7")]
-position = Vector2(7552, 700)
-
-[node name="Poison_P1" parent="Pond" unique_id=50652557 instance=ExtResource("2_ecbh7")]
-position = Vector2(7680, 700)
-
-[node name="Poison_P2" parent="Pond" unique_id=684946723 instance=ExtResource("2_ecbh7")]
-position = Vector2(7808, 700)
-
-[node name="Poison_P3" parent="Pond" unique_id=839224818 instance=ExtResource("2_ecbh7")]
-position = Vector2(7936, 700)
-
-[node name="Poison_P4" parent="Pond" unique_id=1670664617 instance=ExtResource("2_ecbh7")]
-position = Vector2(8064, 700)
-
-[node name="Poison_P5" parent="Pond" unique_id=1673382371 instance=ExtResource("2_ecbh7")]
-position = Vector2(8192, 700)
+[node name="StunWall4" parent="Walls/Control" unique_id=329051932 instance=ExtResource("6_lu1w2")]
+position = Vector2(1350, 990)
 
 [node name="CheckPoint" type="Node2D" parent="." unique_id=127506614]
 
@@ -626,10 +466,6 @@ text = "§1 灰盒关 · 自动向右滚，[空格]跳
 
 [node name="Mechanic" type="Node2D" parent="." unique_id=1474839566]
 
-[node name="BreakableWall" parent="Mechanic" unique_id=2096001859 instance=ExtResource("3_a6mmc")]
-position = Vector2(1950, 540)
-scale = Vector2(1, 2.5)
-
 [node name="Fan_U1" parent="Mechanic" unique_id=728776927 instance=ExtResource("8_76uo4")]
 position = Vector2(5120, 572)
 neutral_size = 0.9
@@ -652,6 +488,9 @@ pool_end_x = 8320.0
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+
+[node name="Coin" parent="Coins" unique_id=727505925 instance=ExtResource("13_6xftg")]
+position = Vector2(810, 882)
 
 [connection signal="pressed" from="Mechanic/WeightButton" to="Mechanic/Bubble" method="set_active" binds= [true]]
 [connection signal="released" from="Mechanic/WeightButton" to="Mechanic/Bubble" method="set_active" binds= [false]]
