@@ -1,44 +1,51 @@
-[gd_scene load_steps=4 format=3]
+[gd_scene format=3 uid="uid://xqgflncscxga"]
 
-[ext_resource type="Script" path="res://scripts/player/player.gd" id="1_player"]
-[ext_resource type="Texture2D" path="res://assets/player/penguin.png" id="2_penguin"]
+[ext_resource type="Script" uid="uid://bdmbd5c55afi6" path="res://scripts/player/player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://bejkij2j6dj2k" path="res://assets/player/penguin.png" id="2_penguin"]
 
 [sub_resource type="CircleShape2D" id="CircleShape_player"]
 resource_local_to_scene = true
 radius = 64.0
 
-[node name="Player" type="CharacterBody2D"]
-floor_snap_length = 12.0
+[node name="Player" type="CharacterBody2D" unique_id=1530805039]
 floor_max_angle = 0.872665
+floor_snap_length = 12.0
 script = ExtResource("1_player")
+default_size_scale = null
+minimum_size_scale = null
+maximum_size_scale = null
+growth_per_click = null
+growth_per_second_held = null
+rapid_click_multiplier = null
+size_follow_speed = null
+shrink_delay = null
+shrink_speed = null
+gravity = null
+jump_velocity = null
+maximum_jump_count = null
+jump_buffer_duration = null
+coyote_duration = null
+auto_jump_retrigger_delay = null
+auto_forward_enabled = null
+base_forward_speed = null
+minimum_forward_speed = null
+maximum_forward_speed = null
+size_speed_exponent = null
+forward_acceleration = null
 
-[node name="SizeRoot" type="Node2D" parent="."]
+[node name="SizeRoot" type="Node2D" parent="." unique_id=865336963]
 
-[node name="GrowthPulseRoot" type="Node2D" parent="SizeRoot"]
+[node name="GrowthPulseRoot" type="Node2D" parent="SizeRoot" unique_id=565927257]
 
-[node name="RollVisualRoot" type="Node2D" parent="SizeRoot/GrowthPulseRoot"]
+[node name="RollVisualRoot" type="Node2D" parent="SizeRoot/GrowthPulseRoot" unique_id=1353005021]
 position = Vector2(0, -64)
 
-[node name="JumpDeformRoot" type="Node2D" parent="SizeRoot/GrowthPulseRoot/RollVisualRoot"]
+[node name="JumpDeformRoot" type="Node2D" parent="SizeRoot/GrowthPulseRoot/RollVisualRoot" unique_id=1127114905]
 
-[node name="PlayerSprite" type="Sprite2D" parent="SizeRoot/GrowthPulseRoot/RollVisualRoot/JumpDeformRoot"]
+[node name="PlayerSprite" type="Sprite2D" parent="SizeRoot/GrowthPulseRoot/RollVisualRoot/JumpDeformRoot" unique_id=915143543]
 texture_filter = 1
 texture = ExtResource("2_penguin")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=807239746]
 position = Vector2(0, -64)
 shape = SubResource("CircleShape_player")
-
-[node name="DebugLabel" type="Label" parent="."]
-visible = false
-offset_left = -90.0
-offset_top = 18.0
-offset_right = 90.0
-offset_bottom = 70.0
-mouse_filter = 2
-theme_override_colors/font_color = Color(1, 0.94, 0.72, 1)
-theme_override_colors/font_shadow_color = Color(0.18, 0.08, 0.03, 1)
-theme_override_constants/shadow_offset_x = 2
-theme_override_constants/shadow_offset_y = 2
-theme_override_font_sizes/font_size = 16
-horizontal_alignment = 1

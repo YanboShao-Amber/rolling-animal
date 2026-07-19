@@ -177,7 +177,6 @@ func _process(delta: float) -> void:
 	_update_size_visual()
 	if not is_equal_approx(previous_scale, current_size_scale):
 		size_changed.emit(current_size_scale)
-	_update_debug_label()
 
 
 func _register_growth_click() -> void:
@@ -345,20 +344,6 @@ func _update_size_visual() -> void:
 		circle_shape.radius = BASE_RADIUS * current_size_scale
 		collision_shape.position.y = -circle_shape.radius
 	collision_shape.scale = Vector2.ONE
-
-
-func _update_debug_label() -> void:
-	if debug_label.visible:
-		debug_label.text = "SIZE %.2f\nCLICK %.1f / s\nJUMPS %d / %d\nON FLOOR %s\nCOYOTE %.3f\nBUFFER %.3f\nJUMPED NOW %s" % [
-			current_size_scale,
-			click_frequency,
-			jump_count,
-			maximum_jump_count,
-			str(is_on_floor()).to_upper(),
-			coyote_timer,
-			jump_buffer_timer,
-			str(jump_started_this_frame).to_upper(),
-		]
 
 
 func setup_character(character_data: Dictionary) -> void:

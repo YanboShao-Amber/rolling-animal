@@ -11,5 +11,4 @@ extends Control
 
 
 func _ready() -> void:
-	player.debug_label.visible = true          # 屏幕上看实时 SIZE
 	player.auto_forward_enabled = auto_forward
