@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://cnf7giv1qi0g2"]
 
 [ext_resource type="Script" uid="uid://b2wvoth7oavnv" path="res://scripts/obstacles/checkpoint.gd" id="1_checkpoint"]
-[ext_resource type="Texture2D" path="res://assets/tilemap/tilemap_packed.png" id="2_texture"]
+[ext_resource type="Texture2D" uid="uid://dhcv4s1plevnm" path="res://assets/tilemap/industrial.png" id="2_texture"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_checkpoint"]
 texture = ExtResource("2_texture")
