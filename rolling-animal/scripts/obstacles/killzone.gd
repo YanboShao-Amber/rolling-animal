@@ -36,20 +36,18 @@ signal player_died(player: SoftPlayer, effect: PackedScene)
 var _killed := false
 
 
-func _ready() -> void:
-	body_entered.connect(_on_body_entered)
-	body_exited.connect(_on_body_exited)
-
-
-func _on_body_entered(body: Node2D) -> void:
-	if _killed:
-		return
-	if body is SoftPlayer:
-		_killed = true
-		player_died.emit(body, death_effect)
-
-
-func _on_body_exited(body: Node2D) -> void:
-	# 玩家被重生传送离开后解锁，允许再次触发。
-	if body is SoftPlayer:
-		_killed = false
+func _physics_process(_delta: float) -> void:
+	# 逐帧检测（不再用 body_entered）：这样"套着气泡的免疫玩家"能安全待在毒水里，
+	# 一旦气泡破裂(免疫解除)、玩家仍在水里，下一帧就立刻判死。
+	var found := false
+	for body in get_overlapping_bodies():
+		if body is SoftPlayer:
+			if body.is_in_group("bubble_immune"):
+				continue           # 有气泡 → 免疫，放行
+			found = true
+			if not _killed:
+				_killed = true
+				player_died.emit(body, death_effect)
+			break
+	if not found:
+		_killed = false            # 没有(会受伤的)玩家重叠 → 解锁，允许再次触发

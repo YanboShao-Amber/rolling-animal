@@ -2,19 +2,18 @@
 
 [ext_resource type="Script" path="res://scripts/obstacles/bubble.gd" id="1_bub"]
 
-[sub_resource type="RectangleShape2D" id="RS_board"]
-size = Vector2(128, 256)
+[sub_resource type="CircleShape2D" id="CS_detect"]
+resource_local_to_scene = true
+radius = 64.0
 
 [node name="Bubble" type="Node2D"]
 script = ExtResource("1_bub")
 
-[node name="BoardArea" type="Area2D" parent="."]
+[node name="Detect" type="Area2D" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BoardArea"]
-position = Vector2(64, -64)
-shape = SubResource("RS_board")
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect"]
+shape = SubResource("CS_detect")
 
 [node name="Shell" type="Polygon2D" parent="."]
-position = Vector2(0, -70)
 color = Color(0.5, 0.8, 1, 0.35)
-polygon = PackedVector2Array(100, 0, 71, 71, 0, 100, -71, 71, -100, 0, -71, -71, 0, -100, 71, -71)
+polygon = PackedVector2Array(64, 0, 45, 45, 0, 64, -45, 45, -64, 0, -45, -45, 0, -64, 45, -45)

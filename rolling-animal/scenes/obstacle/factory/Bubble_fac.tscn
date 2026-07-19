@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3qrdguqecaxw"]
+
+[ext_resource type="Script" uid="uid://lpehin41ilh" path="res://scripts/obstacles/bubble.gd" id="1_bub"]
+[ext_resource type="Texture2D" uid="uid://c82ih7dipg12a" path="res://assets/original/kenney_alien-ufo-pack/PNG/dome.png" id="2_fyx36"]
+
+[sub_resource type="CircleShape2D" id="CS_detect"]
+resource_local_to_scene = true
+radius = 64.0
+
+[node name="Bubble" type="Node2D" unique_id=1157410344]
+script = ExtResource("1_bub")
+
+[node name="Detect" type="Area2D" parent="." unique_id=796137301]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detect" unique_id=2117468738]
+shape = SubResource("CS_detect")
+
+[node name="Shell" type="Sprite2D" parent="." unique_id=1134874886]
+texture_filter = 1
+texture = ExtResource("2_fyx36")
