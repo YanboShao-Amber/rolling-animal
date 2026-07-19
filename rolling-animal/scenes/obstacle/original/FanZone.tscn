@@ -1,22 +1,49 @@
-[gd_scene load_steps=3 format=3]
+[gd_scene format=3 uid="uid://dw0x4ao75p8gk"]
 
-[ext_resource type="Script" path="res://scripts/obstacles/fan_zone.gd" id="1_fan"]
+[ext_resource type="Script" uid="uid://bftdfafstpv3j" path="res://scripts/obstacles/fan_zone.gd" id="1_fan"]
+[ext_resource type="Texture2D" uid="uid://6kdhtdti6lqj" path="res://assets/original/kenney_light-masks-1.0/Transparent/fan_d_blur.png" id="2_hojba"]
+[ext_resource type="Texture2D" uid="uid://cx2w6u8qlsap8" path="res://assets/original/kenney_light-masks-1.0/Transparent/cone_composed_d_noise.png" id="4_g1emn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fan"]
 resource_local_to_scene = true
 size = Vector2(128, 640)
 
-[node name="FanZone" type="Area2D"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_s1fef"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_g1emn")
+}],
+"loop": 1,
+"name": &"fan",
+"speed": 3.0
+}]
+
+[node name="FanZone" type="Area2D" unique_id=1725130732]
 script = ExtResource("1_fan")
 
-[node name="WindColumn" type="Polygon2D" parent="."]
+[node name="WindColumn" type="Polygon2D" parent="." unique_id=1856732519]
+visible = false
 color = Color(0.4, 0.7, 1, 0.22)
 polygon = PackedVector2Array(0, 128, 128, 128, 128, -512, 0, -512)
 
-[node name="Base" type="Polygon2D" parent="."]
+[node name="Base" type="Polygon2D" parent="." unique_id=1183068575]
+visible = false
 color = Color(0.5, 0.55, 0.6, 1)
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 128, 0, 128)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=2040060844]
 position = Vector2(64, -192)
 shape = SubResource("RectangleShape2D_fan")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1033849216]
+position = Vector2(65, 65.5)
+scale = Vector2(0.24999997, 0.24804689)
+texture = ExtResource("2_hojba")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1556364465]
+position = Vector2(66, -255)
+sprite_frames = SubResource("SpriteFrames_s1fef")
+animation = &"fan"
+autoplay = "fan"
+frame_progress = 0.37099248
