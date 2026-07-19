@@ -13,3 +13,9 @@ extends Control
 func _ready() -> void:
 	player.debug_label.visible = true          # 屏幕上看实时 SIZE
 	player.auto_forward_enabled = auto_forward
+	# 应用在角色选择界面选中的角色（与第 1 关 farm_level_test 一致）。
+	# 正常流程会先经过角色选择，这里据此替换主角贴图；直接运行本场景时保留场景自带的默认外观。
+	var game_state := get_node_or_null("/root/GameState")
+	if game_state and game_state.has_selected_character() \
+			and game_state.selected_character_data is Dictionary:
+		player.setup_character(game_state.selected_character_data.duplicate(true))
